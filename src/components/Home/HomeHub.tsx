@@ -22,14 +22,15 @@ export const HomeHub: React.FC = () => {
     {
       id: 'calculators' as const,
       title: 'Calculadoras Biomecánicas & Fisiológicas',
-      badge: 'Módulo en Desarrollo',
-      badgeType: 'upcoming',
+      badge: '12 Calculadoras Activas',
+      badgeType: 'active',
       icon: Calculator,
       description:
-        'Suite cuantitativa de cálculo cinemático, estimación de 1RM con percentiles de fatiga, partición energética y prescripción de zonas cardíacas.',
+        'Suite cuantitativa interactiva de cálculo cinemático, estimación ponderada de 1RM, ciclos de sueño, TDEE desglosado, hidratación y suplementación.',
       toolsList: [
-        { name: 'Estimador de 1RM (Epley / Brzycki)', desc: 'Cálculo de cargas efectivas y RIR' },
-        { name: 'Zonas Cardíacas Karvonen', desc: 'Prescripción por FC de reserva' }
+        { name: 'Readiness Hooper, Ciclos de Sueño & FC Karvonen', desc: 'Monitoreo de fatiga, ritmos circadianos y 5 zonas cardíacas' },
+        { name: '1RM Peso Muerto, Press Banca & Pliegues Cutáneos', desc: 'Modelos Epley, Brzycki, Wathan y Jackson-Pollock' },
+        { name: 'Calorías, TDEE, Cafeína, Creatina & Magnesio', desc: 'ISSN, EFSA y partición energética con cálculo en tiempo real' }
       ]
     }
   ];

@@ -6,26 +6,26 @@ export const CalculatorsView: React.FC = () => {
     {
       id: '1rm',
       name: 'Estimador de 1RM & Cargas de Trabajo',
-      desc: 'Cálculo de repetición máxima mediante fórmulas Epley, Brzycki y Lander con percentiles de RPE/RIR.',
-      status: 'Próximamente'
+      desc: 'Cálculo de repetición máxima mediante fórmulas Epley, Brzycki y Wathan con percentiles de fatiga y RPE.',
+      status: 'Operativo'
     },
     {
       id: 'hr_zones',
       name: 'Calculadora de Zonas Cardíacas (Karvonen)',
-      desc: 'Determinación de Z1 a Z5 basada en frecuencia cardíaca de reserva y umbral de lactato.',
-      status: 'Próximamente'
+      desc: 'Determinación de Z1 a Z5 basada en frecuencia cardíaca de reserva (HRR) y modelos Tanaka / Gellish.',
+      status: 'Operativo'
     },
     {
-      id: 'volume_landmarks',
-      name: 'Hitos de Volumen Semanal (MEV / MAV / MRV)',
-      desc: 'Estimación de volumen de mantenimiento, mínimo efectivo y máximo recuperable por grupo muscular.',
-      status: 'Próximamente'
-    },
-    {
-      id: 'tdee',
+      id: 'macros_tdee',
       name: 'Gasto Energético & Partición de Macronutrientes',
-      desc: 'Balance calórico metabólico y ratios de carbohidratos/proteínas para recomposición corporal.',
-      status: 'Próximamente'
+      desc: 'Modelos Mifflin-St Jeor / Katch-McArdle y ratios de carbohidratos, grasas y proteínas (ISSN).',
+      status: 'Operativo'
+    },
+    {
+      id: 'readiness',
+      name: 'Readiness & Índice de Hooper',
+      desc: 'Control psicométrico de fatiga, calidad de sueño, dolor muscular y ratio de carga aguda:crónica (ACWR).',
+      status: 'Operativo'
     }
   ];
 
@@ -57,7 +57,7 @@ export const CalculatorsView: React.FC = () => {
               <div className="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-800">
                 <Calculator className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-500 font-medium">
+              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-zinc-950 text-white border border-zinc-950 font-medium">
                 {tool.status}
               </span>
             </div>
