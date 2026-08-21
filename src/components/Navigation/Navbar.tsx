@@ -11,8 +11,8 @@ export const Navbar: React.FC = () => {
     setCurrentQuestion
   } = useRoutineStore();
 
-  const totalQuestions = 5;
-  const questionTitles = ['Objetivo', 'Experiencia', 'Frecuencia', 'Entorno', 'Enfoque'];
+  const totalQuestions = 6;
+  const questionTitles = ['Objetivo', 'Experiencia', 'Frecuencia', 'Duración', 'Entorno', 'Enfoque'];
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#fcfcfd]/90 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-8 py-3.5 transition-all print:hidden">

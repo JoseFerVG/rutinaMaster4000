@@ -6,6 +6,7 @@ import {
   TrainingGoal,
   ExperienceLevel,
   EquipmentPreference,
+  SessionDuration,
   MuscleGroupId
 } from '../../types';
 import { MUSCLE_LABELS_ES } from '../../utils/routineEngine';
@@ -24,11 +25,13 @@ export const SingleQuestionFlow: React.FC = () => {
     goal,
     experience,
     daysPerWeek,
+    sessionDuration,
     equipment,
     selectedMuscles,
     setGoal,
     setExperience,
     setDaysPerWeek,
+    setSessionDuration,
     setEquipment,
     toggleMuscle,
     setSelectedMuscles,
@@ -122,7 +125,29 @@ export const SingleQuestionFlow: React.FC = () => {
     }
   ];
 
-  // 4. Equipment Options
+  // 4. Time Availability / Session Duration Options
+  const durationOptions: OptionItem<SessionDuration>[] = [
+    {
+      key: '1',
+      value: 45,
+      title: '45 Minutos (Sesión Express)',
+      description: 'Alta densidad: 4 ejercicios multiarticulares principales, descansos eficientes y eliminación de accesorios prescindibles.'
+    },
+    {
+      key: '2',
+      value: 60,
+      title: '60 Minutos (Sesión Estándar)',
+      description: 'Ratio óptimo: 5-6 ejercicios por sesión, combinación equilibrada de compuestos y trabajo accesorio específico.'
+    },
+    {
+      key: '3',
+      value: 90,
+      title: '75 - 90 Minutos (Sesión Completa)',
+      description: 'Máximo volumen: 6-7 ejercicios, descansos intra-serie completos para máxima recuperación neural y aislamiento profundo.'
+    }
+  ];
+
+  // 5. Equipment Options
   const equipmentOptions: OptionItem<EquipmentPreference>[] = [
     {
       key: '1',
@@ -226,6 +251,12 @@ export const SingleQuestionFlow: React.FC = () => {
           setTimeout(() => nextQuestion(), 160);
         }
       } else if (currentQuestion === 3) {
+        const opt = durationOptions[num - 1];
+        if (opt) {
+          setSessionDuration(opt.value);
+          setTimeout(() => nextQuestion(), 160);
+        }
+      } else if (currentQuestion === 4) {
         const opt = equipmentOptions[num - 1];
         if (opt) {
           setEquipment(opt.value);
@@ -236,14 +267,14 @@ export const SingleQuestionFlow: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentQuestion, goal, experience, daysPerWeek, equipment]);
+  }, [currentQuestion, goal, experience, daysPerWeek, sessionDuration, equipment]);
 
   // Render question content
   const renderQuestion = () => {
     switch (currentQuestion) {
       case 0:
         return {
-          meta: '01 / 05 · OBJETIVO',
+          meta: '01 / 06 · OBJETIVO',
           title: '¿Cuál es el objetivo principal del protocolo?',
           subtitle: 'Define la curva de intensidad, los tiempos de descanso intra-serie y el enfoque de sobrecarga.',
           content: (
@@ -293,7 +324,7 @@ export const SingleQuestionFlow: React.FC = () => {
 
       case 1:
         return {
-          meta: '02 / 05 · NIVEL DE EXPERIENCIA',
+          meta: '02 / 06 · NIVEL DE EXPERIENCIA',
           title: '¿Cuál es tu nivel de experiencia en levantamiento de pesas?',
           subtitle: 'Calibra el volumen efectivo de series semanales, la proximidad al fallo (RIR) y la tasa de recuperación.',
           content: (
@@ -343,7 +374,7 @@ export const SingleQuestionFlow: React.FC = () => {
 
       case 2:
         return {
-          meta: '03 / 05 · FRECUENCIA SEMANAL',
+          meta: '03 / 06 · FRECUENCIA SEMANAL',
           title: '¿Cuántos días por semana dispones para entrenar?',
           subtitle: 'Determina la arquitectura de división (Full Body, Torso/Pierna o Push/Pull/Legs).',
           content: (
@@ -393,7 +424,57 @@ export const SingleQuestionFlow: React.FC = () => {
 
       case 3:
         return {
-          meta: '04 / 05 · ENTORNO & EQUIPAMIENTO',
+          meta: '04 / 06 · TIEMPO POR SESIÓN',
+          title: '¿De cuánto tiempo dispones para cada entrenamiento?',
+          subtitle: 'Ajusta el número de ejercicios por día, descansos y densidad del protocolo.',
+          content: (
+            <div className="grid grid-cols-1 gap-2.5 w-full">
+              {durationOptions.map((opt) => {
+                const isSelected = sessionDuration === opt.value;
+                return (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    onClick={() => {
+                      setSessionDuration(opt.value);
+                      setTimeout(() => nextQuestion(), 160);
+                    }}
+                    className={`group w-full text-left p-4 rounded-xl border transition-all duration-150 flex items-start gap-4 ${
+                      isSelected
+                        ? 'bg-zinc-950 border-zinc-950 text-white shadow-sm ring-1 ring-zinc-950'
+                        : 'bg-white border-zinc-200 text-zinc-900 hover:border-zinc-400 hover:bg-zinc-50/80 shadow-subtle'
+                    }`}
+                  >
+                    <span
+                      className={`font-mono text-xs px-2 py-0.5 rounded border transition-colors shrink-0 mt-0.5 ${
+                        isSelected
+                          ? 'border-zinc-800 bg-zinc-800 text-zinc-300'
+                          : 'border-zinc-200 bg-zinc-50 text-zinc-500 group-hover:border-zinc-300 group-hover:text-zinc-700'
+                      }`}
+                    >
+                      {opt.key}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`text-sm md:text-base font-semibold ${isSelected ? 'text-white' : 'text-zinc-900'}`}>
+                          {opt.title}
+                        </span>
+                        {isSelected && <Check className="w-4 h-4 text-zinc-200 shrink-0" />}
+                      </div>
+                      <p className={`text-xs md:text-sm mt-1 leading-relaxed ${isSelected ? 'text-zinc-300' : 'text-zinc-500'}`}>
+                        {opt.description}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )
+        };
+
+      case 4:
+        return {
+          meta: '05 / 06 · ENTORNO & EQUIPAMIENTO',
           title: '¿Qué equipamiento tienes disponible para entrenar?',
           subtitle: 'Filtra la selección de ejercicios biomecánicamente equivalentes según tus herramientas.',
           content: (
@@ -441,10 +522,10 @@ export const SingleQuestionFlow: React.FC = () => {
           )
         };
 
-      case 4:
+      case 5:
       default:
         return {
-          meta: '05 / 05 · ENFOQUE ANATÓMICO & GRUPOS MUSCULARES',
+          meta: '06 / 06 · ENFOQUE ANATÓMICO & GRUPOS MUSCULARES',
           title: 'Selecciona los grupos musculares objetivo en el cuerpo o elige un preset',
           subtitle: 'Pulsa directamente sobre el cuerpo anatómico para añadir o quitar músculos, o selecciona una distribución rápida.',
           content: (
@@ -535,7 +616,7 @@ export const SingleQuestionFlow: React.FC = () => {
   const currentData = renderQuestion();
 
   return (
-    <div className={`w-full ${currentQuestion === 4 ? 'max-w-3xl' : 'max-w-2xl'} mx-auto px-4 py-8 md:py-12 flex flex-col justify-center min-h-[calc(100vh-140px)] transition-all`}>
+    <div className={`w-full ${currentQuestion === 5 ? 'max-w-3xl' : 'max-w-2xl'} mx-auto px-4 py-8 md:py-12 flex flex-col justify-center min-h-[calc(100vh-140px)] transition-all`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentQuestion}
@@ -591,8 +672,8 @@ export const SingleQuestionFlow: React.FC = () => {
                 onClick={nextQuestion}
                 className="px-5 py-2.5 rounded-lg text-xs md:text-sm font-semibold bg-zinc-950 hover:bg-zinc-800 text-white shadow-sm transition-all flex items-center gap-2"
               >
-                <span>{currentQuestion === 4 ? 'Generar Protocolo' : 'Continuar'}</span>
-                {currentQuestion === 4 ? (
+                <span>{currentQuestion === 5 ? 'Generar Protocolo' : 'Continuar'}</span>
+                {currentQuestion === 5 ? (
                   <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
                 ) : (
                   <ArrowRight className="w-3.5 h-3.5 text-zinc-300" />

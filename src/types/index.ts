@@ -33,6 +33,8 @@ export type TrainingGoal = 'hipertrofia' | 'fuerza' | 'recomposicion' | 'longevi
 
 export type EquipmentPreference = 'commercial' | 'home';
 
+export type SessionDuration = 45 | 60 | 90;
+
 export type MuscleFocusPreset = 'balance' | 'upper' | 'lower' | 'shoulders_back' | 'custom';
 
 export interface Exercise {
@@ -48,7 +50,7 @@ export interface Exercise {
   coachingCue: string;
   difficulty: ExperienceLevel;
   mechanics: 'compound' | 'isolation';
-  tier: 1 | 2 | 3; // 1 = main compound, 2 = secondary, 3 = isolation / accessory
+  tier: 1 | 2 | 3; // 1 = main compound, 2 = secondary compound, 3 = isolation / accessory
 }
 
 export interface RoutineExercise {
@@ -61,6 +63,8 @@ export interface RoutineExercise {
   targetRir?: string;
   isTemporarilyReplaced: boolean;
   isPermanentlyReplaced?: boolean;
+  isSecondaryFreeWeightSwapped?: boolean;
+  isOmitted?: boolean;
   replacementMessage?: string;
   completedSets: boolean[];
   notes?: string;
@@ -84,6 +88,7 @@ export interface Routine {
   goal: TrainingGoal;
   experience: ExperienceLevel;
   daysPerWeek: number;
+  sessionDuration: SessionDuration;
   equipment: EquipmentPreference;
   selectedMuscles: MuscleGroupId[];
   days: RoutineDay[];

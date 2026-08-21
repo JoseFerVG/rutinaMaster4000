@@ -5,6 +5,7 @@ import {
   ExperienceLevel,
   EquipmentPreference,
   TrainingGoal,
+  SessionDuration,
   MuscleFocusPreset,
   Routine,
   ToastMessage,
@@ -14,20 +15,22 @@ import rawExercises from '../data/exercises.json';
 import {
   buildRoutine,
   findQuickSubstitution,
-  findPermanentSubstitution
+  findPermanentSubstitution,
+  findFreeWeightAlternative
 } from '../utils/routineEngine';
 
 const exercisesDb = rawExercises as Exercise[];
 
 interface RoutineStore {
   // Wizard & Flow State
-  currentQuestion: number; // 0..4
+  currentQuestion: number; // 0..5
   step: 'questionnaire' | 'generating' | 'routine';
   
   // User Configuration
   goal: TrainingGoal;
   experience: ExperienceLevel;
   daysPerWeek: number;
+  sessionDuration: SessionDuration;
   equipment: EquipmentPreference;
   focusPreset: MuscleFocusPreset;
   selectedMuscles: MuscleGroupId[];
@@ -48,6 +51,7 @@ interface RoutineStore {
   setGoal: (goal: TrainingGoal) => void;
   setExperience: (level: ExperienceLevel) => void;
   setDaysPerWeek: (days: number) => void;
+  setSessionDuration: (duration: SessionDuration) => void;
   setEquipment: (eq: EquipmentPreference) => void;
   setFocusPreset: (preset: MuscleFocusPreset) => void;
   toggleMuscle: (muscleId: MuscleGroupId) => void;
@@ -60,6 +64,8 @@ interface RoutineStore {
   // Routine Workout Actions
   replaceTemporary: (dayNumber: number, instanceId: string) => void;
   replacePermanent: (dayNumber: number, instanceId: string) => void;
+  replaceWithFreeWeight: (dayNumber: number, instanceId: string) => void;
+  toggleOmitExercise: (dayNumber: number, instanceId: string) => void;
   toggleSetCompleted: (dayNumber: number, instanceId: string, setIndex: number) => void;
   updateExerciseNotes: (dayNumber: number, instanceId: string, notes: string) => void;
   setActiveDayTab: (dayNum: number) => void;
@@ -78,9 +84,10 @@ export const useRoutineStore = create<RoutineStore>()(
       goal: 'hipertrofia',
       experience: 'intermedio',
       daysPerWeek: 4,
+      sessionDuration: 60,
       equipment: 'commercial',
       focusPreset: 'balance',
-      selectedMuscles: ['chest', 'back_upper', 'shoulders', 'quads', 'hamstrings', 'glutes'],
+      selectedMuscles: ['chest', 'back_upper', 'shoulders', 'quads', 'hamstrings', 'glutes', 'biceps', 'triceps', 'core', 'calves'],
 
       activeRoutine: null,
       activeDayTab: 1,
@@ -90,7 +97,7 @@ export const useRoutineStore = create<RoutineStore>()(
 
       nextQuestion: () => {
         const { currentQuestion } = get();
-        if (currentQuestion < 4) {
+        if (currentQuestion < 5) {
           set({ currentQuestion: currentQuestion + 1 });
         } else {
           get().generateRoutine();
@@ -107,6 +114,7 @@ export const useRoutineStore = create<RoutineStore>()(
       setGoal: (goal: TrainingGoal) => set({ goal }),
       setExperience: (experience: ExperienceLevel) => set({ experience }),
       setDaysPerWeek: (daysPerWeek: number) => set({ daysPerWeek }),
+      setSessionDuration: (sessionDuration: SessionDuration) => set({ sessionDuration }),
       setEquipment: (equipment: EquipmentPreference) => set({ equipment }),
 
       setFocusPreset: (focusPreset: MuscleFocusPreset) => {
@@ -140,13 +148,14 @@ export const useRoutineStore = create<RoutineStore>()(
         set({ step: 'generating' });
 
         setTimeout(() => {
-          const { selectedMuscles, daysPerWeek, experience, equipment, goal } = get();
+          const { selectedMuscles, daysPerWeek, experience, equipment, goal, sessionDuration } = get();
           const routine = buildRoutine(
             selectedMuscles,
             daysPerWeek,
             experience,
             equipment,
             goal,
+            sessionDuration,
             exercisesDb
           );
 
@@ -200,6 +209,7 @@ export const useRoutineStore = create<RoutineStore>()(
                 ...ex,
                 exerciseId: replacement.id,
                 isTemporarilyReplaced: true,
+                isOmitted: false,
                 replacementMessage: feedback
               };
             })
@@ -251,6 +261,7 @@ export const useRoutineStore = create<RoutineStore>()(
                 originalExerciseId: replacement.id,
                 isTemporarilyReplaced: false,
                 isPermanentlyReplaced: true,
+                isOmitted: false,
                 replacementMessage: feedback
               };
             })
@@ -265,6 +276,97 @@ export const useRoutineStore = create<RoutineStore>()(
         });
 
         get().showToast('Protocolo Actualizado', `Ejercicio modificado a: ${replacement.name}`, 'success');
+      },
+
+      replaceWithFreeWeight: (dayNumber: number, instanceId: string) => {
+        const { activeRoutine } = get();
+        if (!activeRoutine) return;
+
+        const day = activeRoutine.days.find(d => d.dayNumber === dayNumber);
+        if (!day) return;
+
+        const exerciseInstance = day.exercises.find(e => e.instanceId === instanceId);
+        if (!exerciseInstance) return;
+
+        const currentDayExerciseIds = day.exercises.map(e => e.exerciseId);
+        const { replacement, feedback } = findFreeWeightAlternative(
+          exerciseInstance.exerciseId,
+          exercisesDb,
+          currentDayExerciseIds
+        );
+
+        if (!replacement) {
+          get().showToast('Sin alternativa libre', feedback, 'warning');
+          return;
+        }
+
+        const updatedDays = activeRoutine.days.map(d => {
+          if (d.dayNumber !== dayNumber) return d;
+          return {
+            ...d,
+            exercises: d.exercises.map(ex => {
+              if (ex.instanceId !== instanceId) return ex;
+              return {
+                ...ex,
+                exerciseId: replacement.id,
+                isTemporarilyReplaced: true,
+                isSecondaryFreeWeightSwapped: true,
+                isOmitted: false,
+                replacementMessage: feedback
+              };
+            })
+          };
+        });
+
+        set({
+          activeRoutine: {
+            ...activeRoutine,
+            days: updatedDays
+          }
+        });
+
+        get().showToast('Variante Libre Asignada', `Reemplazado por básico: ${replacement.name}`, 'info');
+      },
+
+      toggleOmitExercise: (dayNumber: number, instanceId: string) => {
+        const { activeRoutine } = get();
+        if (!activeRoutine) return;
+
+        const day = activeRoutine.days.find(d => d.dayNumber === dayNumber);
+        if (!day) return;
+
+        const exerciseInstance = day.exercises.find(e => e.instanceId === instanceId);
+        if (!exerciseInstance) return;
+
+        const newOmittedState = !exerciseInstance.isOmitted;
+
+        const updatedDays = activeRoutine.days.map(d => {
+          if (d.dayNumber !== dayNumber) return d;
+          return {
+            ...d,
+            exercises: d.exercises.map(ex => {
+              if (ex.instanceId !== instanceId) return ex;
+              return {
+                ...ex,
+                isOmitted: newOmittedState,
+                replacementMessage: newOmittedState ? 'Ejercicio omitido de la sesión.' : undefined
+              };
+            })
+          };
+        });
+
+        set({
+          activeRoutine: {
+            ...activeRoutine,
+            days: updatedDays
+          }
+        });
+
+        get().showToast(
+          newOmittedState ? 'Ejercicio Secundario Omitido' : 'Ejercicio Restaurado',
+          newOmittedState ? 'Se ha retirado de los requerimientos de la sesión.' : 'Se ha vuelto a incluir en la sesión.',
+          'info'
+        );
       },
 
       toggleSetCompleted: (dayNumber: number, instanceId: string, setIndex: number) => {
@@ -345,6 +447,7 @@ export const useRoutineStore = create<RoutineStore>()(
         goal: state.goal,
         experience: state.experience,
         daysPerWeek: state.daysPerWeek,
+        sessionDuration: state.sessionDuration,
         equipment: state.equipment,
         focusPreset: state.focusPreset,
         selectedMuscles: state.selectedMuscles,
