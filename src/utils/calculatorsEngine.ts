@@ -352,7 +352,7 @@ export function calculateDeadlift1RM(input: Deadlift1RMInput): Deadlift1RMResult
 
   let repsValidityWarning: string | null = null;
   if (repetitions > 10) {
-    repsValidityWarning = '⚠️ Advertencia: Las fórmulas de 1RM pierden validez matemática por encima de 10 reps debido a la fatiga metabólica y glucolítica.';
+    repsValidityWarning = 'Aviso de Precisión: Las fórmulas de 1RM pierden validez matemática por encima de 10 reps debido a la fatiga metabólica y glucolítica.';
   }
 
   if (repetitions === 1) {

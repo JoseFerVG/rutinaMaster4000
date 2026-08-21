@@ -50,22 +50,22 @@ export const CardioRoutineView: React.FC = () => {
 
   const handleCopyText = () => {
     let text = `=========================================\n`;
-    text += `🫀 ${activeCardioRoutine.name}\n`;
+    text += `KINETIC BIOMECHANICS · ${activeCardioRoutine.name}\n`;
     text += `${activeCardioRoutine.subtitle}\n`;
     text += `Modalidad: ${CARDIO_MODALITY_LABELS[activeCardioRoutine.modality]} | Nivel: ${activeCardioRoutine.experience.toUpperCase()} | Sesiones: ${activeCardioRoutine.daysPerWeek}/sem\n`;
     text += `=========================================\n\n`;
 
     activeCardioRoutine.sessions.forEach(sess => {
-      text += `📅 ${sess.title} (~${sess.totalDurationMinutes} min)\n`;
-      text += `🎯 Zona Primaria: ${sess.primaryZone} | Tipo: ${sess.type}\n`;
+      text += `[${sess.title}] (~${sess.totalDurationMinutes} min)\n`;
+      text += `Zona Primaria: ${sess.primaryZone} | Tipo: ${sess.type}\n`;
       text += `-----------------------------------------\n`;
       text += `1. Calentamiento: ${sess.warmup.duration} (${sess.warmup.targetPaceOrRpe})\n`;
       sess.mainBlock.forEach((block, bIdx) => {
         text += `2.${bIdx + 1} ${block.name}: ${block.duration} | Intensidad: ${block.targetPaceOrRpe} | ${block.description}\n`;
       });
       text += `3. Enfriamiento: ${sess.cooldown.duration} (${sess.cooldown.targetPaceOrRpe})\n`;
-      text += `💡 Biomecánica: ${sess.biomechanicalCue}\n`;
-      text += `💧 Nutrición/Hidratación: ${sess.nutritionHydrationTip}\n\n`;
+      text += `Biomecánica: ${sess.biomechanicalCue}\n`;
+      text += `Nutrición / Hidratación: ${sess.nutritionHydrationTip}\n\n`;
     });
 
     navigator.clipboard.writeText(text);

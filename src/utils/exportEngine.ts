@@ -245,7 +245,7 @@ export function downloadMarkdownFile(routine: Routine, allExercises: Exercise[])
   text += `---\n\n`;
 
   routine.days.forEach(day => {
-    text += `## 📅 ${day.title}\n`;
+    text += `## ${day.title}\n`;
     text += `*${day.subtitle}*\n\n`;
     text += `| Nº | Ejercicio Principal | Alternativa / Plan B | Series | Reps | Descanso | RIR | Indicación Biomecánica |\n`;
     text += `|:---|:---|:---|:---:|:---:|:---:|:---:|:---|\n`;

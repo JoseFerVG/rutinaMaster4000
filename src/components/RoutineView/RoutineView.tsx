@@ -87,14 +87,14 @@ export const RoutineView: React.FC = () => {
 
   const handleCopyText = () => {
     let text = `=========================================\n`;
-    text += `📋 ${activeRoutine.name}\n`;
+    text += `KINETIC BIOMECHANICS · ${activeRoutine.name}\n`;
     text += `${activeRoutine.subtitle}\n`;
     text += `Objetivo: ${activeRoutine.goal.toUpperCase()} | Nivel: ${activeRoutine.experience.toUpperCase()} | Duración: ${activeRoutine.sessionDuration || 60} MIN | Entorno: ${activeRoutine.equipment.toUpperCase()}\n`;
     text += `=========================================\n\n`;
 
     activeRoutine.days.forEach(day => {
-      text += `📅 ${day.title}\n`;
-      text += `🎯 ${day.subtitle}\n`;
+      text += `[${day.title}]\n`;
+      text += `${day.subtitle}\n`;
       text += `-----------------------------------------\n`;
       day.exercises.forEach((exInst, idx) => {
         if (exInst.isOmitted) return;

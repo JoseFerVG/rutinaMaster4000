@@ -19,7 +19,7 @@ import {
 } from './calculatorsEngine';
 
 export function runAllCalculatorTests(): boolean {
-  console.log('🧪 Iniciando verificación de 12 motores de cálculo...');
+  console.log('[TESTS] Iniciando verificacion de 12 motores de calculo...');
 
   // 1. Test Readiness (Hooper + ACWR)
   const readiness = calculateReadiness({
@@ -111,6 +111,6 @@ export function runAllCalculatorTests(): boolean {
   const magnesium = calculateMagnesiumRequirements({ ageYears: 26, gender: 'male', highSweatAthlete: true });
   console.assert(magnesium.athleteAdjustedRdaMg === 483, 'Test 12 Fallido: Magnesio atleta (420 * 1.15 = 483mg)');
 
-  console.log('✅ ¡Los 12 tests matemáticos de las calculadoras pasaron exitosamente!');
+  console.log('[TESTS OK] Los 12 tests matematicos de las calculadoras pasaron exitosamente.');
   return true;
 }
