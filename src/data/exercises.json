@@ -1227,10 +1227,11 @@
     "movementPattern": "lateral_raise",
     "equipment": "home",
     "directEquivalents": [
-      "ex_605"
+      "ex_605",
+      "ex_608"
     ],
     "freeWeightEquivalents": [
-      "ex_605"
+      "ex_608"
     ],
     "coachingCue": "Eleva en el plano escapular (ligeramente hacia el frente). Conduce el movimiento desde los codos sin encoger los trapecios.",
     "difficulty": "novato",
@@ -1253,10 +1254,12 @@
     "movementPattern": "lateral_raise",
     "equipment": "commercial",
     "directEquivalents": [
-      "ex_604"
+      "ex_604",
+      "ex_608"
     ],
     "freeWeightEquivalents": [
-      "ex_604"
+      "ex_604",
+      "ex_608"
     ],
     "coachingCue": "La polea garantiza tensión desde el inicio del recorrido. Controla la fase excéntrica en 2 segundos.",
     "difficulty": "intermedio",
@@ -1269,6 +1272,34 @@
       "Baja despacio sintiendo la carga en el deltoides lateral."
     ],
     "localGifPath": "/gifs/cable-lateral-raise.gif"
+  },
+  {
+    "id": "ex_608",
+    "name": "Elevaciones Laterales a Un Brazo con Mancuerna",
+    "subtitle": "Aislamiento unilateral con mayor estabilidad y enfoque neural",
+    "muscleGroup": "shoulders",
+    "secondaryMuscles": [],
+    "movementPattern": "lateral_raise",
+    "equipment": "home",
+    "directEquivalents": [
+      "ex_604",
+      "ex_605"
+    ],
+    "freeWeightEquivalents": [
+      "ex_604"
+    ],
+    "coachingCue": "Sostén una estructura estable con la mano libre para anular compensaciones de tronco y aislar el deltoides lateral.",
+    "difficulty": "novato",
+    "mechanics": "isolation",
+    "tier": 2,
+    "gifUrl": "/gifs/ex_608.gif",
+    "instructions": [
+      "De pie, sostén una mancuerna con una mano y afiánzate con la otra a un poste o respaldo de banco.",
+      "Eleva el brazo en el plano escapular (30º adelantado respecto al torso) guiando con el codo.",
+      "Alcanza la horizontal del hombro, pausa 1 segundo y desciende de forma controlada en 2-3 segundos.",
+      "Completa las repeticiones asignadas y cambia de brazo."
+    ],
+    "localGifPath": "/gifs/dumbbell-one-arm-lateral-raise.gif"
   },
   {
     "id": "ex_606",
