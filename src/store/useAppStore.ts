@@ -2,7 +2,22 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
 export type CategoryId = 'routines' | 'calculators';
-export type ToolId = 'hypertrophy' | 'cardio' | 'calculator_1rm' | 'calculator_hr';
+
+export type ToolId =
+  | 'hypertrophy'
+  | 'cardio'
+  | 'calc_readiness'
+  | 'calc_sleep'
+  | 'calc_macros'
+  | 'calc_deadlift_1rm'
+  | 'calc_bench_1rm'
+  | 'calc_caffeine'
+  | 'calc_tdee'
+  | 'calc_water'
+  | 'calc_skinfolds'
+  | 'calc_heart_rate'
+  | 'calc_creatine'
+  | 'calc_magnesium';
 
 export type AppView = 'home' | 'category' | 'tool';
 
@@ -64,7 +79,7 @@ export const useAppStore = create<AppStore>()(
       }
     }),
     {
-      name: 'kinetic-app-navigation-v2',
+      name: 'kinetic-app-navigation-v3',
       storage: createJSONStorage(() => localStorage)
     }
   )

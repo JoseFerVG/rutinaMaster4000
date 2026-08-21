@@ -11,6 +11,7 @@ import { RoutineView } from './components/RoutineView/RoutineView';
 import { CardioWizard } from './components/Cardio/CardioWizard';
 import { CardioGeneratingView } from './components/Cardio/CardioGeneratingView';
 import { CardioRoutineView } from './components/Cardio/CardioRoutineView';
+import { CalculatorDetailView } from './components/Calculators/CalculatorDetailView';
 import { Toast } from './components/UI/Toast';
 
 export function App() {
@@ -30,7 +31,11 @@ export function App() {
     }
 
     // Level 3: Specific Active Tool Execution
-    if (currentView === 'tool') {
+    if (currentView === 'tool' && activeTool) {
+      if (activeTool.startsWith('calc_')) {
+        return <CalculatorDetailView key={`calc-${activeTool}`} toolId={activeTool} />;
+      }
+
       if (activeTool === 'cardio') {
         switch (cardioStep) {
           case 'wizard':
