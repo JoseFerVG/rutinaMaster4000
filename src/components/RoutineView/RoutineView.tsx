@@ -17,8 +17,7 @@ import {
   Layers,
   Sparkles,
   Info,
-  Shield,
-  Zap
+  Shield
 } from 'lucide-react';
 import { useRoutineStore } from '../../store/useRoutineStore';
 import rawExercises from '../../data/exercises.json';
@@ -42,7 +41,6 @@ export const RoutineView: React.FC = () => {
     setActiveDayTab,
     setSpecificExercise,
     setSpecificAlternative,
-    toggleUseAlternative,
     toggleOmitExercise,
     resetAll,
     showToast
@@ -271,61 +269,41 @@ export const RoutineView: React.FC = () => {
           </div>
         )}
 
-        {/* Dedicated Plan B / Alternative Exercise Box (Siempre visible por si está ocupado) */}
-        <div className="p-3 rounded-xl bg-zinc-50/70 border border-zinc-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 print:bg-white print:border-zinc-300">
-          <div className="flex items-start gap-2.5">
-            <div className="w-6 h-6 rounded-md bg-zinc-200/70 flex items-center justify-center text-zinc-700 shrink-0 mt-0.5">
-              <Shield className="w-3.5 h-3.5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <span className="text-[10px] font-mono uppercase font-bold text-zinc-500">
-                  Plan B / Alternativa (si ocupado):
-                </span>
-                {altMeta ? (
-                  <button
-                    type="button"
-                    onClick={() => setModalExercise(altMeta)}
-                    className="text-xs font-bold text-zinc-950 hover:underline flex items-center gap-1"
-                  >
-                    <span>{altMeta.name}</span>
-                    <Play className="w-3 h-3 text-zinc-400 print:hidden" />
-                  </button>
-                ) : (
-                  <span className="text-xs text-zinc-400 italic">No asignado</span>
-                )}
-                {altMeta && (
-                  <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded bg-zinc-200/70 text-zinc-700">
-                    {altMeta.mechanics === 'compound' ? 'Compuesto' : 'Aislamiento'} · {altMeta.equipment === 'commercial' ? 'Máquina/Polea' : 'Libre'}
-                  </span>
-                )}
-              </div>
+        {/* Dedicated Plan B / Alternative Exercise Box (Informativo) */}
+        <div className="p-3 rounded-xl bg-zinc-50/70 border border-zinc-200/80 flex items-start gap-2.5 print:bg-white print:border-zinc-300">
+          <div className="w-6 h-6 rounded-md bg-zinc-200/70 flex items-center justify-center text-zinc-700 shrink-0 mt-0.5">
+            <Shield className="w-3.5 h-3.5" aria-hidden="true" />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="text-[10px] font-mono uppercase font-bold text-zinc-500">
+                Ejercicio Secundario / Plan B (si ocupado):
+              </span>
+              {altMeta ? (
+                <button
+                  type="button"
+                  onClick={() => setModalExercise(altMeta)}
+                  className="text-xs font-bold text-zinc-950 hover:underline flex items-center gap-1 cursor-pointer"
+                  title="Ver técnica y detalles del ejercicio secundario"
+                >
+                  <span>{altMeta.name}</span>
+                  <Play className="w-3 h-3 text-zinc-400 print:hidden" aria-hidden="true" />
+                </button>
+              ) : (
+                <span className="text-xs text-zinc-400 italic">No asignado</span>
+              )}
               {altMeta && (
-                <p className="text-[11px] text-zinc-500 mt-0.5">
-                  {altMeta.subtitle}
-                </p>
+                <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded bg-zinc-200/70 text-zinc-700">
+                  {altMeta.mechanics === 'compound' ? 'Compuesto' : 'Aislamiento'} · {altMeta.equipment === 'commercial' ? 'Máquina/Polea' : 'Libre'}
+                </span>
               )}
             </div>
+            {altMeta && (
+              <p className="text-[11px] text-zinc-500 mt-0.5">
+                {altMeta.subtitle}
+              </p>
+            )}
           </div>
-
-          {/* Quick Activate Plan B Switch */}
-          {altMeta && (
-            <div className="shrink-0 print:hidden">
-              <button
-                type="button"
-                onClick={() => toggleUseAlternative(dayNumber, exInst.instanceId)}
-                title="Activar alternativa si la máquina principal está ocupada hoy"
-                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 border cursor-pointer ${
-                  exInst.isUsingAlternative
-                    ? 'bg-zinc-950 text-white border-zinc-950 shadow-xs'
-                    : 'bg-white hover:bg-zinc-100 text-zinc-800 border-zinc-200'
-                }`}
-              >
-                <Zap className="w-3 h-3" aria-hidden="true" />
-                <span>{exInst.isUsingAlternative ? 'Usando Plan B (Activo)' : 'Usar Plan B'}</span>
-              </button>
-            </div>
-          )}
         </div>
 
         {/* Standardized 3 Actions Bar: Cambiar Ej. Principal, Cambiar Ej. Secundario, Omitir */}
