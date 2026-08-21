@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Search, Check, Dumbbell } from 'lucide-react';
+import { X, Search, Check, Dumbbell, Shield } from 'lucide-react';
 import { Exercise } from '../../types';
 import { MUSCLE_LABELS_ES } from '../../utils/routineEngine';
 import rawExercises from '../../data/exercises.json';
@@ -12,8 +12,9 @@ interface ExerciseSwapModalProps {
   dayNumber: number;
   instanceId: string;
   isOpen: boolean;
+  mode?: 'main' | 'alternative';
   onClose: () => void;
-  onSelectReplacement: (dayNumber: number, instanceId: string, newExerciseId: string) => void;
+  onSelectReplacement: (dayNumber: number, instanceId: string, newExerciseId: string, mode?: 'main' | 'alternative') => void;
 }
 
 export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
@@ -21,6 +22,7 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
   dayNumber,
   instanceId,
   isOpen,
+  mode = 'main',
   onClose,
   onSelectReplacement
 }) => {
@@ -54,9 +56,11 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
   });
 
   const handleConfirm = (newExId: string) => {
-    onSelectReplacement(dayNumber, instanceId, newExId);
+    onSelectReplacement(dayNumber, instanceId, newExId, mode);
     onClose();
   };
+
+  const isAltMode = mode === 'alternative';
 
   return (
     <AnimatePresence>
@@ -81,14 +85,19 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
           {/* Header */}
           <div className="p-5 sm:p-6 border-b border-zinc-100 bg-[#fcfcfd] flex items-start justify-between gap-4">
             <div className="space-y-1">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400">
-                Sustitución Personalizada de Ejercicio
-              </span>
+              <div className="flex items-center gap-1.5">
+                {isAltMode && <Shield className="w-3.5 h-3.5 text-zinc-600" />}
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400">
+                  {isAltMode ? 'Configuración de Plan B / Alternativa de Respaldo' : 'Sustitución de Ejercicio Principal'}
+                </span>
+              </div>
               <h2 className="text-lg sm:text-xl font-bold text-zinc-950">
-                Cambiar: {currentExercise.name}
+                {isAltMode ? `Elegir Alternativa para: ${currentExercise.name}` : `Cambiar: ${currentExercise.name}`}
               </h2>
               <p className="text-xs text-zinc-500">
-                Selecciona una alternativa compatible por grupo muscular ({MUSCLE_LABELS_ES[currentExercise.muscleGroup] || currentExercise.muscleGroup}) o busca en toda la base biomecánica.
+                {isAltMode
+                  ? `Selecciona el ejercicio de respaldo que realizarás si la máquina principal está ocupada o no dispones del material (${MUSCLE_LABELS_ES[currentExercise.muscleGroup] || currentExercise.muscleGroup}).`
+                  : `Selecciona una alternativa por grupo muscular (${MUSCLE_LABELS_ES[currentExercise.muscleGroup] || currentExercise.muscleGroup}) o busca en la base biomecánica.`}
               </p>
             </div>
 
@@ -109,7 +118,7 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Buscar por nombre (ej. Press mancuernas, Sentadilla, Remo...)"
+                placeholder="Buscar por nombre (ej. Press con mancuernas, Jalón al pecho, Sentadilla hack...)"
                 className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-zinc-200 bg-zinc-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-zinc-900 text-zinc-900 placeholder:text-zinc-400"
               />
             </div>
@@ -180,7 +189,7 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
                         {cand.subtitle}
                       </p>
                       <span className="text-[10px] font-mono text-zinc-400 block pt-1">
-                        Músculo: {MUSCLE_LABELS_ES[cand.muscleGroup] || cand.muscleGroup}
+                        Músculo: {MUSCLE_LABELS_ES[cand.muscleGroup] || cand.muscleGroup} · {cand.equipment === 'commercial' ? 'Máquina/Polea' : 'Mancuerna/Barra'}
                       </span>
                     </div>
                   </div>
@@ -192,7 +201,7 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
                       className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-950 hover:bg-zinc-800 text-white shadow-xs transition-colors flex items-center gap-1"
                     >
                       <Check className="w-3 h-3 text-zinc-300" />
-                      <span>Seleccionar</span>
+                      <span>{isAltMode ? 'Asignar como Plan B' : 'Seleccionar'}</span>
                     </button>
                   </div>
                 </div>
@@ -202,7 +211,7 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
 
           {/* Footer */}
           <div className="p-4 border-t border-zinc-100 bg-zinc-50 flex items-center justify-between text-xs text-zinc-500">
-            <span>{candidates.length} alternativas disponibles</span>
+            <span>{candidates.length} ejercicios compatibles</span>
             <button
               type="button"
               onClick={onClose}

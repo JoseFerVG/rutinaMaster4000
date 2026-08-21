@@ -66,6 +66,8 @@ interface RoutineStore {
   replacePermanent: (dayNumber: number, instanceId: string) => void;
   replaceWithFreeWeight: (dayNumber: number, instanceId: string) => void;
   setSpecificExercise: (dayNumber: number, instanceId: string, newExerciseId: string) => void;
+  setSpecificAlternative: (dayNumber: number, instanceId: string, newAlternativeExerciseId: string) => void;
+  toggleUseAlternative: (dayNumber: number, instanceId: string) => void;
   toggleOmitExercise: (dayNumber: number, instanceId: string) => void;
   toggleSetCompleted: (dayNumber: number, instanceId: string, setIndex: number) => void;
   updateExerciseNotes: (dayNumber: number, instanceId: string, notes: string) => void;
@@ -363,6 +365,86 @@ export const useRoutineStore = create<RoutineStore>()(
         });
 
         get().showToast('Ejercicio Asignado', `Cambiado a: ${targetExerciseMeta.name}`, 'success');
+      },
+
+      setSpecificAlternative: (dayNumber: number, instanceId: string, newAlternativeExerciseId: string) => {
+        const { activeRoutine } = get();
+        if (!activeRoutine) return;
+
+        const targetAltMeta = exercisesDb.find(e => e.id === newAlternativeExerciseId);
+        if (!targetAltMeta) return;
+
+        const updatedDays = activeRoutine.days.map(d => {
+          if (d.dayNumber !== dayNumber) return d;
+          return {
+            ...d,
+            exercises: d.exercises.map(ex => {
+              if (ex.instanceId !== instanceId) return ex;
+              return {
+                ...ex,
+                alternativeExerciseId: newAlternativeExerciseId
+              };
+            })
+          };
+        });
+
+        set({
+          activeRoutine: {
+            ...activeRoutine,
+            days: updatedDays
+          }
+        });
+
+        get().showToast('Plan B Actualizado', `Alternativa cambiada a: ${targetAltMeta.name}`, 'info');
+      },
+
+      toggleUseAlternative: (dayNumber: number, instanceId: string) => {
+        const { activeRoutine } = get();
+        if (!activeRoutine) return;
+
+        const day = activeRoutine.days.find(d => d.dayNumber === dayNumber);
+        if (!day) return;
+
+        const exInst = day.exercises.find(e => e.instanceId === instanceId);
+        if (!exInst || !exInst.alternativeExerciseId) return;
+
+        const isCurrentlyUsingAlt = !!exInst.isUsingAlternative;
+        const newExerciseId = isCurrentlyUsingAlt ? exInst.originalExerciseId : exInst.alternativeExerciseId;
+        const newAltId = isCurrentlyUsingAlt ? exInst.alternativeExerciseId : exInst.originalExerciseId;
+
+        const newMeta = exercisesDb.find(e => e.id === newExerciseId);
+
+        const updatedDays = activeRoutine.days.map(d => {
+          if (d.dayNumber !== dayNumber) return d;
+          return {
+            ...d,
+            exercises: d.exercises.map(ex => {
+              if (ex.instanceId !== instanceId) return ex;
+              return {
+                ...ex,
+                exerciseId: newExerciseId,
+                alternativeExerciseId: newAltId,
+                isUsingAlternative: !isCurrentlyUsingAlt,
+                replacementMessage: !isCurrentlyUsingAlt
+                  ? `Plan B activado: ${newMeta?.name || ''} (por máquina ocupada o preferencia).`
+                  : undefined
+              };
+            })
+          };
+        });
+
+        set({
+          activeRoutine: {
+            ...activeRoutine,
+            days: updatedDays
+          }
+        });
+
+        get().showToast(
+          !isCurrentlyUsingAlt ? 'Plan B Activado' : 'Ejercicio Principal Restaurado',
+          `Ahora realizando: ${newMeta?.name || ''}`,
+          'info'
+        );
       },
 
       toggleOmitExercise: (dayNumber: number, instanceId: string) => {

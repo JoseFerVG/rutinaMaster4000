@@ -55,7 +55,8 @@ export function exportRoutineToExcel(routine: Routine, allExercises: Exercise[])
       [''],
       [
         'Nº',
-        'Ejercicio',
+        'Ejercicio Principal',
+        'Alternativa / Plan B (por si está ocupado)',
         'Mecánica',
         'Músculo Primario',
         'Sinergistas',
@@ -74,7 +75,10 @@ export function exportRoutineToExcel(routine: Routine, allExercises: Exercise[])
 
     activeExercises.forEach((exInst, idx) => {
       const meta = allExercises.find(e => e.id === exInst.exerciseId);
+      const altMeta = exInst.alternativeExerciseId ? allExercises.find(e => e.id === exInst.alternativeExerciseId) : null;
       const name = meta ? meta.name : 'Ejercicio';
+      const firstBackupId = exInst.backupExerciseIds?.[0];
+      const altName = altMeta ? altMeta.name : (firstBackupId ? (allExercises.find(e => e.id === firstBackupId)?.name || '-') : '-');
       const mechanics = meta ? (meta.mechanics === 'compound' ? 'Compuesto' : 'Aislamiento') : '-';
       const primary = meta ? (MUSCLE_LABELS_ES[meta.muscleGroup] || meta.muscleGroup) : '-';
       const synergists = meta && meta.secondaryMuscles ? meta.secondaryMuscles.map(m => MUSCLE_LABELS_ES[m] || m).join(', ') : '-';
@@ -83,6 +87,7 @@ export function exportRoutineToExcel(routine: Routine, allExercises: Exercise[])
       dayData.push([
         String(idx + 1).padStart(2, '0'),
         name,
+        altName,
         mechanics,
         primary,
         synergists,
@@ -103,6 +108,7 @@ export function exportRoutineToExcel(routine: Routine, allExercises: Exercise[])
     wsDay['!cols'] = [
       { wch: 6 },  // Nº
       { wch: 32 }, // Ejercicio
+      { wch: 32 }, // Alternativa / Plan B
       { wch: 14 }, // Mecánica
       { wch: 18 }, // Músculo Primario
       { wch: 22 }, // Sinergistas
@@ -241,15 +247,18 @@ export function downloadMarkdownFile(routine: Routine, allExercises: Exercise[])
   routine.days.forEach(day => {
     text += `## 📅 ${day.title}\n`;
     text += `*${day.subtitle}*\n\n`;
-    text += `| Nº | Ejercicio | Series | Reps | Descanso | RIR | Indicación Biomecánica |\n`;
-    text += `|:---|:---|:---:|:---:|:---:|:---:|:---|\n`;
+    text += `| Nº | Ejercicio Principal | Alternativa / Plan B | Series | Reps | Descanso | RIR | Indicación Biomecánica |\n`;
+    text += `|:---|:---|:---|:---:|:---:|:---:|:---:|:---|\n`;
 
     day.exercises.forEach((exInst, idx) => {
       if (exInst.isOmitted) return;
       const meta = allExercises.find(e => e.id === exInst.exerciseId);
+      const altMeta = exInst.alternativeExerciseId ? allExercises.find(e => e.id === exInst.alternativeExerciseId) : null;
       const name = meta ? meta.name : 'Ejercicio';
+      const firstBackupId = exInst.backupExerciseIds?.[0];
+      const altName = altMeta ? altMeta.name : (firstBackupId ? (allExercises.find(e => e.id === firstBackupId)?.name || '-') : '-');
       const cue = meta ? meta.coachingCue : '';
-      text += `| ${String(idx + 1).padStart(2, '0')} | **${name}** | ${exInst.sets} | ${exInst.reps} | ${exInst.rest} | ${exInst.targetRir || 'RIR 1-2'} | ${cue} |\n`;
+      text += `| ${String(idx + 1).padStart(2, '0')} | **${name}** | *${altName}* | ${exInst.sets} | ${exInst.reps} | ${exInst.rest} | ${exInst.targetRir || 'RIR 1-2'} | ${cue} |\n`;
     });
 
     text += `\n`;

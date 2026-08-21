@@ -179,6 +179,26 @@ export function buildRoutine(
       return bFocus - aFocus;
     });
 
+    const createRoutineExerciseInstance = (ex: Exercise, tier: 1 | 2 | 3): RoutineExercise => {
+      const { sets, reps, rest, targetRir } = getSetsRepsRest(tier, experience, goal, sessionDuration);
+      const { alternativeId, backupIds } = findDesignatedAlternative(ex, equipment, availableExercises, [ex.id]);
+      
+      return {
+        instanceId: `inst_${ex.id}_${Math.random().toString(36).substring(2, 7)}`,
+        exerciseId: ex.id,
+        originalExerciseId: ex.id,
+        alternativeExerciseId: alternativeId,
+        backupExerciseIds: backupIds,
+        isUsingAlternative: false,
+        sets,
+        reps,
+        rest,
+        targetRir,
+        isTemporarilyReplaced: false,
+        completedSets: new Array(sets).fill(false)
+      };
+    };
+
     // 1. Tier 1 Main Compounds
     for (const muscle of sortedTargets) {
       if (picked.length >= maxExercises) break;
@@ -187,18 +207,7 @@ export function buildRoutine(
       );
       if (tier1) {
         usedIds.add(tier1.id);
-        const { sets, reps, rest, targetRir } = getSetsRepsRest(tier1.tier, experience, goal, sessionDuration);
-        picked.push({
-          instanceId: `inst_${tier1.id}_${Math.random().toString(36).substring(2, 7)}`,
-          exerciseId: tier1.id,
-          originalExerciseId: tier1.id,
-          sets,
-          reps,
-          rest,
-          targetRir,
-          isTemporarilyReplaced: false,
-          completedSets: new Array(sets).fill(false)
-        });
+        picked.push(createRoutineExerciseInstance(tier1, tier1.tier));
       }
     }
 
@@ -210,18 +219,7 @@ export function buildRoutine(
       );
       if (tier2) {
         usedIds.add(tier2.id);
-        const { sets, reps, rest, targetRir } = getSetsRepsRest(tier2.tier, experience, goal, sessionDuration);
-        picked.push({
-          instanceId: `inst_${tier2.id}_${Math.random().toString(36).substring(2, 7)}`,
-          exerciseId: tier2.id,
-          originalExerciseId: tier2.id,
-          sets,
-          reps,
-          rest,
-          targetRir,
-          isTemporarilyReplaced: false,
-          completedSets: new Array(sets).fill(false)
-        });
+        picked.push(createRoutineExerciseInstance(tier2, tier2.tier));
       }
     }
 
@@ -234,18 +232,7 @@ export function buildRoutine(
         );
         if (tier3) {
           usedIds.add(tier3.id);
-          const { sets, reps, rest, targetRir } = getSetsRepsRest(tier3.tier, experience, goal, sessionDuration);
-          picked.push({
-            instanceId: `inst_${tier3.id}_${Math.random().toString(36).substring(2, 7)}`,
-            exerciseId: tier3.id,
-            originalExerciseId: tier3.id,
-            sets,
-            reps,
-            rest,
-            targetRir,
-            isTemporarilyReplaced: false,
-            completedSets: new Array(sets).fill(false)
-          });
+          picked.push(createRoutineExerciseInstance(tier3, tier3.tier));
         }
       }
     }
@@ -258,18 +245,7 @@ export function buildRoutine(
       );
       if (filler) {
         usedIds.add(filler.id);
-        const { sets, reps, rest, targetRir } = getSetsRepsRest(filler.tier, experience, goal, sessionDuration);
-        picked.push({
-          instanceId: `inst_${filler.id}_${Math.random().toString(36).substring(2, 7)}`,
-          exerciseId: filler.id,
-          originalExerciseId: filler.id,
-          sets,
-          reps,
-          rest,
-          targetRir,
-          isTemporarilyReplaced: false,
-          completedSets: new Array(sets).fill(false)
-        });
+        picked.push(createRoutineExerciseInstance(filler, filler.tier));
       }
     }
 
@@ -564,4 +540,35 @@ export function findFreeWeightAlternative(
     replacement: null,
     feedback: 'No se encontró una variante básica de peso libre adicional.'
   };
+}
+
+export function findDesignatedAlternative(
+  exercise: Exercise,
+  equipment: EquipmentPreference,
+  allExercises: Exercise[],
+  excludedIds: string[] = []
+): { alternativeId?: string; backupIds: string[] } {
+  const candidates = [
+    ...(exercise.directEquivalents || []),
+    ...(exercise.freeWeightEquivalents || [])
+  ].filter(id => id !== exercise.id && !excludedIds.includes(id));
+
+  const validCandidates = allExercises.filter(ex =>
+    candidates.includes(ex.id) && isExerciseAllowed(ex, equipment)
+  );
+
+  let backupIds = validCandidates.map(c => c.id);
+
+  if (backupIds.length === 0) {
+    const patternFallback = allExercises.filter(ex =>
+      ex.movementPattern === exercise.movementPattern &&
+      ex.id !== exercise.id &&
+      !excludedIds.includes(ex.id) &&
+      isExerciseAllowed(ex, equipment)
+    );
+    backupIds = patternFallback.map(c => c.id);
+  }
+
+  const alternativeId = backupIds.length > 0 ? backupIds[0] : undefined;
+  return { alternativeId, backupIds };
 }

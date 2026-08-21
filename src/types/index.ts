@@ -59,6 +59,9 @@ export interface RoutineExercise {
   instanceId: string;
   exerciseId: string;
   originalExerciseId: string;
+  alternativeExerciseId?: string;
+  backupExerciseIds?: string[];
+  isUsingAlternative?: boolean;
   sets: number;
   reps: string;
   rest: string;

@@ -17,7 +17,9 @@ import {
   ChevronDown,
   Layers,
   Sparkles,
-  Info
+  Info,
+  Shield,
+  Zap
 } from 'lucide-react';
 import { useRoutineStore } from '../../store/useRoutineStore';
 import rawExercises from '../../data/exercises.json';
@@ -41,6 +43,8 @@ export const RoutineView: React.FC = () => {
     setActiveDayTab,
     replaceWithFreeWeight,
     setSpecificExercise,
+    setSpecificAlternative,
+    toggleUseAlternative,
     toggleOmitExercise,
     resetAll,
     showToast
@@ -54,11 +58,13 @@ export const RoutineView: React.FC = () => {
     exercise: Exercise | null;
     dayNumber: number;
     instanceId: string;
+    mode: 'main' | 'alternative';
   }>({
     isOpen: false,
     exercise: null,
     dayNumber: 1,
-    instanceId: ''
+    instanceId: '',
+    mode: 'main'
   });
   const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
 
@@ -93,8 +99,12 @@ export const RoutineView: React.FC = () => {
       day.exercises.forEach((exInst, idx) => {
         if (exInst.isOmitted) return;
         const exMeta = exercisesDb.find(e => e.id === exInst.exerciseId);
+        const altMeta = exInst.alternativeExerciseId ? exercisesDb.find(e => e.id === exInst.alternativeExerciseId) : null;
         if (exMeta) {
           text += `${idx + 1}. ${exMeta.name}\n`;
+          if (altMeta) {
+            text += `   Plan B / Alternativa (si ocupado): ${altMeta.name}\n`;
+          }
           text += `   Series: ${exInst.sets} | Reps: ${exInst.reps} | Descanso: ${exInst.rest} | Intensidad: ${exInst.targetRir || 'RIR 1-2'}\n`;
           text += `   Guía técnica: ${exMeta.coachingCue}\n\n`;
         }
@@ -104,13 +114,13 @@ export const RoutineView: React.FC = () => {
 
     navigator.clipboard.writeText(text);
     setCopied(true);
-    showToast('Protocolo Copiado', 'La rutina completa ha sido copiada a tu portapapeles.', 'success');
+    showToast('Protocolo Copiado', 'La rutina completa con alternativas ha sido copiada.', 'success');
     setTimeout(() => setCopied(false), 3000);
   };
 
   const handleExportExcel = () => {
     exportRoutineToExcel(activeRoutine, exercisesDb);
-    showToast('Excel Descargado', 'Se ha exportado el archivo .xlsx con todas las hojas de entrenamiento.', 'success');
+    showToast('Excel Descargado', 'Archivo .xlsx generado con la columna de Alternativas (Plan B).', 'success');
   };
 
   const handleExportMarkdown = () => {
@@ -132,12 +142,13 @@ export const RoutineView: React.FC = () => {
     window.print();
   };
 
-  const openSwapModal = (dayNumber: number, instanceId: string, exercise: Exercise) => {
+  const openSwapModal = (dayNumber: number, instanceId: string, exercise: Exercise, mode: 'main' | 'alternative' = 'main') => {
     setSwapModalState({
       isOpen: true,
       exercise,
       dayNumber,
-      instanceId
+      instanceId,
+      mode
     });
   };
 
@@ -145,6 +156,7 @@ export const RoutineView: React.FC = () => {
     const exMeta = exercisesDb.find(e => e.id === exInst.exerciseId);
     if (!exMeta) return null;
 
+    const altMeta = exInst.alternativeExerciseId ? exercisesDb.find(e => e.id === exInst.alternativeExerciseId) : null;
     const isSecondary = exMeta.tier >= 2 || exMeta.mechanics === 'isolation';
 
     if (exInst.isOmitted) {
@@ -215,11 +227,15 @@ export const RoutineView: React.FC = () => {
           </div>
         </div>
 
-        {/* Replacement Banner if Modified */}
-        {(exInst.isTemporarilyReplaced || exInst.isPermanentlyReplaced || exInst.isSecondaryFreeWeightSwapped) && (
-          <div className="p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/80 text-xs text-zinc-700 flex items-center justify-between gap-2 print:hidden">
+        {/* Status Banner if Plan B is Active or Modified */}
+        {(exInst.isUsingAlternative || exInst.isTemporarilyReplaced || exInst.isPermanentlyReplaced || exInst.isSecondaryFreeWeightSwapped) && (
+          <div className={`p-2.5 rounded-lg border text-xs flex items-center justify-between gap-2 print:hidden ${
+            exInst.isUsingAlternative
+              ? 'bg-amber-50/90 border-amber-200/80 text-amber-900'
+              : 'bg-zinc-50 border-zinc-200/80 text-zinc-700'
+          }`}>
             <div className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-zinc-600 shrink-0" />
+              <Sparkles className="w-3.5 h-3.5 shrink-0" />
               <span>{exInst.replacementMessage || 'Ejercicio personalizado en tu protocolo.'}</span>
             </div>
           </div>
@@ -258,22 +274,89 @@ export const RoutineView: React.FC = () => {
           </div>
         )}
 
-        {/* Customization Actions Bar (Cambiar ejercicio, No tengo secundario, Omitir) */}
+        {/* Dedicated Plan B / Alternative Exercise Box (Siempre visible por si está ocupado) */}
+        <div className="p-3 rounded-xl bg-zinc-50/70 border border-zinc-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 print:bg-white print:border-zinc-300">
+          <div className="flex items-start gap-2.5">
+            <div className="w-6 h-6 rounded-md bg-zinc-200/70 flex items-center justify-center text-zinc-700 shrink-0 mt-0.5">
+              <Shield className="w-3.5 h-3.5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[10px] font-mono uppercase font-bold text-zinc-500">
+                  Plan B / Alternativa (si ocupado):
+                </span>
+                {altMeta ? (
+                  <button
+                    type="button"
+                    onClick={() => setModalExercise(altMeta)}
+                    className="text-xs font-bold text-zinc-950 hover:underline flex items-center gap-1"
+                  >
+                    <span>{altMeta.name}</span>
+                    <Play className="w-3 h-3 text-zinc-400 print:hidden" />
+                  </button>
+                ) : (
+                  <span className="text-xs text-zinc-400 italic">No asignado</span>
+                )}
+                {altMeta && (
+                  <span className="text-[9px] font-mono uppercase px-1.5 py-0.2 rounded bg-zinc-200/70 text-zinc-700">
+                    {altMeta.mechanics === 'compound' ? 'Compuesto' : 'Aislamiento'} · {altMeta.equipment === 'commercial' ? 'Máquina/Polea' : 'Libre'}
+                  </span>
+                )}
+              </div>
+              {altMeta && (
+                <p className="text-[11px] text-zinc-500 mt-0.5">
+                  {altMeta.subtitle}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Action Buttons for Plan B */}
+          <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0 print:hidden flex-wrap">
+            {altMeta && (
+              <button
+                type="button"
+                onClick={() => toggleUseAlternative(dayNumber, exInst.instanceId)}
+                title="Activar alternativa si la máquina principal está ocupada hoy"
+                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 border ${
+                  exInst.isUsingAlternative
+                    ? 'bg-zinc-950 text-white border-zinc-950 shadow-xs'
+                    : 'bg-white hover:bg-zinc-100 text-zinc-800 border-zinc-200'
+                }`}
+              >
+                <Zap className="w-3 h-3" />
+                <span>{exInst.isUsingAlternative ? 'Usando Plan B (Activo)' : 'Usar Plan B'}</span>
+              </button>
+            )}
+
+            <button
+              type="button"
+              onClick={() => openSwapModal(dayNumber, exInst.instanceId, altMeta || exMeta, 'alternative')}
+              title="No dispongo de esta alternativa / Seleccionar otro Plan B de por si acaso"
+              className="px-2.5 py-1 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 bg-white hover:bg-zinc-100 border border-zinc-200 transition-colors flex items-center gap-1"
+            >
+              <RefreshCw className="w-3 h-3 text-zinc-400" />
+              <span>Cambiar Alternativa</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Customization Actions Bar (Cambiar Ejercicio Principal, Peso Libre, Omitir) */}
         <div className="pt-2 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-2 print:hidden">
           <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-mono">
             <span>Músculo: {MUSCLE_LABELS_ES[exMeta.muscleGroup] || exMeta.muscleGroup}</span>
           </div>
 
           <div className="flex items-center gap-1.5 flex-wrap">
-            {/* Direct Exercise Swap Modal Button */}
+            {/* Direct Exercise Swap Modal Button for Main Exercise */}
             <button
               type="button"
-              onClick={() => openSwapModal(dayNumber, exInst.instanceId, exMeta)}
-              title="Seleccionar otro ejercicio de la base de datos"
+              onClick={() => openSwapModal(dayNumber, exInst.instanceId, exMeta, 'main')}
+              title="Seleccionar otro ejercicio principal de la base de datos"
               className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1"
             >
               <RefreshCw className="w-3 h-3 text-zinc-500" />
-              <span>Cambiar Ejercicio</span>
+              <span>Cambiar Principal</span>
             </button>
 
             {/* Free Weight Alternative */}
@@ -551,7 +634,7 @@ export const RoutineView: React.FC = () => {
         </section>
       )}
 
-      {/* Print View Only (Hidden on Screen, Rendered on Print) */}
+      {/* Print View Only (Clean A4 High-Contrast Format) */}
       <div className="hidden print:block space-y-6">
         {activeRoutine.days.map((day) => (
           <div key={day.dayNumber} className="space-y-3 page-break-after-auto">
@@ -575,15 +658,20 @@ export const RoutineView: React.FC = () => {
         onClose={() => setModalExercise(null)}
       />
 
-      {/* Exercise Swap Modal (Change Main or Replacement Exercise) */}
+      {/* Exercise Swap Modal (Change Main or Alternative Exercise) */}
       <ExerciseSwapModal
         currentExercise={swapModalState.exercise}
         dayNumber={swapModalState.dayNumber}
         instanceId={swapModalState.instanceId}
+        mode={swapModalState.mode}
         isOpen={swapModalState.isOpen}
         onClose={() => setSwapModalState(prev => ({ ...prev, isOpen: false }))}
-        onSelectReplacement={(dNum, instId, newExId) => {
-          setSpecificExercise(dNum, instId, newExId);
+        onSelectReplacement={(dNum, instId, newExId, mode) => {
+          if (mode === 'alternative') {
+            setSpecificAlternative(dNum, instId, newExId);
+          } else {
+            setSpecificExercise(dNum, instId, newExId);
+          }
         }}
       />
     </div>
