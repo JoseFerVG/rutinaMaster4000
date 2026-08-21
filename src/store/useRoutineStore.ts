@@ -65,6 +65,7 @@ interface RoutineStore {
   replaceTemporary: (dayNumber: number, instanceId: string) => void;
   replacePermanent: (dayNumber: number, instanceId: string) => void;
   replaceWithFreeWeight: (dayNumber: number, instanceId: string) => void;
+  setSpecificExercise: (dayNumber: number, instanceId: string, newExerciseId: string) => void;
   toggleOmitExercise: (dayNumber: number, instanceId: string) => void;
   toggleSetCompleted: (dayNumber: number, instanceId: string, setIndex: number) => void;
   updateExerciseNotes: (dayNumber: number, instanceId: string, notes: string) => void;
@@ -326,6 +327,42 @@ export const useRoutineStore = create<RoutineStore>()(
         });
 
         get().showToast('Variante Libre Asignada', `Reemplazado por básico: ${replacement.name}`, 'info');
+      },
+
+      setSpecificExercise: (dayNumber: number, instanceId: string, newExerciseId: string) => {
+        const { activeRoutine } = get();
+        if (!activeRoutine) return;
+
+        const targetExerciseMeta = exercisesDb.find(e => e.id === newExerciseId);
+        if (!targetExerciseMeta) return;
+
+        const updatedDays = activeRoutine.days.map(d => {
+          if (d.dayNumber !== dayNumber) return d;
+          return {
+            ...d,
+            exercises: d.exercises.map(ex => {
+              if (ex.instanceId !== instanceId) return ex;
+              return {
+                ...ex,
+                exerciseId: newExerciseId,
+                originalExerciseId: newExerciseId,
+                isTemporarilyReplaced: false,
+                isPermanentlyReplaced: true,
+                isOmitted: false,
+                replacementMessage: `Sustituido manualmente por: ${targetExerciseMeta.name}`
+              };
+            })
+          };
+        });
+
+        set({
+          activeRoutine: {
+            ...activeRoutine,
+            days: updatedDays
+          }
+        });
+
+        get().showToast('Ejercicio Asignado', `Cambiado a: ${targetExerciseMeta.name}`, 'success');
       },
 
       toggleOmitExercise: (dayNumber: number, instanceId: string) => {

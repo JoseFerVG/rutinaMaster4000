@@ -8,10 +8,12 @@ import {
   Clock,
   Zap,
   Droplets,
-  Edit3
+  Edit3,
+  FileSpreadsheet
 } from 'lucide-react';
 import { useCardioStore } from '../../store/useCardioStore';
 import { CARDIO_MODALITY_LABELS } from '../../utils/cardioEngine';
+import { exportCardioToExcel } from '../../utils/exportEngine';
 
 export const CardioRoutineView: React.FC = () => {
   const {
@@ -117,7 +119,15 @@ export const CardioRoutineView: React.FC = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-2 shrink-0 print:hidden">
+          <div className="flex items-center gap-2 shrink-0 print:hidden flex-wrap">
+            <button
+              onClick={() => exportCardioToExcel(activeCardioRoutine)}
+              className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm flex items-center gap-1.5 transition-all"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5" />
+              <span>Exportar Excel (.xlsx)</span>
+            </button>
+
             <button
               onClick={handleCopyText}
               className="px-3.5 py-2 rounded-lg text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors"
