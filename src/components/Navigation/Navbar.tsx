@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, ChevronRight, Home, RotateCcw, Layers, Calculator } from 'lucide-react';
+import { Activity, ChevronRight, Home, RotateCcw } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 import { useRoutineStore } from '../../store/useRoutineStore';
 import { useCardioStore } from '../../store/useCardioStore';
@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
     (activeTool === 'cardio' && activeCardioRoutine);
 
   return (
-    <header role="banner" className="sticky top-0 z-40 w-full bg-[#fbfbfa]/90 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-8 py-3 transition-all print:hidden">
+    <header role="banner" className="sticky top-0 z-40 w-full bg-[#fbfbfa]/90 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-8 py-3.5 transition-all print:hidden">
       <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
         {/* Brand Logo & Name: Kinetic Biomechanics */}
         <div className="flex items-center gap-3">
@@ -50,7 +50,7 @@ export const Navbar: React.FC = () => {
           </button>
 
           {/* Breadcrumb Navigation Trail */}
-          <nav aria-label="Ruta de navegación" className="hidden md:flex items-center gap-1.5 pl-3 border-l border-zinc-200 text-xs font-medium text-zinc-500">
+          <nav aria-label="Ruta de navegación" className="flex items-center gap-1.5 pl-3 border-l border-zinc-200 text-xs font-medium text-zinc-500">
             <button
               type="button"
               onClick={goHome}
@@ -82,7 +82,7 @@ export const Navbar: React.FC = () => {
             {currentView === 'tool' && activeTool && (
               <>
                 <ChevronRight className="w-3 h-3 text-zinc-400" aria-hidden="true" />
-                <span className="text-zinc-950 font-semibold px-1.5 py-0.5" aria-current="page">
+                <span className="text-zinc-950 font-semibold px-1.5 py-0.5 truncate max-w-[180px] sm:max-w-none" aria-current="page">
                   {activeTool === 'hypertrophy'
                     ? 'Hipertrofia & Fuerza'
                     : activeTool === 'cardio'
@@ -94,42 +94,8 @@ export const Navbar: React.FC = () => {
           </nav>
         </div>
 
-        {/* Top Switcher & Quick Navigation */}
+        {/* Right side: only reset/new action when inside active tool */}
         <div className="flex items-center gap-2">
-          {/* Direct Category Jump Tabs */}
-          <div role="tablist" aria-label="Categorías principales" className="flex items-center gap-1 bg-zinc-100 p-1 rounded-xl border border-zinc-200/60">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeCategory === 'routines'}
-              onClick={() => goToCategory('routines')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
-                activeCategory === 'routines'
-                  ? 'bg-white text-zinc-950 shadow-xs'
-                  : 'text-zinc-600 hover:text-zinc-900'
-              }`}
-            >
-              <Layers className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Rutinas</span>
-            </button>
-
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeCategory === 'calculators'}
-              onClick={() => goToCategory('calculators')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
-                activeCategory === 'calculators'
-                  ? 'bg-white text-zinc-950 shadow-xs'
-                  : 'text-zinc-600 hover:text-zinc-900'
-              }`}
-            >
-              <Calculator className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Calculadoras</span>
-            </button>
-          </div>
-
-          {/* Action: Reset current plan when in tool view */}
           {currentView === 'tool' && hasActivePlan && (
             <button
               type="button"
