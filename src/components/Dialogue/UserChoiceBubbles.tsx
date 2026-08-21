@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageSquare, Check } from 'lucide-react';
+import { Check, ChevronRight } from 'lucide-react';
 import { soundFx } from '../../utils/audioSynth';
 
 export interface DialogueChoiceOption {
@@ -20,114 +20,74 @@ interface UserChoiceBubblesProps {
 }
 
 export const UserChoiceBubbles: React.FC<UserChoiceBubblesProps> = ({
-  promptText = 'Tu respuesta para Heinz:',
+  promptText = 'Selecciona una respuesta:',
   options,
   className = ''
 }) => {
-  const getVariantStyles = (variant: DialogueChoiceOption['variant'] = 'green', isSelected: boolean = false) => {
-    if (isSelected) {
-      return {
-        card: 'bg-gradient-to-r from-emerald-950 via-teal-900 to-doof-card border-doof-green-neon text-white shadow-xl shadow-emerald-950/60 ring-2 ring-emerald-400',
-        tail: 'border-emerald-400 bg-teal-900',
-        badge: 'bg-emerald-500 text-slate-950 font-bold',
-        icon: 'text-doof-green-neon'
-      };
-    }
-
-    switch (variant) {
-      case 'purple':
-        return {
-          card: 'bg-gradient-to-r from-purple-950/70 via-doof-panel to-doof-card border-purple-500/70 text-slate-100 hover:border-purple-300 hover:shadow-purple-950/60',
-          tail: 'border-purple-500 bg-doof-panel',
-          badge: 'bg-purple-900/80 text-purple-200 border border-purple-400/50',
-          icon: 'text-purple-400'
-        };
-      case 'cyan':
-        return {
-          card: 'bg-gradient-to-r from-cyan-950/70 via-doof-panel to-doof-card border-cyan-500/70 text-slate-100 hover:border-cyan-300 hover:shadow-cyan-950/60',
-          tail: 'border-cyan-500 bg-doof-panel',
-          badge: 'bg-cyan-900/80 text-cyan-200 border border-cyan-400/50',
-          icon: 'text-cyan-400'
-        };
-      case 'amber':
-        return {
-          card: 'bg-gradient-to-r from-amber-950/70 via-doof-panel to-doof-card border-amber-500/70 text-slate-100 hover:border-amber-300 hover:shadow-amber-950/60',
-          tail: 'border-amber-500 bg-doof-panel',
-          badge: 'bg-amber-900/80 text-amber-200 border border-amber-400/50',
-          icon: 'text-amber-400'
-        };
-      case 'red':
-        return {
-          card: 'bg-gradient-to-r from-red-950/80 via-doof-panel to-doof-card border-red-500/80 text-slate-100 hover:border-red-400 hover:shadow-red-950/70',
-          tail: 'border-red-500 bg-doof-panel',
-          badge: 'bg-red-900/80 text-red-200 border border-red-400/50',
-          icon: 'text-red-400'
-        };
-      default:
-        return {
-          card: 'bg-gradient-to-r from-doof-panel via-doof-card to-slate-900 border-doof-border text-slate-200 hover:border-doof-green-acid hover:text-white hover:shadow-emerald-950/40',
-          tail: 'border-doof-border bg-doof-card',
-          badge: 'bg-slate-800 text-slate-300 border border-slate-700',
-          icon: 'text-doof-green-acid'
-        };
-    }
-  };
-
   return (
-    <div className={`space-y-3 ${className}`}>
+    <div className={`space-y-2.5 ${className}`}>
       {promptText && (
-        <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-slate-400 px-2">
-          <MessageSquare className="w-3.5 h-3.5 text-doof-green-neon" />
+        <div className="flex items-center gap-2 text-xs font-medium text-slate-400 px-1 tracking-wide">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
           <span>{promptText}</span>
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-3">
+      <div className="grid grid-cols-1 gap-2.5">
         {options.map((opt, idx) => {
-          const style = getVariantStyles(opt.variant, opt.isSelected);
-
           return (
             <motion.button
               key={opt.id || idx}
-              whileHover={{ scale: 1.015, x: 4 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.008, x: 2 }}
+              whileTap={{ scale: 0.99 }}
               onClick={() => {
                 soundFx.playLaser();
                 opt.onClick();
               }}
-              className={`relative p-4 md:p-5 rounded-2xl border-2 text-left transition-all shadow-lg cursor-pointer group flex items-start gap-4 ${style.card}`}
+              className={`w-full p-4 md:p-4.5 rounded-2xl border text-left transition-all duration-300 flex items-center justify-between gap-4 backdrop-blur-md cursor-pointer ${
+                opt.isSelected
+                  ? 'bg-emerald-500/10 border-emerald-400/40 text-white shadow-zen-glow ring-1 ring-emerald-400/30'
+                  : 'bg-white/[0.025] hover:bg-white/[0.06] border-white/[0.08] hover:border-white/[0.16] text-slate-200 shadow-sm'
+              }`}
             >
-              {/* Icon or Avatar Icon */}
-              <div className="flex-shrink-0 mt-0.5">
-                <div className={`w-8 h-8 rounded-xl bg-slate-950/60 border border-slate-700/60 flex items-center justify-center text-base shadow-sm ${style.icon}`}>
-                  {opt.icon || '💬'}
-                </div>
-              </div>
+              <div className="flex items-center gap-3.5 min-w-0">
+                {opt.icon && (
+                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 text-sm border ${
+                    opt.isSelected
+                      ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/30'
+                      : 'bg-white/[0.04] text-slate-400 border-white/[0.06]'
+                  }`}>
+                    {opt.icon}
+                  </div>
+                )}
 
-              {/* Dialogue Speech Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
+                <div className="min-w-0">
                   {opt.tag && (
-                    <span className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded-full font-bold ${style.badge}`}>
+                    <span className={`inline-block text-[10px] tracking-wider uppercase font-semibold px-2 py-0.5 rounded-md mb-1 border ${
+                      opt.isSelected
+                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                        : 'bg-white/[0.04] text-slate-400 border-white/[0.06]'
+                    }`}>
                       {opt.tag}
                     </span>
                   )}
-                  {opt.isSelected && (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-mono text-doof-green-neon font-bold">
-                      <Check className="w-3.5 h-3.5 stroke-[3]" /> Seleccionado
-                    </span>
-                  )}
-                </div>
-
-                <div className="font-comic text-base sm:text-lg text-white group-hover:text-doof-green-neon tracking-wide transition-colors">
-                  {opt.speechText}
+                  <div className="font-sans text-sm md:text-base text-slate-100 font-medium leading-snug">
+                    {opt.speechText}
+                  </div>
                 </div>
               </div>
 
-              {/* Subtle tail accent */}
-              <div
-                className={`hidden md:block absolute -right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rotate-45 border-r-2 border-t-2 ${style.tail}`}
-              />
+              <div className="flex-shrink-0">
+                {opt.isSelected ? (
+                  <div className="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center shadow-sm">
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                  </div>
+                ) : (
+                  <div className="w-6 h-6 rounded-full bg-white/[0.04] border border-white/[0.08] text-slate-500 flex items-center justify-center group-hover:text-slate-200 transition-colors">
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </div>
+                )}
+              </div>
             </motion.button>
           );
         })}

@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Sparkles,
-  Zap,
   ArrowRight,
   ArrowLeft,
   Shield,
-  HelpCircle,
   Dumbbell,
-  User
+  User,
+  Sliders
 } from 'lucide-react';
 import { useDoofStore } from '../../store/useDoofStore';
 import { DoofenshmirtzAvatar } from './DoofenshmirtzAvatar';
@@ -31,7 +30,6 @@ export const ConversationalStage: React.FC = () => {
     setEquipment,
     heinzSpeech,
     setHeinzSpeech,
-    heinzMood,
     selectPreset
   } = useDoofStore();
 
@@ -42,45 +40,35 @@ export const ConversationalStage: React.FC = () => {
   const getWelcomeChoices = (): DialogueChoiceOption[] => [
     {
       id: 'start',
-      speechText: '«¡Cuenta conmigo, Heinz! Vamos a calibrar mi morfología y construir el Inador.»',
-      tag: 'Aceptar Misión',
+      speechText: '«Comencemos. Deseo estructurar una rutina de hipertrofia y fuerza biomecánica.»',
+      tag: 'Diseñar Rutina',
       variant: 'green',
-      icon: <Zap className="w-4 h-4" />,
+      icon: <Sparkles className="w-4 h-4" />,
       onClick: () => {
-        setHeinzSpeech('¡Excelente! Primero necesito saber tu morfología biológica para proyectar el Holograma Anatómico 3000 con precisión milimétrica.', 'excited');
+        setHeinzSpeech('Excelente decisión. En primer lugar, definamos tu morfología para calibrar las proporciones y ángulos anatómicos con máxima precisión.', 'normal');
         setGenderSelectedInStep1(false);
         setStep(1);
       }
     },
     {
-      id: 'why_roger',
-      speechText: '«¿Por qué odias tanto a tu hermano Roger?»',
-      tag: 'Lore de Gimmelshtump',
-      variant: 'amber',
-      icon: <HelpCircle className="w-4 h-4" />,
-      onClick: () => {
-        setHeinzSpeech('¡¿Que por qué?! ¡Roger siempre fue el hijo consentido de mamá! Mientras a mí me vestían con vestidos de muñeca usados y me obligaban a ser un gnomo de jardín bajo la lluvia en Gimmelshtump, ¡a él le aplaudían por respirar! ¡Y ahora es el alcalde! ¡Es insoportable!', 'complaining');
-      }
-    },
-    {
-      id: 'is_safe',
-      speechText: '«¿Esto es seguro o va a explotar como tus otros inventos?»',
-      tag: 'Control de Calidad',
+      id: 'science_first',
+      speechText: '«¿En qué principios biomecánicos se basa este generador?»',
+      tag: 'Biomecánica & Evidencia',
       variant: 'cyan',
       icon: <Shield className="w-4 h-4" />,
       onClick: () => {
-        setHeinzSpeech('¡Por supuesto que es seguro! He calibrado las curvas de fuerza biomecánicas con precisión matemática... Bueno, a menos que presiones el botón grande y rojo de autodestrucción. ¡Pero nadie sería tan tonto de tocarlo, verdad?', 'normal');
+        setHeinzSpeech('El algoritmo prioriza ejercicios según curvas de resistencia, alineación con la orientación de las fibras musculares, volumen efectivo (series cerca del fallo técnico) y tiempo de recuperación óptimo.', 'normal');
       }
     },
     {
       id: 'home_gym',
-      speechText: '«Solo tengo un par de mancuernas y rencor en mi sótano, ¿me sirve?»',
-      tag: 'Entorno Casero',
+      speechText: '«Entreno en casa con mancuernas y peso libre. ¿Se puede adaptar?»',
+      tag: 'Entrenamiento Casero',
       variant: 'purple',
       icon: <Dumbbell className="w-4 h-4" />,
       onClick: () => {
         setEquipment('home');
-        setHeinzSpeech('¡Ja! ¡El rencor es el mejor combustible anabólico! Mi algoritmo reconfigurará todos los ejercicios para peso libre y mancuernas. ¡Vamos a calibrar tu morfología!', 'excited');
+        setHeinzSpeech('Por supuesto. El sistema reconfigura automáticamente todas las variantes mecánicas para ejecutarse con mancuernas, barras y banco plano.', 'normal');
         setGenderSelectedInStep1(false);
         setStep(1);
       }
@@ -91,8 +79,8 @@ export const ConversationalStage: React.FC = () => {
   const getGenderChoices = (): DialogueChoiceOption[] => [
     {
       id: 'gender_male',
-      speechText: '«Hombre (Morfología Masculina • Torso en V y Hombros Anchos)»',
-      tag: '👨 Morfología Masculina',
+      speechText: '«Morfología Masculina (Mayor proporción en torso superior y deltoides)»',
+      tag: 'Hombre',
       variant: 'purple',
       isSelected: gender === 'male',
       icon: <User className="w-4 h-4" />,
@@ -103,8 +91,8 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'gender_female',
-      speechText: '«Mujer (Morfología Femenina • Potencia Glútea y Resistencia de Élite)»',
-      tag: '👩 Morfología Femenina',
+      speechText: '«Morfología Femenina (Mayor capacidad de volumen en tren inferior y glúteos)»',
+      tag: 'Mujer',
       variant: 'green',
       isSelected: gender === 'female',
       icon: <User className="w-4 h-4" />,
@@ -115,8 +103,8 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'gender_neutral',
-      speechText: '«Morfología Balanceada / Neutra»',
-      tag: '⚡ Morfología Simétrica',
+      speechText: '«Morfología Neutra / Balanceada (Distribución simétrica estándar)»',
+      tag: 'Neutra',
       variant: 'cyan',
       isSelected: gender === 'neutral',
       icon: <User className="w-4 h-4" />,
@@ -131,57 +119,47 @@ export const ConversationalStage: React.FC = () => {
   const getMuscleChoices = (): DialogueChoiceOption[] => [
     {
       id: 'toggle_hologram',
-      speechText: stageMode === 'hologram' ? '«Cerrar Proyector Holográfico y volver al diálogo»' : '«Abrir el Holograma Anatómico 3D Realista para iluminar músculos»',
-      tag: 'Proyector Anatómico 3000',
+      speechText: stageMode === 'hologram' ? '«Cerrar visualizador anatómico y continuar diálogo»' : '«Abrir visualizador anatómico para seleccionar zonas musculares manualmente»',
+      tag: 'Mapa Muscular',
       variant: 'cyan',
-      icon: <Sparkles className="w-4 h-4" />,
+      icon: <Sliders className="w-4 h-4" />,
       onClick: () => {
         setStageMode(stageMode === 'hologram' ? 'dialogue' : 'hologram');
-        setHeinzSpeech('¡Activando el proyector holográfico realista! Haz clic en cada músculo para transferirle energía anabólica pura.', 'normal');
+        setHeinzSpeech('Visualizador anatómico abierto. Puedes hacer clic en cada músculo para activar su estímulo.', 'normal');
       }
     },
     {
       id: 'preset_full',
-      speechText: '«¡Cuerpo Completo Malvado! Quiero estimular todo el arsenal anatómico.»',
-      tag: 'Preset Full Body',
+      speechText: '«Cuerpo Completo (Full Body equilibrado para todos los grupos)»',
+      tag: 'Full Body',
       variant: 'green',
       isSelected: selectedMuscles.length >= 8,
       onClick: () => selectPreset('full_body')
     },
     {
       id: 'preset_upper',
-      speechText: '«¡Torso Destructor de Alcaldes! Enfoque en pecho, espalda gigante y brazos.»',
-      tag: 'Preset Torso & Brazos',
+      speechText: '«Torso & Brazos (Énfasis en pectoral, dorsales, deltoides y brazos)»',
+      tag: 'Torso & Brazos',
       variant: 'purple',
       isSelected: selectedMuscles.includes('chest') && selectedMuscles.includes('back_upper') && selectedMuscles.includes('biceps') && !selectedMuscles.includes('quads'),
       onClick: () => selectPreset('upper_torso')
     },
     {
       id: 'preset_legs',
-      speechText: '«¡Piernas de Titán de Gimmelshtump! Cuádriceps, glúteos e isquios de acero.»',
-      tag: 'Preset Piernas',
+      speechText: '«Tren Inferior Completo (Cuádriceps, glúteos, isquiotibiales y gemelos)»',
+      tag: 'Piernas',
       variant: 'amber',
       isSelected: selectedMuscles.includes('quads') && selectedMuscles.includes('glutes') && !selectedMuscles.includes('chest'),
       onClick: () => selectPreset('titan_legs')
     },
     {
-      id: 'change_gender',
-      speechText: `«Cambiar morfología actual (Actual: ${gender === 'male' ? 'Hombre' : gender === 'female' ? 'Mujer' : 'Neutra'})»`,
-      tag: 'Re-calibrar Sexo',
-      variant: 'amber',
-      icon: <User className="w-4 h-4" />,
-      onClick: () => {
-        setGenderSelectedInStep1(false);
-      }
-    },
-    {
       id: 'confirm_muscles',
-      speechText: `«¡Listo con las zonas musculares (${selectedMuscles.length} iluminadas)! Pasemos a calibrar la frecuencia de días.»`,
-      tag: 'Siguiente Fase',
+      speechText: `«Confirmar selección (${selectedMuscles.length} grupos activos) y pasar a frecuencia de días.»`,
+      tag: 'Siguiente Paso',
       variant: 'green',
       icon: <ArrowRight className="w-4 h-4" />,
       onClick: () => {
-        setHeinzSpeech('¡Magnífico! Ahora dime cuántos días por semana puedes escapar de tus responsabilidades cívicas antes de que sospechen...', 'evil');
+        setHeinzSpeech('Perfecto. Ahora definamos la frecuencia semanal y disponibilidad de tiempo.', 'normal');
         setStep(2);
       }
     }
@@ -191,7 +169,7 @@ export const ConversationalStage: React.FC = () => {
   const getLogisticsChoices = (): DialogueChoiceOption[] => [
     {
       id: 'days_2',
-      speechText: '«Solo puedo 2 días a la semana (Villano Ocupado / Full Body A-B).»',
+      speechText: '«2 días por semana (Frecuencia A/B de alta eficiencia).»',
       tag: '2 Días / Sem',
       variant: 'purple',
       isSelected: daysPerWeek === 2,
@@ -199,7 +177,7 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'days_3',
-      speechText: '«3 días a la semana (Clásica división Empuje / Tracción / Pierna).»',
+      speechText: '«3 días por semana (Clásica división Empuje / Tracción / Pierna).»',
       tag: '3 Días / Sem',
       variant: 'cyan',
       isSelected: daysPerWeek === 3,
@@ -207,7 +185,7 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'days_4',
-      speechText: '«4 días a la semana (División Torso / Pierna de máxima potencia).»',
+      speechText: '«4 días por semana (División Torso / Pierna de óptima recuperación).»',
       tag: '4 Días / Sem',
       variant: 'green',
       isSelected: daysPerWeek === 4,
@@ -215,7 +193,7 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'days_5_6',
-      speechText: daysPerWeek === 6 ? '«6 días a la semana (No tengo vida social desde 1982).»' : '«5 días a la semana (Frecuencia intensa y bombeo casi diario).»',
+      speechText: daysPerWeek === 6 ? '«6 días por semana (Frecuencia alta Push/Pull/Legs x2).»' : '«5 días por semana (Frecuencia intermedia con días especializados).»',
       tag: `${daysPerWeek >= 5 ? daysPerWeek : 5} Días / Sem`,
       variant: 'amber',
       isSelected: daysPerWeek >= 5,
@@ -223,7 +201,7 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'exp_toggle',
-      speechText: `«Mi experiencia levantando peso: ${experience.toUpperCase()} (Haz clic para alternar: Novato ➔ Intermedio ➔ Avanzado).»`,
+      speechText: `«Nivel de experiencia: ${experience.toUpperCase()} (Click para alternar: Novato ➔ Intermedio ➔ Avanzado).»`,
       tag: `Nivel: ${experience}`,
       variant: 'cyan',
       icon: <Dumbbell className="w-4 h-4" />,
@@ -234,7 +212,7 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'eq_toggle',
-      speechText: `«Entrenaré en: ${equipment === 'commercial' ? 'El Megalaboratorio Comercial (todas las máquinas)' : 'Mi Sótano Casero (mancuernas y rencor)'}.»`,
+      speechText: `«Lugar de entrenamiento: ${equipment === 'commercial' ? 'Gimnasio Comercial Completo (máquinas y poleas)' : 'Gimnasio Casero (mancuernas y peso libre)'}.»`,
       tag: equipment === 'commercial' ? 'Gimnasio Comercial' : 'Gimnasio Casero',
       variant: 'purple',
       icon: <Shield className="w-4 h-4" />,
@@ -244,10 +222,10 @@ export const ConversationalStage: React.FC = () => {
     },
     {
       id: 'compile_ready',
-      speechText: '«¡Todo calibrado a la perfección! ¡Enciende el Compil-inador de Rutina, Heinz!»',
-      tag: '¡Compilar Inador!',
+      speechText: '«Parámetros listos. Generar mi protocolo de entrenamiento personalizado.»',
+      tag: 'Generar Protocolo',
       variant: 'green',
-      icon: <Zap className="w-4 h-4" />,
+      icon: <Sparkles className="w-4 h-4" />,
       onClick: () => {
         setStep(3);
       }
@@ -255,43 +233,31 @@ export const ConversationalStage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-4 md:py-6 space-y-6">
-      {/* Visual Stage Container (Doofenshmirtz Evil Inc. Penthouse) */}
-      <div className="relative rounded-3xl bg-gradient-to-b from-doof-darkest via-doof-panel to-slate-950 border-4 border-purple-500/60 p-6 md:p-8 shadow-2xl shadow-purple-950/50 overflow-hidden">
-        {/* Lab Background Grid & Ambience */}
-        <div className="absolute inset-0 bg-blueprint-grid opacity-20 pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-
-        {/* Character & Speech Bubble Interaction Row */}
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Dr. Heinz Doofenshmirtz Animated Avatar */}
-          <div className="lg:col-span-4 flex flex-col items-center justify-center p-4 rounded-2xl bg-doof-card/50 border border-purple-500/30 backdrop-blur-sm shadow-xl">
-            <DoofenshmirtzAvatar mood={heinzMood} isTalking={true} size="lg" />
-            <div className="mt-3 text-center">
-              <span className="font-comic text-xl text-white tracking-wide block">
-                Dr. Heinz Doofenshmirtz
+    <div className="max-w-5xl mx-auto px-4 py-6 md:py-10 space-y-6">
+      {/* Zen Conversational Stage Card */}
+      <div className="relative rounded-3xl zen-glass p-6 md:p-10 shadow-zen-lg overflow-hidden border border-white/10">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* AI Coach Visual Presence */}
+          <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] shadow-sm">
+            <DoofenshmirtzAvatar mood="normal" isTalking={true} size="lg" />
+            <div className="mt-4 text-center">
+              <span className="font-display font-semibold text-lg text-white block">
+                Asesor Biomecánico
               </span>
-              <span className="text-[11px] font-mono text-purple-300">
-                Director General • Doofenshmirtz Evil Inc.
+              <span className="text-xs text-slate-400 font-medium">
+                RutinaMaster Engine
               </span>
-            </div>
-
-            {/* Quirky Evil Inc. Post-It Note on the side */}
-            <div className="mt-4 p-3 rounded-lg bg-yellow-200/90 text-slate-950 text-[11px] font-sans font-semibold rotate-[-2deg] shadow-lg border border-yellow-400 max-w-[200px]">
-              📌 <em>"Nota: Derrotar a Roger antes del viernes y comprar tuercas de repuesto para el Inador."</em>
             </div>
           </div>
 
-          {/* Heinz's Main Comic Dialogue Balloon */}
-          <div className="lg:col-span-8 flex flex-col justify-between space-y-4">
+          {/* Dialogue & Interactive Options */}
+          <div className="lg:col-span-8 flex flex-col justify-between space-y-5">
             <DialogueBubble
               text={heinzSpeech}
-              mood={heinzMood}
-              title={`Dr. Doofenshmirtz • ${step === 0 ? 'Bienvenida' : step === 1 ? 'Morfología & Zonas de Choque' : 'Calibración de Maquinaria'}`}
+              title={`Paso ${step + 1} de 4 · ${step === 0 ? 'Bienvenida' : step === 1 ? 'Morfología & Zonas' : 'Calibración'}`}
             />
 
-            {/* In-Dialogue Realistic Hologram (if Step 1 and Hologram Open) */}
+            {/* In-Dialogue Anatomical Map (if Step 1 and Map Open) */}
             {step === 1 && stageMode === 'hologram' && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
@@ -303,32 +269,32 @@ export const ConversationalStage: React.FC = () => {
               </motion.div>
             )}
 
-            {/* Interactive User Speech Balloons (Menu de Bocadillos) */}
+            {/* Interactive User Choices */}
             <div className="pt-2">
               {step === 0 && (
                 <UserChoiceBubbles
-                  promptText="Selecciona tu respuesta para Heinz (Bocadillos de Diálogo):"
+                  promptText="Opciones de respuesta:"
                   options={getWelcomeChoices()}
                 />
               )}
 
               {step === 1 && !genderSelectedInStep1 && (
                 <UserChoiceBubbles
-                  promptText="Dile a Heinz tu morfología / sexo biológico:"
+                  promptText="Selecciona tu morfología biológica:"
                   options={getGenderChoices()}
                 />
               )}
 
               {step === 1 && genderSelectedInStep1 && (
                 <UserChoiceBubbles
-                  promptText={`Tus respuestas sobre el objetivo muscular (Morfología: ${gender === 'male' ? 'Hombre' : gender === 'female' ? 'Mujer' : 'Neutra'}):`}
+                  promptText={`Objetivo muscular (Morfología: ${gender === 'male' ? 'Hombre' : gender === 'female' ? 'Mujer' : 'Neutra'}):`}
                   options={getMuscleChoices()}
                 />
               )}
 
               {step === 2 && (
                 <UserChoiceBubbles
-                  promptText="Calibra tus parámetros respondiéndole a Heinz:"
+                  promptText="Calibra tus preferencias de entrenamiento:"
                   options={getLogisticsChoices()}
                 />
               )}
@@ -352,9 +318,9 @@ export const ConversationalStage: React.FC = () => {
                 setStep(1);
               }
             }}
-            className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-bold font-mono flex items-center gap-2 transition-colors"
+            className="px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] text-slate-400 hover:text-white border border-white/[0.08] text-xs font-medium flex items-center gap-2 transition-all"
           >
-            <ArrowLeft className="w-4 h-4" /> Volver al diálogo anterior
+            <ArrowLeft className="w-4 h-4" /> Volver al paso anterior
           </button>
         </div>
       )}

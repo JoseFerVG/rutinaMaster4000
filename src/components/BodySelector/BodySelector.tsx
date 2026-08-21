@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Sparkles, Trash2, Shield, User, UserCheck } from 'lucide-react';
+import { Check, Trash2, User, UserCheck } from 'lucide-react';
 import { MuscleGroupId } from '../../types';
 import { useDoofStore } from '../../store/useDoofStore';
 import { RealisticBodyMap } from './RealisticBodyMap';
@@ -21,7 +21,7 @@ const MUSCLE_CATALOG: MuscleMeta[] = [
   { id: 'shoulders', name: 'Hombros (Deltoides)', category: 'torso', view: 'both', iconText: '⚡' },
   { id: 'biceps', name: 'Bíceps', category: 'brazos', view: 'front', iconText: '💪' },
   { id: 'triceps', name: 'Tríceps', category: 'brazos', view: 'back', iconText: '🔨' },
-  { id: 'core', name: 'Core & Abdomen (6-Pack)', category: 'core', view: 'front', iconText: '🧱' },
+  { id: 'core', name: 'Core & Abdomen', category: 'core', view: 'front', iconText: '🧱' },
   { id: 'quads', name: 'Cuádriceps', category: 'piernas', view: 'front', iconText: '🦵' },
   { id: 'glutes', name: 'Glúteos', category: 'piernas', view: 'back', iconText: '🍑' },
   { id: 'hamstrings', name: 'Isquiotibiales (Femoral)', category: 'piernas', view: 'back', iconText: '🏹' },
@@ -46,46 +46,46 @@ export const BodySelector: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Gender & View Controller Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-doof-card/90 border-2 border-doof-purple shadow-xl">
+      <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl zen-glass shadow-zen-sm">
         {/* Gender selector buttons */}
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-slate-300 font-bold uppercase mr-1 flex items-center gap-1">
-            <User className="w-3.5 h-3.5 text-purple-400" /> Morfología:
+          <span className="text-xs text-slate-400 font-medium tracking-wide mr-1 flex items-center gap-1.5">
+            <User className="w-3.5 h-3.5 text-emerald-400" /> Morfología:
           </span>
           <button
             onClick={() => setGender('male')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold font-tech transition-all flex items-center gap-1.5 border ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 border ${
               gender === 'male'
-                ? 'bg-gradient-to-r from-purple-900 to-doof-purple text-white border-purple-400 shadow-md shadow-purple-950'
-                : 'bg-doof-panel text-slate-400 border-slate-700 hover:text-white'
+                ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40 shadow-sm'
+                : 'bg-white/[0.03] text-slate-400 border-white/[0.06] hover:text-white'
             }`}
           >
-            <span>👨 Hombre</span>
-            {gender === 'male' && <UserCheck className="w-3.5 h-3.5 text-doof-green-acid" />}
+            <span>Hombre</span>
+            {gender === 'male' && <UserCheck className="w-3.5 h-3.5 text-emerald-400" />}
           </button>
           <button
             onClick={() => setGender('female')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold font-tech transition-all flex items-center gap-1.5 border ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 border ${
               gender === 'female'
-                ? 'bg-gradient-to-r from-purple-900 to-doof-purple text-white border-purple-400 shadow-md shadow-purple-950'
-                : 'bg-doof-panel text-slate-400 border-slate-700 hover:text-white'
+                ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40 shadow-sm'
+                : 'bg-white/[0.03] text-slate-400 border-white/[0.06] hover:text-white'
             }`}
           >
-            <span>👩 Mujer</span>
-            {gender === 'female' && <UserCheck className="w-3.5 h-3.5 text-doof-green-acid" />}
+            <span>Mujer</span>
+            {gender === 'female' && <UserCheck className="w-3.5 h-3.5 text-emerald-400" />}
           </button>
         </div>
 
         {/* View Toggle */}
         <div className="flex items-center gap-2">
-          <span className="text-xs font-mono text-slate-300 font-bold uppercase mr-1">
+          <span className="text-xs text-slate-400 font-medium tracking-wide mr-1">
             Perspectiva:
           </span>
-          <div className="flex bg-doof-darkest p-1 rounded-xl border border-doof-border text-xs font-semibold">
+          <div className="flex bg-zen-darkest p-1 rounded-xl border border-white/[0.08] text-xs font-medium">
             <button
               onClick={() => setActiveView('both')}
               className={`px-3 py-1 rounded-lg transition-colors ${
-                activeView === 'both' ? 'bg-doof-purple text-white' : 'text-slate-400 hover:text-white'
+                activeView === 'both' ? 'bg-white/[0.1] text-white shadow-sm' : 'text-slate-400 hover:text-white'
               }`}
             >
               Ambas
@@ -93,7 +93,7 @@ export const BodySelector: React.FC = () => {
             <button
               onClick={() => setActiveView('front')}
               className={`px-3 py-1 rounded-lg transition-colors ${
-                activeView === 'front' ? 'bg-doof-purple text-white' : 'text-slate-400 hover:text-white'
+                activeView === 'front' ? 'bg-white/[0.1] text-white shadow-sm' : 'text-slate-400 hover:text-white'
               }`}
             >
               Frente
@@ -101,7 +101,7 @@ export const BodySelector: React.FC = () => {
             <button
               onClick={() => setActiveView('back')}
               className={`px-3 py-1 rounded-lg transition-colors ${
-                activeView === 'back' ? 'bg-doof-purple text-white' : 'text-slate-400 hover:text-white'
+                activeView === 'back' ? 'bg-white/[0.1] text-white shadow-sm' : 'text-slate-400 hover:text-white'
               }`}
             >
               Espalda
@@ -111,7 +111,7 @@ export const BodySelector: React.FC = () => {
           {selectedMuscles.length > 0 && (
             <button
               onClick={clearMuscles}
-              className="p-2 rounded-xl bg-slate-800 hover:bg-red-950/60 border border-slate-700 hover:border-red-500/50 text-slate-400 hover:text-red-300 transition-colors ml-2"
+              className="p-2 rounded-xl bg-white/[0.03] hover:bg-rose-500/20 border border-white/[0.08] hover:border-rose-500/30 text-slate-400 hover:text-rose-300 transition-colors ml-2"
               title="Limpiar Selección"
             >
               <Trash2 className="w-4 h-4" />
@@ -121,21 +121,21 @@ export const BodySelector: React.FC = () => {
       </div>
 
       {/* Preset Quick Selectors */}
-      <div className="bg-doof-card/70 rounded-2xl p-4 border border-doof-border">
-        <div className="text-xs font-mono text-purple-300 font-bold uppercase mb-3 flex items-center gap-1.5">
-          <Shield className="w-3.5 h-3.5" /> Configuraciones Pre-diseñadas por Doofenshmirtz:
+      <div className="p-4 rounded-2xl zen-glass shadow-zen-sm">
+        <div className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-2.5 flex items-center gap-1.5">
+          <span>Configuraciones sugeridas:</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
           {dialogues.presets.map(preset => (
             <button
               key={preset.id}
               onClick={() => selectPreset(preset.id)}
-              className="flex flex-col items-start p-3 rounded-xl bg-doof-panel/80 hover:bg-doof-purple/20 border border-doof-border hover:border-doof-purple transition-all text-left group"
+              className="flex flex-col items-start p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.06] hover:border-emerald-500/30 transition-all text-left group"
             >
-              <span className="text-xs font-bold text-slate-200 group-hover:text-purple-300 font-tech">
+              <span className="text-xs font-semibold text-slate-200 group-hover:text-emerald-300">
                 {preset.name}
               </span>
-              <span className="text-[11px] text-slate-400 mt-1 line-clamp-2">
+              <span className="text-[11px] text-slate-400 mt-1 line-clamp-2 leading-relaxed">
                 {preset.description}
               </span>
             </button>
@@ -146,28 +146,22 @@ export const BodySelector: React.FC = () => {
       {/* Main Interactive Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Realistic Anatomical SVG Visualizer */}
-        <div className="lg:col-span-7 bg-doof-card/90 rounded-2xl p-6 border-2 border-doof-border shadow-xl flex flex-col items-center justify-between relative overflow-hidden">
-          {/* Holographic background rays */}
-          <div className="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none" />
-          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-48 h-12 bg-cyan-500/20 rounded-full blur-2xl pointer-events-none" />
-
+        <div className="lg:col-span-7 p-6 rounded-2xl zen-glass shadow-zen-md flex flex-col items-center justify-between relative overflow-hidden">
           <div className="w-full flex items-center justify-between mb-2 z-10">
-            <span className="text-xs font-mono text-doof-green-acid font-bold flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
-              HOLOGRAMA ANATÓMICO 3000 ({gender === 'male' ? 'MASCULINO' : 'FEMENINO'})
+            <span className="text-xs font-medium text-emerald-400 tracking-wide">
+              Anatomía Biomecánica ({gender === 'male' ? 'Hombre' : 'Mujer'})
             </span>
-            <span className="text-xs font-mono text-slate-400 font-bold">
-              {selectedMuscles.length} Zonas Iluminadas
+            <span className="text-xs font-mono text-slate-400">
+              {selectedMuscles.length} Seleccionados
             </span>
           </div>
 
           {/* SVG Visualizer */}
           <div className="w-full flex flex-wrap items-center justify-center gap-6 py-2 z-10">
-            {/* Front View */}
             {(activeView === 'both' || activeView === 'front') && (
               <div className="flex flex-col items-center">
-                <span className="text-[10px] font-mono uppercase text-slate-400 mb-1 font-bold">
-                  Vista Frontal
+                <span className="text-[10px] uppercase text-slate-500 mb-1 font-medium tracking-wider">
+                  Frente
                 </span>
                 <RealisticBodyMap
                   gender={gender}
@@ -180,11 +174,10 @@ export const BodySelector: React.FC = () => {
               </div>
             )}
 
-            {/* Back View */}
             {(activeView === 'both' || activeView === 'back') && (
               <div className="flex flex-col items-center">
-                <span className="text-[10px] font-mono uppercase text-slate-400 mb-1 font-bold">
-                  Vista Posterior
+                <span className="text-[10px] uppercase text-slate-500 mb-1 font-medium tracking-wider">
+                  Espalda
                 </span>
                 <RealisticBodyMap
                   gender={gender}
@@ -198,24 +191,23 @@ export const BodySelector: React.FC = () => {
             )}
           </div>
 
-          <div className="w-full text-center text-xs text-slate-400 font-mono mt-2 z-10">
+          <div className="w-full text-center text-xs text-slate-400 font-normal mt-2 z-10">
             {hoveredMuscle ? (
-              <span className="text-doof-green-acid font-bold">
-                🎯 Apuntando a:{' '}
+              <span className="text-emerald-400 font-medium">
                 {MUSCLE_CATALOG.find(m => m.id === hoveredMuscle)?.name}
               </span>
             ) : (
-              '⚡ Haz clic en cualquier músculo anatómico para iluminarlo con energía del Inador'
+              'Toca cualquier grupo muscular para activarlo o desactivarlo'
             )}
           </div>
         </div>
 
         {/* Muscle Selection Cards Column */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
-          <div className="bg-doof-card/90 rounded-2xl p-5 border border-doof-border shadow-xl space-y-3">
-            <h3 className="text-sm font-mono uppercase tracking-wider text-slate-300 font-bold flex items-center justify-between">
-              <span>Músculos del Exoesqueleto</span>
-              <span className="text-xs text-purple-400 font-normal">Click para alternar</span>
+          <div className="p-5 rounded-2xl zen-glass shadow-zen-md space-y-3">
+            <h3 className="text-xs font-medium uppercase tracking-wider text-slate-400 flex items-center justify-between">
+              <span>Grupos Musculares</span>
+              <span className="text-[11px] text-emerald-400 font-normal">Click para alternar</span>
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2 max-h-[380px] overflow-y-auto pr-1">
@@ -225,32 +217,32 @@ export const BodySelector: React.FC = () => {
                   <motion.button
                     key={m.id}
                     onClick={() => toggleMuscle(m.id)}
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.008 }}
+                    whileTap={{ scale: 0.99 }}
                     className={`flex items-center justify-between p-3 rounded-xl border text-left transition-all ${
                       active
-                        ? 'bg-gradient-to-r from-emerald-950/70 to-doof-card border-doof-green-acid/80 shadow-md shadow-emerald-950/40 text-white'
-                        : 'bg-doof-panel/60 border-doof-border text-slate-300 hover:border-slate-500 hover:bg-doof-panel'
+                        ? 'bg-emerald-500/15 border-emerald-400/40 text-white shadow-sm'
+                        : 'bg-white/[0.02] border-white/[0.06] text-slate-300 hover:border-white/[0.14] hover:bg-white/[0.04]'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-lg">{m.iconText}</span>
+                      <span className="text-base">{m.iconText}</span>
                       <div>
-                        <div className="text-xs font-bold font-tech uppercase">{m.name}</div>
+                        <div className="text-xs font-semibold text-slate-100">{m.name}</div>
                         <div className="text-[10px] text-slate-400">
-                          {m.view === 'front' ? 'Zona Frontal' : m.view === 'back' ? 'Zona Posterior' : '360 Grados'}
+                          {m.view === 'front' ? 'Zona Frontal' : m.view === 'back' ? 'Zona Posterior' : 'Plano Completo'}
                         </div>
                       </div>
                     </div>
 
                     <div
-                      className={`w-6 h-6 rounded-lg flex items-center justify-center border transition-all ${
+                      className={`w-5 h-5 rounded-md flex items-center justify-center border transition-all ${
                         active
-                          ? 'bg-doof-green-neon border-white text-slate-950 shadow-sm'
-                          : 'border-slate-600 bg-slate-800/60 text-transparent'
+                          ? 'bg-emerald-500 border-emerald-400 text-slate-950 shadow-sm'
+                          : 'border-white/10 bg-white/[0.02] text-transparent'
                       }`}
                     >
-                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                      <Check className="w-3 h-3 stroke-[2.5]" />
                     </div>
                   </motion.button>
                 );

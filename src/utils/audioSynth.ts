@@ -1,6 +1,6 @@
-// Web Audio API Synthesizer for Evil Laboratory Sound Effects (100% Client-Side, Zero External MP3 Dependencies)
+// Web Audio API Synthesizer - Minimalist Zen & Acoustic Chimes Engine
 
-class AudioEngine {
+class ZenAudioEngine {
   private ctx: AudioContext | null = null;
   public enabled: boolean = true;
 
@@ -21,40 +21,18 @@ class AudioEngine {
   }
 
   public playLaser() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    try {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(880, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.18);
-
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.18);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start();
-      osc.stop(ctx.currentTime + 0.2);
-    } catch {
-      // Audio context error handling
-    }
-  }
-
-  public playMuscleSelect() {
+    // Gentle crystal tap
     const ctx = this.getContext();
     if (!ctx) return;
     try {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(320, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(640, ctx.currentTime + 0.12);
+      osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.08); // A5
 
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
@@ -64,134 +42,121 @@ class AudioEngine {
     } catch {}
   }
 
-  public playJingle() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    try {
-      // Doofenshmirtz Evil Inc chord progression approximation: G4, B4, D5, F#5
-      const notes = [392, 493.88, 587.33, 739.99];
-      notes.forEach((freq, idx) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
-
-        gain.gain.setValueAtTime(0.001, ctx.currentTime + idx * 0.08);
-        gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + idx * 0.08 + 0.03);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.08 + 0.35);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start(ctx.currentTime + idx * 0.08);
-        osc.stop(ctx.currentTime + idx * 0.08 + 0.4);
-      });
-    } catch {}
-  }
-
-  public playGearClick() {
+  public playMuscleSelect() {
+    // Soft harmonic chime
     const ctx = this.getContext();
     if (!ctx) return;
     try {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(220, ctx.currentTime);
-      osc.frequency.setValueAtTime(440, ctx.currentTime + 0.04);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(440, ctx.currentTime); // A4
+      osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.15); // E5
 
-      gain.gain.setValueAtTime(0.1, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.09, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
 
       osc.start();
-      osc.stop(ctx.currentTime + 0.09);
+      osc.stop(ctx.currentTime + 0.2);
     } catch {}
   }
 
-  public playSiren() {
+  public playJingle() {
+    // Calming 3-note Zen Bell Progression (E5, G#5, B5)
     const ctx = this.getContext();
     if (!ctx) return;
     try {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sawtooth';
-      const now = ctx.currentTime;
-
-      osc.frequency.setValueAtTime(400, now);
-      osc.frequency.linearRampToValueAtTime(900, now + 0.25);
-      osc.frequency.linearRampToValueAtTime(400, now + 0.5);
-      osc.frequency.linearRampToValueAtTime(900, now + 0.75);
-
-      gain.gain.setValueAtTime(0.2, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.85);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.85);
-    } catch {}
-  }
-
-  public playExplosion() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    try {
-      // Noise burst for explosion
-      const bufferSize = ctx.sampleRate * 0.8;
-      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const output = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) {
-        output[i] = Math.random() * 2 - 1;
-      }
-
-      const whiteNoise = ctx.createBufferSource();
-      whiteNoise.buffer = buffer;
-
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(600, ctx.currentTime);
-      filter.frequency.exponentialRampToValueAtTime(30, ctx.currentTime + 0.8);
-
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.35, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.8);
-
-      whiteNoise.connect(filter);
-      filter.connect(gain);
-      gain.connect(ctx.destination);
-
-      whiteNoise.start();
-      whiteNoise.stop(ctx.currentTime + 0.8);
-    } catch {}
-  }
-
-  public playPerrySound() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    try {
-      // Perry chattering sound simulation
-      for (let i = 0; i < 6; i++) {
+      const notes = [659.25, 830.61, 987.77];
+      notes.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
-        const start = ctx.currentTime + i * 0.06;
-        osc.frequency.setValueAtTime(180 + Math.random() * 60, start);
-        osc.frequency.exponentialRampToValueAtTime(80, start + 0.04);
+        const start = ctx.currentTime + idx * 0.1;
 
-        gain.gain.setValueAtTime(0.2, start);
-        gain.gain.exponentialRampToValueAtTime(0.01, start + 0.04);
+        osc.frequency.setValueAtTime(freq, start);
+
+        gain.gain.setValueAtTime(0.001, start);
+        gain.gain.linearRampToValueAtTime(0.08, start + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.6);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
 
         osc.start(start);
-        osc.stop(start + 0.05);
-      }
+        osc.stop(start + 0.65);
+      });
     } catch {}
+  }
+
+  public playGearClick() {
+    // Subtle wooden/crystal haptic tick
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(320, ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
+    } catch {}
+  }
+
+  public playSiren() {
+    // Deep meditation singing bowl hum
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.85);
+    } catch {}
+  }
+
+  public playExplosion() {
+    // Subtle deep chime fade
+    const ctx = this.getContext();
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(164.81, ctx.currentTime); // E3
+
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.7);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.75);
+    } catch {}
+  }
+
+  public playPerrySound() {
+    this.playJingle();
   }
 }
 
-export const soundFx = new AudioEngine();
+export const soundFx = new ZenAudioEngine();

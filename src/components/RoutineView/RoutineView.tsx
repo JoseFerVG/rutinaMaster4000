@@ -4,8 +4,6 @@ import {
   Printer,
   Copy,
   Check,
-  Flame,
-  AlertCircle,
   Dumbbell,
   Clock,
   Repeat,
@@ -17,7 +15,7 @@ import {
   Award,
   Info,
   Edit3,
-  MessageSquare
+  RefreshCw
 } from 'lucide-react';
 import { useDoofStore } from '../../store/useDoofStore';
 import { DoofenshmirtzAvatar } from '../Dialogue/DoofenshmirtzAvatar';
@@ -52,11 +50,11 @@ export const RoutineView: React.FC = () => {
 
   if (!activeRoutine) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center space-y-4">
-        <h2 className="font-comic text-3xl text-red-400">¡NO HAY NINGÚN INADOR ACTIVO!</h2>
-        <p className="text-slate-300">Debes pasar por la calibración para forjar un nuevo Inador.</p>
+      <div className="max-w-3xl mx-auto px-4 py-16 text-center space-y-4">
+        <h2 className="font-display font-semibold text-2xl text-slate-200">No hay protocolo activo</h2>
+        <p className="text-slate-400 text-sm">Configura tus preferencias para generar un plan de entrenamiento.</p>
         <HazardButton variant="purple" onClick={() => setStep(0)}>
-          Ir a la Bienvenida
+          Iniciar Configuración
         </HazardButton>
       </div>
     );
@@ -69,7 +67,7 @@ export const RoutineView: React.FC = () => {
     let text = `=========================================\n`;
     text += `⚡ ${activeRoutine.name} ⚡\n`;
     text += `${activeRoutine.subtitle}\n`;
-    text += `Dr. Heinz Doofenshmirtz • Doofenshmirtz Evil Inc.\n`;
+    text += `Protocolo Biomecánico Personalizado\n`;
     text += `=========================================\n\n`;
 
     activeRoutine.days.forEach(day => {
@@ -80,9 +78,8 @@ export const RoutineView: React.FC = () => {
         const exMeta = exercisesDb.find(e => e.id === exInst.exerciseId);
         if (exMeta) {
           text += `${idx + 1}. ${exMeta.name}\n`;
-          text += `   ${exMeta.doofSubtitle}\n`;
           text += `   Series: ${exInst.sets} | Reps: ${exInst.reps} | Descanso: ${exInst.rest}\n`;
-          text += `   Consejo Doof: "${exMeta.doofTip}"\n\n`;
+          text += `   Consejo: "${exMeta.doofTip}"\n\n`;
         }
       });
       text += `\n`;
@@ -90,7 +87,7 @@ export const RoutineView: React.FC = () => {
 
     navigator.clipboard.writeText(text);
     setCopied(true);
-    showToast('¡Plano Copiado!', 'La rutina completa ha sido transferida a tu portapapeles.', 'success');
+    showToast('Protocolo Copiado', 'La rutina completa ha sido transferida a tu portapapeles.', 'success');
     setTimeout(() => setCopied(false), 3000);
   };
 
@@ -100,57 +97,54 @@ export const RoutineView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6 print:p-0 print:m-0 print:max-w-none">
-      {/* Blueprint Schematic Header Box */}
-      <div className="relative rounded-3xl bg-gradient-to-br from-doof-darkest via-doof-panel to-slate-900 border-4 border-doof-cyan/50 p-6 md:p-8 shadow-2xl shadow-cyan-950/40 overflow-hidden print:border-none print:shadow-none print:p-2">
-        {/* Grid Background */}
-        <div className="absolute inset-0 bg-blueprint-grid opacity-40 pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+    <div className="max-w-5xl mx-auto px-4 py-6 md:py-8 space-y-6 print:p-0 print:m-0 print:max-w-none">
+      {/* Routine Hero Header Box */}
+      <div className="rounded-3xl zen-glass p-6 md:p-8 shadow-zen-lg overflow-hidden border border-white/10 print:border-none print:shadow-none print:p-2">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-400 text-cyan-300 text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                <Sparkles className="w-3 h-3 text-cyan-400" />
-                PLANO MALVADO AUTORIZADO
+              <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium tracking-wide flex items-center gap-1.5 shadow-sm">
+                <Sparkles className="w-3 h-3 text-emerald-400" />
+                PROTOCOLO OPTIMIZADO
               </span>
-              <span className="px-3 py-1 rounded-full bg-purple-950/80 border border-purple-400 text-purple-300 text-xs font-mono font-bold uppercase">
-                {activeRoutine.daysPerWeek} DÍAS • {activeRoutine.experience.toUpperCase()} • {activeRoutine.equipment === 'commercial' ? 'MEGALABORATORIO' : 'SÓTANO'}
+              <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-slate-300 text-xs font-medium">
+                {activeRoutine.daysPerWeek} DÍAS/SEM · {activeRoutine.experience.toUpperCase()} · {activeRoutine.equipment === 'commercial' ? 'GIMNASIO' : 'CASA'}
               </span>
             </div>
 
-            <h1 className="font-comic text-3xl sm:text-4xl md:text-5xl text-white tracking-wide leading-tight">
+            <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white tracking-tight leading-tight">
               {activeRoutine.name}
             </h1>
 
-            <p className="text-sm md:text-base text-cyan-200/90 font-tech">
+            <p className="text-sm md:text-base text-slate-300 font-normal">
               {activeRoutine.subtitle}
             </p>
           </div>
 
           {/* Quick Action Toolbar */}
-          <div className="flex flex-wrap items-center gap-2.5 print:hidden">
+          <div className="flex flex-wrap items-center gap-2 print:hidden">
             <button
               onClick={handlePrint}
-              className="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-600 text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-md active:scale-95"
+              className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/10 text-xs font-medium flex items-center gap-2 transition-all shadow-sm"
               title="Imprimir / Exportar PDF"
             >
-              <Printer className="w-4 h-4 text-cyan-400" />
-              <span>Imprimir Plano</span>
+              <Printer className="w-4 h-4 text-slate-400" />
+              <span>Imprimir / PDF</span>
             </button>
 
             <button
               onClick={handleCopyText}
-              className="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-600 text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-md active:scale-95"
+              className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/10 text-xs font-medium flex items-center gap-2 transition-all shadow-sm"
               title="Copiar texto de rutina"
             >
-              {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-purple-400" />}
-              <span>{copied ? '¡Copiado!' : 'Copiar Texto'}</span>
+              {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-slate-400" />}
+              <span>{copied ? 'Copiado' : 'Copiar'}</span>
             </button>
 
             <button
               onClick={() => setStep(1)}
-              className="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-purple-950/80 text-purple-300 border border-purple-500/40 text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all shadow-md active:scale-95"
-              title="Re-calibrar músculos y opciones"
+              className="px-4 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-medium flex items-center gap-2 transition-all shadow-sm"
+              title="Re-calibrar parámetros"
             >
               <Sliders className="w-4 h-4" />
               <span>Re-calibrar</span>
@@ -159,8 +153,8 @@ export const RoutineView: React.FC = () => {
         </div>
       </div>
 
-      {/* Heinz Interactive Character & Speech Stage at the War Room */}
-      <div className="print:hidden rounded-3xl bg-gradient-to-r from-doof-panel via-doof-card to-slate-900 border-2 border-purple-500/40 p-4 md:p-6 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+      {/* AI Coach Live Dialogue Strip */}
+      <div className="print:hidden rounded-2xl zen-glass p-4 md:p-6 shadow-zen-md grid grid-cols-1 md:grid-cols-12 gap-5 items-center border border-white/10">
         <div className="md:col-span-3 flex flex-col items-center justify-center">
           <DoofenshmirtzAvatar mood={heinzMood} isTalking={true} size="md" />
         </div>
@@ -168,7 +162,7 @@ export const RoutineView: React.FC = () => {
           <DialogueBubble
             text={heinzSpeech}
             mood={heinzMood}
-            title="Dr. Doofenshmirtz • Monitor de Entrenamiento"
+            title="Asesor Biomecánico"
           />
         </div>
       </div>
@@ -181,24 +175,24 @@ export const RoutineView: React.FC = () => {
             <button
               key={day.dayNumber}
               onClick={() => setActiveDayTab(day.dayNumber)}
-              className={`flex-shrink-0 px-4 py-3 rounded-2xl border-2 transition-all flex items-center gap-3 text-left ${
+              className={`flex-shrink-0 px-4 py-2.5 rounded-2xl border transition-all flex items-center gap-3 text-left ${
                 isActive
-                  ? 'bg-gradient-to-r from-purple-900 via-doof-purple to-purple-800 border-doof-green-neon text-white shadow-lg shadow-purple-950/60 scale-[1.02]'
-                  : 'bg-doof-card/80 border-doof-border text-slate-400 hover:border-slate-500 hover:text-slate-200'
+                  ? 'bg-emerald-500/15 border-emerald-500/40 text-white shadow-zen-glow'
+                  : 'bg-white/[0.02] border-white/[0.06] text-slate-400 hover:border-white/[0.12] hover:text-slate-200'
               }`}
             >
               <div
-                className={`w-8 h-8 rounded-xl flex items-center justify-center font-comic text-lg ${
-                  isActive ? 'bg-doof-darkest text-doof-green-acid' : 'bg-slate-800 text-slate-400'
+                className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold ${
+                  isActive ? 'bg-emerald-500 text-slate-950 font-bold' : 'bg-white/[0.04] text-slate-400'
                 }`}
               >
                 {day.dayNumber}
               </div>
               <div>
-                <div className="text-xs font-bold font-tech uppercase tracking-wider text-slate-100">
+                <div className="text-xs font-semibold text-slate-100">
                   Día {day.dayNumber}
                 </div>
-                <div className="text-[10px] text-slate-300 truncate max-w-[140px]">
+                <div className="text-[11px] text-slate-400 truncate max-w-[140px]">
                   {day.title.split(':')[1] || day.title}
                 </div>
               </div>
@@ -208,34 +202,34 @@ export const RoutineView: React.FC = () => {
       </div>
 
       {/* Current Day Detail Header */}
-      <div className="bg-doof-card/90 rounded-2xl p-5 border-2 border-doof-border shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="p-5 rounded-2xl zen-glass shadow-zen-sm flex flex-col md:flex-row md:items-center justify-between gap-4 border border-white/10">
         <div>
-          <div className="text-xs font-mono text-doof-green-acid font-bold uppercase tracking-widest flex items-center gap-1.5">
-            <Award className="w-3.5 h-3.5" /> Sesión de Entrenamiento Activa
+          <div className="text-xs font-medium text-emerald-400 uppercase tracking-wide flex items-center gap-1.5">
+            <Award className="w-3.5 h-3.5" /> Sesión Programada
           </div>
-          <h2 className="font-comic text-2xl md:text-3xl text-white tracking-wide mt-0.5">
+          <h2 className="font-display font-semibold text-xl md:text-2xl text-white mt-0.5">
             {currentDay.title}
           </h2>
-          <p className="text-xs md:text-sm text-slate-300 mt-1">
+          <p className="text-xs md:text-sm text-slate-400 mt-1">
             {currentDay.subtitle}
           </p>
         </div>
 
-        <div className="flex items-center gap-3 bg-doof-panel px-4 py-2.5 rounded-xl border border-doof-border">
+        <div className="flex items-center gap-3 bg-white/[0.03] px-4 py-2 rounded-xl border border-white/[0.06]">
           <div className="text-right">
-            <div className="text-[10px] uppercase font-mono text-slate-400">Total Ejercicios</div>
-            <div className="text-base font-bold font-tech text-doof-green-acid">{currentDay.exercises.length} Artefactos</div>
+            <div className="text-[10px] uppercase text-slate-500 font-medium">Ejercicios</div>
+            <div className="text-sm font-semibold text-emerald-400">{currentDay.exercises.length} Movimientos</div>
           </div>
-          <div className="w-px h-8 bg-slate-700" />
+          <div className="w-px h-6 bg-white/[0.08]" />
           <div className="text-right">
-            <div className="text-[10px] uppercase font-mono text-slate-400">Estímulo</div>
-            <div className="text-base font-bold font-tech text-purple-300">Hipertrofia Pura</div>
+            <div className="text-[10px] uppercase text-slate-500 font-medium">Estímulo</div>
+            <div className="text-sm font-semibold text-slate-200">Hipertrofia</div>
           </div>
         </div>
       </div>
 
       {/* Exercise Cards List */}
-      <div className="space-y-4">
+      <div className="space-y-3.5">
         {currentDay.exercises.map((exInst, index) => {
           const exMeta = exercisesDb.find(e => e.id === exInst.exerciseId);
           if (!exMeta) return null;
@@ -247,24 +241,24 @@ export const RoutineView: React.FC = () => {
             <motion.div
               key={exInst.instanceId}
               layout
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2 }}
-              className={`rounded-2xl border-2 transition-all p-5 shadow-xl ${
+              className={`rounded-2xl p-5 border transition-all duration-300 zen-glass shadow-zen-sm ${
                 exInst.isTemporarilyReplaced
-                  ? 'bg-gradient-to-r from-amber-950/40 via-doof-card to-doof-card border-amber-500/60 shadow-amber-950/20'
+                  ? 'border-amber-500/30 bg-amber-500/[0.03]'
                   : exInst.isPermanentlyReplaced
-                  ? 'bg-gradient-to-r from-purple-950/40 via-doof-card to-doof-card border-purple-500/60'
-                  : 'bg-doof-card/90 border-doof-border hover:border-slate-600'
+                  ? 'border-sky-500/30 bg-sky-500/[0.03]'
+                  : 'border-white/10 hover:border-white/15'
               }`}
             >
-              {/* Replacement Banner if Replaced */}
+              {/* Substitution Banner if Replaced */}
               {exInst.replacementMessage && (
-                <div className="mb-4 p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 text-amber-200 text-xs flex items-start gap-2">
-                  <AlertCircle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                <div className="mb-3.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs flex items-start gap-2">
+                  <RefreshCw className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
-                    <span className="font-bold">
-                      {exInst.isTemporarilyReplaced ? '⚡ SUSTITUCIÓN TEMPORAL ACTIVA:' : '🔒 REEMPLAZO PERMANENTE:'}
+                    <span className="font-semibold">
+                      {exInst.isTemporarilyReplaced ? 'Sustitución rápida activa:' : 'Reemplazo permanente:'}
                     </span>{' '}
                     <span>{exInst.replacementMessage}</span>
                   </div>
@@ -273,78 +267,75 @@ export const RoutineView: React.FC = () => {
 
               <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                 {/* Exercise Info */}
-                <div className="space-y-2 flex-1">
+                <div className="space-y-1.5 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-doof-darkest border border-slate-700 flex items-center justify-center text-xs font-mono font-bold text-doof-green-acid">
+                    <span className="w-5 h-5 rounded-md bg-white/[0.05] border border-white/10 flex items-center justify-center text-xs font-semibold text-emerald-400">
                       {index + 1}
                     </span>
-                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className="text-[10px] uppercase font-medium px-2 py-0.5 rounded bg-white/[0.04] text-slate-300 border border-white/[0.06]">
                       {exMeta.muscleGroup.replace('_', ' ').toUpperCase()}
                     </span>
-                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-500/40">
-                      {exMeta.mechanics.toUpperCase()} • TIER {exMeta.tier}
-                    </span>
-                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-500/40">
+                    <span className="text-[10px] uppercase font-medium px-2 py-0.5 rounded bg-white/[0.04] text-slate-400 border border-white/[0.06]">
                       {exMeta.equipment.toUpperCase()}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="font-bold text-lg md:text-xl text-white font-sans">
+                    <h3 className="font-semibold text-base md:text-lg text-white">
                       {exMeta.name}
                     </h3>
-                    <p className="font-comic text-base text-doof-green-acid tracking-wide">
+                    <p className="text-xs text-slate-400 font-normal">
                       {exMeta.doofSubtitle}
                     </p>
                   </div>
                 </div>
 
                 {/* Sets, Reps, Rest Badges */}
-                <div className="flex items-center gap-3 bg-doof-darkest/80 p-3 rounded-xl border border-doof-border flex-shrink-0">
+                <div className="flex items-center gap-3 bg-white/[0.03] p-2.5 rounded-xl border border-white/[0.06] flex-shrink-0">
                   <div className="text-center px-2">
-                    <div className="flex items-center justify-center gap-1 text-[10px] font-mono text-slate-400 uppercase">
-                      <Layers className="w-3 h-3 text-purple-400" /> Series
+                    <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500 uppercase font-medium">
+                      <Layers className="w-3 h-3 text-slate-400" /> Series
                     </div>
-                    <div className="font-tech font-bold text-lg text-white">{exInst.sets}</div>
+                    <div className="font-semibold text-base text-white">{exInst.sets}</div>
                   </div>
 
-                  <div className="w-px h-6 bg-slate-700" />
+                  <div className="w-px h-5 bg-white/[0.08]" />
 
                   <div className="text-center px-2">
-                    <div className="flex items-center justify-center gap-1 text-[10px] font-mono text-slate-400 uppercase">
-                      <Repeat className="w-3 h-3 text-doof-green-acid" /> Reps
+                    <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500 uppercase font-medium">
+                      <Repeat className="w-3 h-3 text-emerald-400" /> Reps
                     </div>
-                    <div className="font-tech font-bold text-sm text-doof-green-acid">{exInst.reps}</div>
+                    <div className="font-semibold text-sm text-emerald-300">{exInst.reps}</div>
                   </div>
 
-                  <div className="w-px h-6 bg-slate-700" />
+                  <div className="w-px h-5 bg-white/[0.08]" />
 
                   <div className="text-center px-2">
-                    <div className="flex items-center justify-center gap-1 text-[10px] font-mono text-slate-400 uppercase">
-                      <Clock className="w-3 h-3 text-cyan-400" /> Descanso
+                    <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500 uppercase font-medium">
+                      <Clock className="w-3 h-3 text-sky-400" /> Descanso
                     </div>
-                    <div className="font-tech font-bold text-sm text-cyan-300">{exInst.rest}</div>
+                    <div className="font-semibold text-sm text-slate-300">{exInst.rest}</div>
                   </div>
                 </div>
               </div>
 
-              {/* Set Checkbox Levers (Interactive Tracker) */}
-              <div className="mt-4 pt-4 border-t border-doof-border/60 flex flex-wrap items-center justify-between gap-4">
+              {/* Set Checkbox Tracker */}
+              <div className="mt-4 pt-3.5 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-slate-400 font-bold uppercase">Marcar Series:</span>
-                  <div className="flex items-center gap-2">
+                  <span className="text-xs text-slate-400 font-medium">Series:</span>
+                  <div className="flex items-center gap-1.5">
                     {exInst.completedSets.map((done, sIdx) => (
                       <button
                         key={sIdx}
                         onClick={() => toggleSetCompleted(currentDay.dayNumber, exInst.instanceId, sIdx)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-bold font-tech transition-all flex items-center gap-1 border ${
+                        className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 border ${
                           done
-                            ? 'bg-doof-green-acid border-emerald-300 text-slate-950 shadow-md shadow-emerald-950/50 scale-105'
-                            : 'bg-doof-panel border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white'
+                            ? 'bg-emerald-500 border-emerald-400 text-slate-950 shadow-sm'
+                            : 'bg-white/[0.02] border-white/[0.08] text-slate-400 hover:text-white hover:border-white/20'
                         }`}
                       >
                         <span>S{sIdx + 1}</span>
-                        {done && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                        {done && <Check className="w-3 h-3 stroke-[2.5]" />}
                       </button>
                     ))}
                   </div>
@@ -354,28 +345,28 @@ export const RoutineView: React.FC = () => {
                   {/* Notes button */}
                   <button
                     onClick={() => setEditingNotes(isEditing ? null : exInst.instanceId)}
-                    className="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-1 font-mono transition-colors"
+                    className="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-1 font-medium transition-colors"
                   >
                     <Edit3 className="w-3.5 h-3.5" />
-                    <span>{exInst.notes ? 'Editar Notas' : 'Añadir Notas'}</span>
+                    <span>{exInst.notes ? 'Editar Notas' : 'Añadir Carga'}</span>
                   </button>
 
-                  {/* Doof Coach Tip Toggle Button */}
+                  {/* Advice toggle */}
                   <button
                     onClick={() => setExpandedTip(isTipOpen ? null : exInst.instanceId)}
-                    className="text-xs text-purple-300 hover:text-white flex items-center gap-1.5 transition-colors font-mono"
+                    className="text-xs text-slate-400 hover:text-emerald-300 flex items-center gap-1 font-medium transition-colors"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-                    <span>{isTipOpen ? 'Ocultar Consejo' : 'Consejo Doof'}</span>
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>{isTipOpen ? 'Ocultar Detalle' : 'Detalle Biomecánico'}</span>
                     {isTipOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                   </button>
                 </div>
               </div>
 
-              {/* Notes Input Field if Open or Notes exist */}
+              {/* Notes Input Field */}
               {(isEditing || exInst.notes) && (
-                <div className="mt-3 p-3 rounded-xl bg-slate-900/80 border border-slate-700">
-                  <div className="text-[10px] font-mono text-slate-400 uppercase mb-1">Notas de Carga / RPE:</div>
+                <div className="mt-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+                  <div className="text-[10px] text-slate-500 uppercase font-medium mb-1">Registro de Peso / RPE:</div>
                   {isEditing ? (
                     <input
                       type="text"
@@ -390,13 +381,13 @@ export const RoutineView: React.FC = () => {
                           setEditingNotes(null);
                         }
                       }}
-                      className="w-full bg-slate-950 border border-slate-600 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-purple-400"
+                      className="w-full bg-zen-darkest border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-400"
                       autoFocus
                     />
                   ) : (
                     <div
                       onClick={() => setEditingNotes(exInst.instanceId)}
-                      className="text-xs text-slate-200 cursor-pointer hover:text-purple-300"
+                      className="text-xs text-slate-300 cursor-pointer hover:text-emerald-300"
                     >
                       {exInst.notes}
                     </div>
@@ -404,40 +395,38 @@ export const RoutineView: React.FC = () => {
                 </div>
               )}
 
-              {/* Collapsible Doof Advice */}
+              {/* Collapsible Advice */}
               <AnimatePresence>
                 {isTipOpen && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="mt-3 p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/40 text-xs text-purple-200 leading-relaxed font-sans"
+                    className="mt-3 p-3.5 rounded-xl bg-emerald-500/[0.04] border border-emerald-500/20 text-xs text-slate-300 leading-relaxed font-sans"
                   >
-                    <strong className="text-doof-green-acid font-tech">Consejo del Dr. Doofenshmirtz:</strong> «{exMeta.doofTip}»
+                    <strong className="text-emerald-400 font-medium">Clave Técnica:</strong> «{exMeta.doofTip}»
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              {/* Substitution Action Bocadillos (Lógica 1 & Lógica 2) */}
-              <div className="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2.5 print:hidden">
-                {/* Lógica 1: Sustitución de máquina ocupada */}
+              {/* Substitution Action Controls */}
+              <div className="mt-3.5 pt-3 border-t border-white/[0.04] flex flex-wrap items-center justify-between gap-2.5 print:hidden">
                 <button
                   onClick={() => replaceTemporary(currentDay.dayNumber, exInst.instanceId)}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-amber-950/60 hover:bg-amber-900/80 border-2 border-amber-500/60 text-amber-200 text-xs font-bold tracking-wide transition-all active:scale-95 shadow-md group"
-                  title="Reemplaza inmediatamente por si la máquina está ocupada en el gym"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.03] hover:bg-amber-500/10 border border-white/[0.08] hover:border-amber-500/30 text-slate-300 hover:text-amber-200 text-xs font-medium transition-all"
+                  title="Sustituye por ejercicio equivalente si la máquina está ocupada"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
-                  <span className="font-comic text-sm">«¡Heinz, polea ocupada! Dame otra variante»</span>
+                  <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Máquina Ocupada · Sustitución Rápida</span>
                 </button>
 
-                {/* Lógica 2: Cambiar permanentemente */}
                 <button
                   onClick={() => replacePermanent(currentDay.dayNumber, exInst.instanceId)}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-800/90 hover:bg-red-950/60 border-2 border-slate-600 hover:border-red-500/60 text-slate-200 hover:text-red-200 text-xs font-bold tracking-wide transition-all active:scale-95 shadow-md group"
-                  title="Cambia permanentemente en el plano por no disponer de máquina o molestia articular"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.08] hover:border-white/20 text-slate-400 hover:text-slate-200 text-xs font-medium transition-all"
+                  title="Cambia permanentemente en la rutina por molestia o preferencia"
                 >
-                  <Dumbbell className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-400" />
-                  <span className="font-comic text-sm">«No tengo esta máquina / No me gusta este ejercicio»</span>
+                  <Dumbbell className="w-3.5 h-3.5" />
+                  <span>Cambiar permanentemente de variante</span>
                 </button>
               </div>
             </motion.div>
@@ -445,38 +434,37 @@ export const RoutineView: React.FC = () => {
         })}
       </div>
 
-      {/* Rest Days Note & Protocol */}
-      <div className="p-5 rounded-2xl bg-gradient-to-r from-teal-950/60 via-doof-card to-doof-card border border-teal-500/40 flex items-start gap-4 shadow-lg">
-        <div className="p-2.5 rounded-xl bg-teal-900/60 text-teal-300 flex-shrink-0">
-          <Info className="w-5 h-5" />
+      {/* Rest Days Note */}
+      <div className="p-4 rounded-2xl zen-glass border border-white/10 flex items-start gap-3.5 shadow-sm">
+        <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 flex-shrink-0">
+          <Info className="w-4 h-4" />
         </div>
-        <div className="text-xs md:text-sm text-slate-300 space-y-1">
-          <h4 className="font-bold text-teal-300 font-tech uppercase text-sm">
-            Protocolo de Días de Descanso
+        <div className="text-xs text-slate-300 space-y-0.5">
+          <h4 className="font-semibold text-emerald-400">
+            Recuperación & Adaptación
           </h4>
-          <p>
+          <p className="text-slate-400">
             «{dialogues.restDayQuotes[Math.floor(Math.random() * dialogues.restDayQuotes.length)]}»
           </p>
         </div>
       </div>
 
-      {/* Self-Destruct Industrial Danger Section */}
-      <div className="pt-6 border-t-2 border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 print:hidden">
+      {/* Reset Section */}
+      <div className="pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 print:hidden">
         <div>
-          <h4 className="font-comic text-xl text-white tracking-wide">
-            Gestión de Emergencias de Doofenshmirtz Evil Inc.
+          <h4 className="font-display font-semibold text-sm text-slate-300">
+            Gestión del Protocolo
           </h4>
-          <p className="text-xs text-slate-400">
-            Si Perry el Ornitorrinco descubre esta rutina, o deseas resetear todos los datos:
+          <p className="text-xs text-slate-500">
+            Puedes restablecer todos los parámetros para iniciar una nueva calibración desde cero.
           </p>
         </div>
 
         <button
           onClick={openSelfDestructModal}
-          className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-hazard-red hover:brightness-110 text-white font-black text-sm uppercase tracking-widest border-4 border-yellow-400 shadow-2xl shadow-red-950 flex items-center justify-center gap-3 transition-transform active:scale-95 animate-pulse-fast"
+          className="px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-rose-500/15 text-slate-400 hover:text-rose-300 font-medium text-xs border border-white/10 hover:border-rose-500/30 flex items-center gap-2 transition-all"
         >
-          <Flame className="w-5 h-5 text-yellow-300" />
-          <span>¡BOTÓN DE AUTODESTRUCCIÓN!</span>
+          <span>Restablecer Todo</span>
         </button>
       </div>
     </div>
