@@ -4,120 +4,243 @@
     "name": "Press de Banca con Barra",
     "subtitle": "Empuje horizontal multiarticular en banco plano",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["shoulders", "triceps"],
+    "secondaryMuscles": [
+      "shoulders",
+      "triceps"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "both",
-    "directEquivalents": ["ex_102", "ex_103", "ex_105"],
-    "freeWeightEquivalents": ["ex_102", "ex_104"],
+    "directEquivalents": [
+      "ex_102",
+      "ex_103",
+      "ex_105"
+    ],
+    "freeWeightEquivalents": [
+      "ex_102",
+      "ex_104"
+    ],
     "coachingCue": "Retracción y depresión escapular firme. Trayectoria de codos a 45º respecto al torso. Pausa controlada en el esternón sin rebotar.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-bench-press.gif",
+    "instructions": [
+      "Túmbate en el banco con los ojos alineados debajo de la barra y los pies firmemente anclados al suelo.",
+      "Junta y desciende las escápulas (retracción y depresión escapular) creando un arco lumbar fisiológico natural.",
+      "Desengancha la barra y desciende de forma controlada (2-3 seg) hacia el tercio inferior del esternón, con codos a 45-60º.",
+      "Pausa un instante en el pecho sin rebotar y empuja con potencia manteniendo la tensión en el pectoral."
+    ]
   },
   {
     "id": "ex_102",
     "name": "Press Plano con Mancuernas",
     "subtitle": "Empuje horizontal con libertad articular y rango extendido",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["shoulders", "triceps"],
+    "secondaryMuscles": [
+      "shoulders",
+      "triceps"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "home",
-    "directEquivalents": ["ex_101", "ex_103", "ex_105"],
-    "freeWeightEquivalents": ["ex_101", "ex_104"],
+    "directEquivalents": [
+      "ex_101",
+      "ex_103",
+      "ex_105"
+    ],
+    "freeWeightEquivalents": [
+      "ex_101",
+      "ex_104"
+    ],
     "coachingCue": "Desciende con control buscando un estiramiento profundo del pectoral. Converge ligeramente arriba manteniendo la tensión constante.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/dumbbell-incline-bench-press.gif",
+    "instructions": [
+      "Siéntate en el banco con las mancuernas en los muslos; impúlsate hacia atrás para colocarlas a la altura del pecho.",
+      "Mantén las escápulas retraídas y desciende las mancuernas ampliando el rango de movimiento hasta sentir un estiramiento profundo.",
+      "Empuja convergiendo ligeramente hacia arriba sin chocar las mancuernas en la cúspide.",
+      "Mantén los antebrazos completamente verticales durante todo el recorrido."
+    ]
   },
   {
     "id": "ex_103",
     "name": "Press de Pecho en Máquina Convergente",
     "subtitle": "Empuje guiado con estabilidad biomecánica óptima",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["triceps", "shoulders"],
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "commercial",
-    "directEquivalents": ["ex_101", "ex_102", "ex_104"],
-    "freeWeightEquivalents": ["ex_102", "ex_104"],
+    "directEquivalents": [
+      "ex_101",
+      "ex_102",
+      "ex_104"
+    ],
+    "freeWeightEquivalents": [
+      "ex_102",
+      "ex_104"
+    ],
     "coachingCue": "Ajusta la altura del asiento para alinear las empuñaduras con el tercio medio del pectoral. Empuja con fuerza sin perder el contacto dorsal.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/lever-chest-press-0577.gif",
+    "instructions": [
+      "Ajusta la altura del asiento para que los agarres queden alineados con la línea media de los pezones.",
+      "Apoya la espalda y la cabeza firmemente contra el respaldo y retrae las escápulas.",
+      "Empuja hacia adelante extendiendo los brazos sin llegar a bloquear bruscamente los codos.",
+      "Regresa lentamente controlando la carga hasta que las empuñaduras lleguen al nivel del pecho."
+    ]
   },
   {
     "id": "ex_104",
     "name": "Flexiones de Brazos (Push-Ups)",
     "subtitle": "Empuje horizontal con autocarga y estabilización de core",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["triceps", "core"],
+    "secondaryMuscles": [
+      "triceps",
+      "core"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "bodyweight",
-    "directEquivalents": ["ex_101", "ex_102", "ex_103"],
-    "freeWeightEquivalents": ["ex_102"],
+    "directEquivalents": [
+      "ex_101",
+      "ex_102",
+      "ex_103"
+    ],
+    "freeWeightEquivalents": [
+      "ex_102"
+    ],
     "coachingCue": "Alineación neutra de columna, glúteos y abdomen activos. Rango completo hasta rozar el suelo con el pecho.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/push-up.gif",
+    "instructions": [
+      "Colócate en posición de plancha con las manos separadas a la anchura de los hombros.",
+      "Activa el core, glúteos y cuádriceps para mantener una línea recta desde la cabeza a los talones.",
+      "Desciende flexionando los codos en un ángulo de 45º hasta rozar el suelo con el esternón.",
+      "Empuja contra el suelo extendiendo los brazos y manteniendo el abdomen firme."
+    ]
   },
   {
     "id": "ex_105",
     "name": "Press Inclinado con Mancuernas",
     "subtitle": "Empuje inclinado a 30º para haz clavicular",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["shoulders", "triceps"],
+    "secondaryMuscles": [
+      "shoulders",
+      "triceps"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "both",
-    "directEquivalents": ["ex_106", "ex_101"],
-    "freeWeightEquivalents": ["ex_106"],
+    "directEquivalents": [
+      "ex_106",
+      "ex_101"
+    ],
+    "freeWeightEquivalents": [
+      "ex_106"
+    ],
     "coachingCue": "Banco regulado a 30º de inclinación. Énfasis en el tercio superior del pectoral con fase excéntrica controlada en 2-3 segundos.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/dumbbell-incline-bench-press.gif",
+    "instructions": [
+      "Ajusta el banco a una inclinación de 30º a 45º.",
+      "Apoya la espalda, fija los pies y lleva las mancuernas al nivel de la clavícula.",
+      "Desciende controlando la fase excéntrica enfatizando la porción clavicular del pectoral.",
+      "Empuja verticalmente con fuerza manteniendo los hombros pegados al respaldo."
+    ]
   },
   {
     "id": "ex_106",
     "name": "Press Inclinado con Barra",
     "subtitle": "Empuje inclinado pesado para fuerza en haz clavicular",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["shoulders", "triceps"],
+    "secondaryMuscles": [
+      "shoulders",
+      "triceps"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "both",
-    "directEquivalents": ["ex_105", "ex_101"],
-    "freeWeightEquivalents": ["ex_105"],
+    "directEquivalents": [
+      "ex_105",
+      "ex_101"
+    ],
+    "freeWeightEquivalents": [
+      "ex_105"
+    ],
     "coachingCue": "Desciende la barra hacia la parte superior del esternón manteniendo los antebrazos perpendiculares al suelo.",
     "difficulty": "avanzado",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-incline-bench-press.gif",
+    "instructions": [
+      "Colócate en banco inclinado a 30º con agarre ligeramente superior al ancho de hombros.",
+      "Desciende la barra hacia la parte superior del tórax rozando la clavícula de forma controlada.",
+      "Empuja la barra en una trayectoria vertical sin adelantar los hombros en la parte superior."
+    ]
   },
   {
     "id": "ex_107",
     "name": "Cruces en Polea",
     "subtitle": "Aislamiento pectoral en aducción horizontal con tensión continua",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["shoulders"],
+    "secondaryMuscles": [
+      "shoulders"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "commercial",
-    "directEquivalents": ["ex_108", "ex_109"],
-    "freeWeightEquivalents": ["ex_108"],
+    "directEquivalents": [
+      "ex_108",
+      "ex_109"
+    ],
+    "freeWeightEquivalents": [
+      "ex_108"
+    ],
     "coachingCue": "Mantén una ligera flexión de codos constante durante todo el recorrido. Contrae activamente en el punto de máxima aproximación.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/cable-middle-fly.gif",
+    "instructions": [
+      "Ajusta las poleas a la altura media o alta y sujeta las manetas con un paso hacia adelante.",
+      "Con los codos ligeramente flexionados, junta las manos al frente realizando una aducción horizontal.",
+      "Aprieta conscientemente el pectoral en la contracción máxima durante 1 segundo.",
+      "Abre los brazos lentamente sintiendo el estiramiento en la fascia del pectoral."
+    ]
   },
   {
     "id": "ex_108",
     "name": "Aperturas con Mancuernas en Banco Plano",
     "subtitle": "Aislamiento en estiramiento máximo del pectoral",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["shoulders"],
+    "secondaryMuscles": [
+      "shoulders"
+    ],
     "movementPattern": "horizontal_push",
     "equipment": "home",
-    "directEquivalents": ["ex_107", "ex_109"],
-    "freeWeightEquivalents": ["ex_107"],
+    "directEquivalents": [
+      "ex_107",
+      "ex_109"
+    ],
+    "freeWeightEquivalents": [
+      "ex_107"
+    ],
     "coachingCue": "Control estricto en la fase excéntrica profunda. Evita hiper-extender los codos y concéntrate en la apertura de la caja torácica.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/dumbbell-fly.gif",
+    "instructions": [
+      "Túmbate en el banco con las mancuernas sobre el pecho y los codos semiflexionados.",
+      "Abre los brazos en arco amplio hasta sentir el estiramiento máximo a nivel de los hombros.",
+      "Cierra el arco contrayendo los pectorales sin variar el ángulo del codo."
+    ]
   },
   {
     "id": "ex_109",
@@ -127,224 +250,444 @@
     "secondaryMuscles": [],
     "movementPattern": "horizontal_push",
     "equipment": "commercial",
-    "directEquivalents": ["ex_107", "ex_108"],
-    "freeWeightEquivalents": ["ex_108"],
+    "directEquivalents": [
+      "ex_107",
+      "ex_108"
+    ],
+    "freeWeightEquivalents": [
+      "ex_108"
+    ],
     "coachingCue": "Espalda y cabeza apoyadas sólidamente. Conduce el movimiento desde los codos para aislar el pectoral sin fatiga en brazos.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/lever-seated-fly.gif",
+    "instructions": [
+      "Regula el asiento de la máquina contractora (Pec Deck) para que los codos y antebrazos queden a la altura del pecho.",
+      "Junta los brazos en el centro apretando los pectorales con fuerza en la posición final.",
+      "Controla el regreso excéntrico evitando que los brazos sobrepasen excesivamente la línea dorsal."
+    ]
   },
   {
     "id": "ex_110",
     "name": "Fondos en Paralelas para Pectoral",
     "subtitle": "Empuje en autocarga con declinación biomecánica",
     "muscleGroup": "chest",
-    "secondaryMuscles": ["triceps", "shoulders"],
+    "secondaryMuscles": [
+      "triceps",
+      "shoulders"
+    ],
     "movementPattern": "vertical_push",
     "equipment": "both",
-    "directEquivalents": ["ex_101", "ex_105"],
-    "freeWeightEquivalents": ["ex_104"],
+    "directEquivalents": [
+      "ex_101",
+      "ex_105"
+    ],
+    "freeWeightEquivalents": [
+      "ex_104"
+    ],
     "coachingCue": "Inclina el torso 30º hacia adelante para focalizar el estímulo en el pectoral inferior y preservar la articulación del hombro.",
     "difficulty": "avanzado",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/chest-dip.gif",
+    "instructions": [
+      "Súbete a las barras paralelas e inclina el torso unos 30º hacia adelante para focalizar en pectoral.",
+      "Desciende flexionando los codos hasta que los hombros queden ligeramente por debajo de los codos.",
+      "Empuja con fuerza extendiendo los brazos y manteniendo el torso inclinado."
+    ]
   },
-
   {
     "id": "ex_201",
     "name": "Dominadas Pronas (Pull-Ups)",
     "subtitle": "Tracción vertical fundamental para amplitud dorsal",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["biceps", "core"],
+    "secondaryMuscles": [
+      "biceps",
+      "core"
+    ],
     "movementPattern": "vertical_pull",
     "equipment": "bodyweight",
-    "directEquivalents": ["ex_202", "ex_203"],
-    "freeWeightEquivalents": ["ex_204", "ex_205"],
+    "directEquivalents": [
+      "ex_202",
+      "ex_203"
+    ],
+    "freeWeightEquivalents": [
+      "ex_204",
+      "ex_205"
+    ],
     "coachingCue": "Inicia el movimiento deprimiendo las escápulas. Conduce los codos hacia abajo y supera la barra con la barbilla de manera limpia.",
     "difficulty": "avanzado",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/pull-up.gif",
+    "instructions": [
+      "Cuélgate de la barra con agarre prono ligeramente más ancho que los hombros.",
+      "Inicia el movimiento deprimiendo y retrayendo las escápulas.",
+      "Tracciona dirigiendo los codos hacia abajo y atrás hasta que la barbilla supere la barra.",
+      "Baja con control completo hasta el estiramiento escapular total."
+    ]
   },
   {
     "id": "ex_202",
     "name": "Jalón al Pecho en Polea Alta",
     "subtitle": "Tracción vertical guiada para dorsal ancho y redondos",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["biceps", "shoulders"],
+    "secondaryMuscles": [
+      "biceps",
+      "shoulders"
+    ],
     "movementPattern": "vertical_pull",
     "equipment": "commercial",
-    "directEquivalents": ["ex_201", "ex_203"],
-    "freeWeightEquivalents": ["ex_204", "ex_205"],
+    "directEquivalents": [
+      "ex_201",
+      "ex_203"
+    ],
+    "freeWeightEquivalents": [
+      "ex_204",
+      "ex_205"
+    ],
     "coachingCue": "Ligera inclinación del torso. Tira de la barra hacia la clavícula guiando el recorrido con los codos sin balanceo lumbar.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-pulldown.gif",
+    "instructions": [
+      "Ajusta el cojín de muslos y toma la barra con agarre prono amplio.",
+      "Inclina el torso ligeramente hacia atrás (~10º) y saca pecho.",
+      "Tira de la barra hacia la parte superior del esternón guiando con los codos.",
+      "Extiende los brazos lentamente controlando el peso hasta el tope superior."
+    ]
   },
   {
     "id": "ex_203",
     "name": "Jalón Unilateral en Polea Neutra",
     "subtitle": "Tracción vertical unilateral alineada con las fibras del dorsal",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["biceps"],
+    "secondaryMuscles": [
+      "biceps"
+    ],
     "movementPattern": "vertical_pull",
     "equipment": "commercial",
-    "directEquivalents": ["ex_202", "ex_201"],
-    "freeWeightEquivalents": ["ex_205"],
+    "directEquivalents": [
+      "ex_202",
+      "ex_201"
+    ],
+    "freeWeightEquivalents": [
+      "ex_205"
+    ],
     "coachingCue": "Alinea el codo con la trayectoria de tracción hacia la cadera, maximizando la contracción en la inserción ilíaca del dorsal.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-one-arm-lat-pulldown.gif",
+    "instructions": [
+      "Coloca una maneta individual en polea alta y arrodíllate o siéntate de lado.",
+      "Tira con un agarre neutro llevando el codo pegado al costado hacia la cadera.",
+      "Permite el estiramiento completo del dorsal en la subida con ligera rotación del torso."
+    ]
   },
   {
     "id": "ex_204",
     "name": "Remo con Barra Prono a 90º",
     "subtitle": "Tracción horizontal pesada para densidad y grosor de espalda",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["back_lower", "biceps", "hamstrings"],
+    "secondaryMuscles": [
+      "back_lower",
+      "biceps",
+      "hamstrings"
+    ],
     "movementPattern": "horizontal_pull",
     "equipment": "both",
-    "directEquivalents": ["ex_205", "ex_206", "ex_207"],
-    "freeWeightEquivalents": ["ex_205"],
+    "directEquivalents": [
+      "ex_205",
+      "ex_206",
+      "ex_207"
+    ],
+    "freeWeightEquivalents": [
+      "ex_205"
+    ],
     "coachingCue": "Torso inclinado a 45-90º con columna neutra. Lleva la barra al ombligo retrayendo activamente las escápulas.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/barbell-bent-over-row.gif",
+    "instructions": [
+      "Pies a la anchura de hombros, flexiona la cadera manteniendo la columna neutra a 45-70º.",
+      "Toma la barra y tracciona hacia la parte baja del abdomen o ombligo.",
+      "Junta las escápulas al final del recorrido manteniendo la cabeza alineada.",
+      "Desciende la barra sin curvar la zona lumbar."
+    ]
   },
   {
     "id": "ex_205",
     "name": "Remo Unilateral con Mancuerna",
     "subtitle": "Tracción horizontal libre con apoyo en banco",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["biceps", "core"],
+    "secondaryMuscles": [
+      "biceps",
+      "core"
+    ],
     "movementPattern": "horizontal_pull",
     "equipment": "home",
-    "directEquivalents": ["ex_204", "ex_206", "ex_207"],
-    "freeWeightEquivalents": ["ex_204"],
+    "directEquivalents": [
+      "ex_204",
+      "ex_206",
+      "ex_207"
+    ],
+    "freeWeightEquivalents": [
+      "ex_204"
+    ],
     "coachingCue": "Trayectoria en arco llevando la mancuerna hacia el bolsillo de la cadera. Evita la rotación excesiva del tronco.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/dumbbell-one-arm-row.gif",
+    "instructions": [
+      "Apoya una rodilla y mano en el banco plano, con la espalda paralela al suelo.",
+      "Con la otra mano, tracciona la mancuerna hacia la cadera describiendo una trayectoria en J.",
+      "Mantén el codo pegado al torso y aprieta el dorsal arriba antes de descender."
+    ]
   },
   {
     "id": "ex_206",
     "name": "Remo Sentado en Polea Baja (Gironda)",
     "subtitle": "Tracción horizontal con apoyo de pies y tensión continua",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["biceps", "shoulders"],
+    "secondaryMuscles": [
+      "biceps",
+      "shoulders"
+    ],
     "movementPattern": "horizontal_pull",
     "equipment": "commercial",
-    "directEquivalents": ["ex_204", "ex_205", "ex_207"],
-    "freeWeightEquivalents": ["ex_205"],
+    "directEquivalents": [
+      "ex_204",
+      "ex_205",
+      "ex_207"
+    ],
+    "freeWeightEquivalents": [
+      "ex_205"
+    ],
     "coachingCue": "Mantén el torso estable con mínima oscilación anteroposterior. Enfoque en aducción escapular en el punto final.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/cable-low-seated-row.gif",
+    "instructions": [
+      "Siéntate con los pies en los soportes y las rodillas ligeramente flexionadas.",
+      "Mantén el pecho erguido y tira del agarre hacia el ombligo retrayendo las escápulas.",
+      "Evita balancear excesivamente la columna lumbar durante el tirón."
+    ]
   },
   {
     "id": "ex_207",
     "name": "Remo con Pecho Apoyado (Chest Supported Row)",
     "subtitle": "Tracción horizontal pura sin fatiga lumbar accesoria",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["biceps"],
+    "secondaryMuscles": [
+      "biceps"
+    ],
     "movementPattern": "horizontal_pull",
     "equipment": "commercial",
-    "directEquivalents": ["ex_204", "ex_206"],
-    "freeWeightEquivalents": ["ex_205"],
+    "directEquivalents": [
+      "ex_204",
+      "ex_206"
+    ],
+    "freeWeightEquivalents": [
+      "ex_205"
+    ],
     "coachingCue": "Al apoyar el esternón en el respaldo se elimina el impulso. Pausa de 1 segundo en máxima contracción escapular.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/lever-t-bar-row.gif",
+    "instructions": [
+      "Apoya el pecho contra el respaldo inclinado eliminando la tensión lumbar.",
+      "Toma los agarres y tracciona abriendo los codos para enfatizar romboides y trapecio medio.",
+      "Desciende controlando el peso hasta el estiramiento escapular completo."
+    ]
   },
   {
     "id": "ex_208",
     "name": "Pullover en Polea Alta con Cuerda",
     "subtitle": "Aislamiento en extensión de hombro para dorsal ancho",
     "muscleGroup": "back_upper",
-    "secondaryMuscles": ["triceps", "core"],
+    "secondaryMuscles": [
+      "triceps",
+      "core"
+    ],
     "movementPattern": "vertical_pull",
     "equipment": "commercial",
-    "directEquivalents": ["ex_202", "ex_203"],
-    "freeWeightEquivalents": ["ex_205"],
+    "directEquivalents": [
+      "ex_202",
+      "ex_203"
+    ],
+    "freeWeightEquivalents": [
+      "ex_205"
+    ],
     "coachingCue": "Codos ligeramente semiflexionados y rígidos. Empuja la barra o cuerda hacia los muslos manteniendo el pecho erguido.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-straight-arm-pulldown-with-rope.gif",
+    "instructions": [
+      "De pie frente a la polea alta con cuerda o barra recta, brazos extendidos con ligera flexión de codo.",
+      "Flexiona la cadera ligeramente y tracciona hacia los muslos en un arco amplio.",
+      "Aprieta los dorsales en la parte baja y regresa sintiendo el estiramiento axilar."
+    ]
   },
-
   {
     "id": "ex_301",
     "name": "Peso Muerto Convencional con Barra",
     "subtitle": "Patrón de bisagra de cadera y fuerza corporal global",
     "muscleGroup": "back_lower",
-    "secondaryMuscles": ["glutes", "hamstrings", "back_upper", "core"],
+    "secondaryMuscles": [
+      "glutes",
+      "hamstrings",
+      "back_upper",
+      "core"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "both",
-    "directEquivalents": ["ex_302", "ex_303", "ex_304"],
-    "freeWeightEquivalents": ["ex_302", "ex_303"],
+    "directEquivalents": [
+      "ex_302",
+      "ex_303",
+      "ex_304"
+    ],
+    "freeWeightEquivalents": [
+      "ex_302",
+      "ex_303"
+    ],
     "coachingCue": "Tracción de la barra pegada a las espinillas. Activa dorsales, bloquea columna lumbar y empuja el suelo con las piernas.",
     "difficulty": "avanzado",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-deadlift.gif",
+    "instructions": [
+      "Barra sobre la mitad de los pies, agarre justo por fuera de las espinillas.",
+      "Empuja las caderas hacia atrás, pecho alto y columna completamente neutra.",
+      "Empuja contra el suelo extendiendo rodillas y caderas al unísono.",
+      "Bloquea arriba con los glúteos sin hiperextender la zona lumbar."
+    ]
   },
   {
     "id": "ex_302",
     "name": "Peso Muerto Rumano con Barra (RDL)",
     "subtitle": "Bisagra de cadera pura con énfasis en isquiotibiales y glúteos",
     "muscleGroup": "hamstrings",
-    "secondaryMuscles": ["glutes", "back_lower"],
+    "secondaryMuscles": [
+      "glutes",
+      "back_lower"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "both",
-    "directEquivalents": ["ex_303", "ex_305", "ex_306"],
-    "freeWeightEquivalents": ["ex_303"],
+    "directEquivalents": [
+      "ex_303",
+      "ex_305",
+      "ex_306"
+    ],
+    "freeWeightEquivalents": [
+      "ex_303"
+    ],
     "coachingCue": "Desplaza la cadera hacia atrás con rodillas semiflexionadas. Desciende hasta el punto de máximo estiramiento isquiosural sin flexionar la columna.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-romanian-deadlift.gif",
+    "instructions": [
+      "De pie con la barra en las manos, rodillas con ligera flexión constante (~15º).",
+      "Empuja las caderas hacia la pared trasera mientras la barra desciende pegada a los muslos.",
+      "Baja hasta que los isquios alcancen su máximo estiramiento (generalmente bajo las rodillas).",
+      "Empuja con las caderas hacia adelante para volver a la posición erguida."
+    ]
   },
   {
     "id": "ex_303",
     "name": "Peso Muerto Rumano con Mancuernas",
     "subtitle": "Bisagra de cadera con mancuernas para adaptación anatómica",
     "muscleGroup": "hamstrings",
-    "secondaryMuscles": ["glutes", "back_lower"],
+    "secondaryMuscles": [
+      "glutes",
+      "back_lower"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "home",
-    "directEquivalents": ["ex_302", "ex_305", "ex_306"],
-    "freeWeightEquivalents": ["ex_302"],
+    "directEquivalents": [
+      "ex_302",
+      "ex_305",
+      "ex_306"
+    ],
+    "freeWeightEquivalents": [
+      "ex_302"
+    ],
     "coachingCue": "Mantén las mancuernas rozando los muslos. Control excéntrico en 3 segundos y extensión de cadera potente.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/dumbbell-romanian-deadlift.gif",
+    "instructions": [
+      "Sujeta dos mancuernas frente a los muslos con agarre prono o neutro.",
+      "Lleva la cadera hacia atrás manteniendo las mancuernas rozando las piernas.",
+      "Siente la tensión en los isquiotibiales y glúteos en el punto bajo y regresa contrayendo glúteos."
+    ]
   },
   {
     "id": "ex_304",
     "name": "Hiperextensiones a 45º",
     "subtitle": "Extensión lumbar y de cadera con estabilidad guiada",
     "muscleGroup": "back_lower",
-    "secondaryMuscles": ["glutes", "hamstrings"],
+    "secondaryMuscles": [
+      "glutes",
+      "hamstrings"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "commercial",
-    "directEquivalents": ["ex_302", "ex_303"],
-    "freeWeightEquivalents": ["ex_303"],
+    "directEquivalents": [
+      "ex_302",
+      "ex_303"
+    ],
+    "freeWeightEquivalents": [
+      "ex_303"
+    ],
     "coachingCue": "Alinea la cadera con el borde del cojín. Extiende hasta formar una línea recta sin hiper-extender la zona lumbar al final.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/spine/hyperextension-on-45-degree-hyperextension-bench.gif",
+    "instructions": [
+      "Colócate en el banco de hiperextensiones con el cojín justo por debajo de la cresta ilíaca.",
+      "Flexiona el torso hacia adelante y extiende hasta alinear el cuerpo sin arquear en exceso.",
+      "Enfoca la contracción en glúteos, isquios y erectores espinales."
+    ]
   },
   {
     "id": "ex_305",
     "name": "Curl Femoral Tumbado en Máquina",
     "subtitle": "Aislamiento de flexión de rodilla en posición prona",
     "muscleGroup": "hamstrings",
-    "secondaryMuscles": ["calves"],
+    "secondaryMuscles": [
+      "calves"
+    ],
     "movementPattern": "knee_flexion",
     "equipment": "commercial",
-    "directEquivalents": ["ex_306", "ex_307"],
-    "freeWeightEquivalents": ["ex_307", "ex_303"],
+    "directEquivalents": [
+      "ex_306",
+      "ex_307"
+    ],
+    "freeWeightEquivalents": [
+      "ex_307",
+      "ex_303"
+    ],
     "coachingCue": "Mantén la pelvis pegada al banco para evitar compensación lumbar. Pausa isométrica de 1 segundo en máxima flexión.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/lever-lying-leg-curl.gif",
+    "instructions": [
+      "Túmbate boca abajo con el rodillo apoyado en la parte inferior de los gemelos (encima del talón).",
+      "Sujeta los agarres y flexiona las rodillas llevando los talones hacia los glúteos.",
+      "Aguanta 1 segundo en contracción máxima y desciende lentamente en 3 segundos."
+    ]
   },
   {
     "id": "ex_306",
@@ -354,118 +697,234 @@
     "secondaryMuscles": [],
     "movementPattern": "knee_flexion",
     "equipment": "commercial",
-    "directEquivalents": ["ex_305", "ex_307"],
-    "freeWeightEquivalents": ["ex_307", "ex_303"],
+    "directEquivalents": [
+      "ex_305",
+      "ex_307"
+    ],
+    "freeWeightEquivalents": [
+      "ex_307",
+      "ex_303"
+    ],
     "coachingCue": "La flexión de cadera al estar sentado genera mayor tensión pasiva en los isquios. Controla la fase de retorno de manera estricta.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/lever-seated-leg-curl.gif",
+    "instructions": [
+      "Ajusta el respaldo para alinear el eje de la rodilla con el eje de giro de la máquina.",
+      "Fija el cojín superior contra los muslos y flexiona las rodillas hacia abajo.",
+      "Aprovecha la flexión de cadera sentada para trabajar los isquios en máxima longitud."
+    ]
   },
   {
     "id": "ex_307",
     "name": "Curl Nórdico / Curl Femoral con Mancuerna",
     "subtitle": "Aislamiento excéntrico de alta intensidad para isquiotibiales",
     "muscleGroup": "hamstrings",
-    "secondaryMuscles": ["glutes"],
+    "secondaryMuscles": [
+      "glutes"
+    ],
     "movementPattern": "knee_flexion",
     "equipment": "home",
-    "directEquivalents": ["ex_305", "ex_306"],
-    "freeWeightEquivalents": ["ex_305"],
+    "directEquivalents": [
+      "ex_305",
+      "ex_306"
+    ],
+    "freeWeightEquivalents": [
+      "ex_305"
+    ],
     "coachingCue": "Frena la caída hacia adelante con la fuerza de los isquiosurales manteniendo la cadera en extensión completa.",
     "difficulty": "avanzado",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/inverse-leg-curl-bench-support.gif",
+    "instructions": [
+      "Ancla los tobillos firmemente en el suelo o máquina y mantén el cuerpo recto.",
+      "Desciende el torso hacia adelante frenando con la fuerza excéntrica de los isquiotibiales.",
+      "Usa las manos para impulsarte ligeramente si es necesario y regresa."
+    ]
   },
-
   {
     "id": "ex_401",
     "name": "Sentadilla Trasera con Barra (Back Squat)",
     "subtitle": "Patrón dominante de cuádriceps multiarticular fundamental",
     "muscleGroup": "quads",
-    "secondaryMuscles": ["glutes", "back_lower", "core"],
+    "secondaryMuscles": [
+      "glutes",
+      "back_lower",
+      "core"
+    ],
     "movementPattern": "quad_dominant",
     "equipment": "both",
-    "directEquivalents": ["ex_402", "ex_403", "ex_404"],
-    "freeWeightEquivalents": ["ex_404", "ex_405"],
+    "directEquivalents": [
+      "ex_402",
+      "ex_403",
+      "ex_404"
+    ],
+    "freeWeightEquivalents": [
+      "ex_404",
+      "ex_405"
+    ],
     "coachingCue": "Pies a anchura de hombros, rodillas alineadas con la punta de los pies. Profundidad hasta romper el paralelo con columna neutra.",
     "difficulty": "avanzado",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-full-squat-back-pov.gif",
+    "instructions": [
+      "Coloca la barra sobre los trapecios (barra alta) o deltoides posterior (barra baja).",
+      "Pies a la anchura de hombros con puntas ligeramente abiertas hacia afuera.",
+      "Desciende flexionando rodillas y caderas simultáneamente hasta romper el paralelo (90º).",
+      "Empuja el suelo con fuerza manteniendo el pecho erguido y las rodillas alineadas."
+    ]
   },
   {
     "id": "ex_402",
     "name": "Prensa de Piernas a 45º",
     "subtitle": "Empuje de tren inferior en plano inclinado con alta capacidad de carga",
     "muscleGroup": "quads",
-    "secondaryMuscles": ["glutes"],
+    "secondaryMuscles": [
+      "glutes"
+    ],
     "movementPattern": "quad_dominant",
     "equipment": "commercial",
-    "directEquivalents": ["ex_401", "ex_403", "ex_404"],
-    "freeWeightEquivalents": ["ex_404", "ex_405"],
+    "directEquivalents": [
+      "ex_401",
+      "ex_403",
+      "ex_404"
+    ],
+    "freeWeightEquivalents": [
+      "ex_404",
+      "ex_405"
+    ],
     "coachingCue": "Coloca los pies al centro de la plataforma. Desciende profundo sin despegar el sacro del respaldo y evita el bloqueo articular superior.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/sled-45-degrees-leg-press.gif",
+    "instructions": [
+      "Apoya la espalda completa en el respaldo y coloca los pies en la plataforma a media altura.",
+      "Desbloquea la prensa y flexiona las rodillas hasta los 90º sin despegar la pelvis del asiento.",
+      "Empuja la plataforma sin bloquear bruscamente las rodillas en la extensión final."
+    ]
   },
   {
     "id": "ex_403",
     "name": "Sentadilla Hack en Máquina",
     "subtitle": "Sentadilla guiada con máxima flexión de rodilla y aislamiento de cuádriceps",
     "muscleGroup": "quads",
-    "secondaryMuscles": ["glutes"],
+    "secondaryMuscles": [
+      "glutes"
+    ],
     "movementPattern": "quad_dominant",
     "equipment": "commercial",
-    "directEquivalents": ["ex_401", "ex_402", "ex_404"],
-    "freeWeightEquivalents": ["ex_404", "ex_405"],
+    "directEquivalents": [
+      "ex_401",
+      "ex_402",
+      "ex_404"
+    ],
+    "freeWeightEquivalents": [
+      "ex_404",
+      "ex_405"
+    ],
     "coachingCue": "Permite el avance de las rodillas sobre las puntas de los pies para máxima dorsiflexión y reclutamiento del recto femoral y vastos.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/sled-hack-squat.gif",
+    "instructions": [
+      "Apoya la espalda y hombros en las almohadillas con los pies adelantados en la base.",
+      "Baja con control buscando la máxima flexión de rodilla para elongar los cuádriceps.",
+      "Empuja manteniendo la espalda pegada al soporte durante todo el recorrido."
+    ]
   },
   {
     "id": "ex_404",
     "name": "Sentadilla Goblet con Mancuerna",
     "subtitle": "Sentadilla con carga frontal para control postural",
     "muscleGroup": "quads",
-    "secondaryMuscles": ["glutes", "core"],
+    "secondaryMuscles": [
+      "glutes",
+      "core"
+    ],
     "movementPattern": "quad_dominant",
     "equipment": "home",
-    "directEquivalents": ["ex_401", "ex_402", "ex_403"],
-    "freeWeightEquivalents": ["ex_401", "ex_405"],
+    "directEquivalents": [
+      "ex_401",
+      "ex_402",
+      "ex_403"
+    ],
+    "freeWeightEquivalents": [
+      "ex_401",
+      "ex_405"
+    ],
     "coachingCue": "Sujeta la mancuerna pegada al esternón. La carga anterior facilita un torso vertical y una profundidad óptima.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/dumbbell-goblet-squat.gif",
+    "instructions": [
+      "Sostén una mancuerna verticalmente pegada al pecho con ambas manos.",
+      "Baja en sentadilla profunda con el torso vertical y los codos pasando por dentro de las rodillas.",
+      "Pausa un instante abajo y sube empujando desde los talones."
+    ]
   },
   {
     "id": "ex_405",
     "name": "Sentadilla Búlgara con Mancuernas",
     "subtitle": "Trabajo unilateral dominante de cuádriceps y glúteo",
     "muscleGroup": "quads",
-    "secondaryMuscles": ["glutes", "hamstrings"],
+    "secondaryMuscles": [
+      "glutes",
+      "hamstrings"
+    ],
     "movementPattern": "quad_dominant",
     "equipment": "home",
-    "directEquivalents": ["ex_406", "ex_401"],
-    "freeWeightEquivalents": ["ex_406"],
+    "directEquivalents": [
+      "ex_406",
+      "ex_401"
+    ],
+    "freeWeightEquivalents": [
+      "ex_406"
+    ],
     "coachingCue": "Pie trasero apoyado en banco. Desciende en vertical distribuyendo el 85% de la carga sobre la pierna delantera.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/barbell-single-leg-split-squat.gif",
+    "instructions": [
+      "Coloca un pie apoyado en el empeine sobre un banco trasero a la altura de la rodilla.",
+      "Baja con la pierna delantera flexionando la rodilla hasta que el muslo quede paralelo al suelo.",
+      "Empuja desde el talón de la pierna delantera manteniendo el equilibrio y torso estable."
+    ]
   },
   {
     "id": "ex_406",
     "name": "Zancadas Dinámicas con Mancuernas",
     "subtitle": "Desplazamiento unilateral con estabilización dinámica",
     "muscleGroup": "quads",
-    "secondaryMuscles": ["glutes", "hamstrings"],
+    "secondaryMuscles": [
+      "glutes",
+      "hamstrings"
+    ],
     "movementPattern": "quad_dominant",
     "equipment": "home",
-    "directEquivalents": ["ex_405", "ex_404"],
-    "freeWeightEquivalents": ["ex_405"],
+    "directEquivalents": [
+      "ex_405",
+      "ex_404"
+    ],
+    "freeWeightEquivalents": [
+      "ex_405"
+    ],
     "coachingCue": "Pasos amplios y controlados. La rodilla delantera no debe colapsar en valgo en el momento del impacto.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/dumbbell-walking-lunge.gif",
+    "instructions": [
+      "Da un paso amplio hacia adelante flexionando ambas rodillas a 90º.",
+      "La rodilla trasera roza casi el suelo mientras el torso permanece vertical.",
+      "Impúlsate hacia adelante en el siguiente paso de forma fluida."
+    ]
   },
   {
     "id": "ex_407",
@@ -475,73 +934,137 @@
     "secondaryMuscles": [],
     "movementPattern": "quad_dominant",
     "equipment": "commercial",
-    "directEquivalents": ["ex_404", "ex_405"],
-    "freeWeightEquivalents": ["ex_404", "ex_405"],
+    "directEquivalents": [
+      "ex_404",
+      "ex_405"
+    ],
+    "freeWeightEquivalents": [
+      "ex_404",
+      "ex_405"
+    ],
     "coachingCue": "Ajusta el eje de rotación de la máquina con la rodilla. Pausa isométrica de 1 segundo en el punto de máxima extensión.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/lever-leg-extension.gif",
+    "instructions": [
+      "Alinea las rodillas con el eje de rotación y coloca el rodillo sobre los empeines.",
+      "Extiende las piernas completamente contrayendo los cuádriceps en el punto alto.",
+      "Aguanta 1 segundo arriba y desciende en 2-3 segundos controlados."
+    ]
   },
-
   {
     "id": "ex_501",
     "name": "Hip Thrust con Barra",
     "subtitle": "Extensión de cadera en puente con máxima activación glútea",
     "muscleGroup": "glutes",
-    "secondaryMuscles": ["hamstrings", "core"],
+    "secondaryMuscles": [
+      "hamstrings",
+      "core"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "both",
-    "directEquivalents": ["ex_502", "ex_503"],
-    "freeWeightEquivalents": ["ex_502"],
+    "directEquivalents": [
+      "ex_502",
+      "ex_503"
+    ],
+    "freeWeightEquivalents": [
+      "ex_502"
+    ],
     "coachingCue": "Escápulas sobre el banco y pies a anchura de hombros. Bloqueo superior con retroversión pélvica y mirada al frente.",
     "difficulty": "intermedio",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-glute-bridge-two-legs-on-bench-male.gif",
+    "instructions": [
+      "Apoya la parte media de la espalda (bajo las escápulas) en el banco plano con la barra acolchada sobre la pelvis.",
+      "Pies apoyados en el suelo al ancho de hombros con rodillas a 90º en la cúspide.",
+      "Empuja las caderas hacia arriba contrayendo fuertemente los glúteos durante 1-2 segundos.",
+      "Baja controlando el descenso sin arquear la zona lumbar."
+    ]
   },
   {
     "id": "ex_502",
     "name": "Hip Thrust con Mancuerna",
     "subtitle": "Extensión de cadera adaptada para espacio reducido",
     "muscleGroup": "glutes",
-    "secondaryMuscles": ["hamstrings"],
+    "secondaryMuscles": [
+      "hamstrings"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "home",
-    "directEquivalents": ["ex_501", "ex_503"],
-    "freeWeightEquivalents": ["ex_501"],
+    "directEquivalents": [
+      "ex_501",
+      "ex_503"
+    ],
+    "freeWeightEquivalents": [
+      "ex_501"
+    ],
     "coachingCue": "Coloca la mancuerna sobre la pelvis y empuja a través de los talones contrayendo glúteos arriba.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-glute-bridge-two-legs-on-bench-male.gif",
+    "instructions": [
+      "Apoya la espalda en el banco con una mancuerna pesada sobre la pelvis.",
+      "Eleva la cadera con potencia hasta alinear muslos con el torso y aprieta los glúteos."
+    ]
   },
   {
     "id": "ex_503",
     "name": "Patada de Glúteo en Polea Baja",
     "subtitle": "Aislamiento de extensión de cadera en polea",
     "muscleGroup": "glutes",
-    "secondaryMuscles": ["hamstrings"],
+    "secondaryMuscles": [
+      "hamstrings"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "commercial",
-    "directEquivalents": ["ex_504", "ex_501"],
-    "freeWeightEquivalents": ["ex_504"],
+    "directEquivalents": [
+      "ex_504",
+      "ex_501"
+    ],
+    "freeWeightEquivalents": [
+      "ex_504"
+    ],
     "coachingCue": "Extiende la pierna hacia atrás y ligeramente hacia afuera (30º) para activar simultáneamente glúteo mayor y medio.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/cable-standing-hip-extension.gif",
+    "instructions": [
+      "Coloca una tobillera conectada a la polea baja y sujétate a la estructura.",
+      "Extiende la pierna hacia atrás en un arco diagonal apretando el glúteo en el final.",
+      "Regresa lentamente sin mover la columna lumbar."
+    ]
   },
   {
     "id": "ex_504",
     "name": "Puente de Glúteos en Suelo",
     "subtitle": "Extensión de cadera en suelo con autocarga y pausa",
     "muscleGroup": "glutes",
-    "secondaryMuscles": ["hamstrings"],
+    "secondaryMuscles": [
+      "hamstrings"
+    ],
     "movementPattern": "hip_hinge",
     "equipment": "bodyweight",
-    "directEquivalents": ["ex_501", "ex_502", "ex_503"],
-    "freeWeightEquivalents": ["ex_502"],
+    "directEquivalents": [
+      "ex_501",
+      "ex_502",
+      "ex_503"
+    ],
+    "freeWeightEquivalents": [
+      "ex_502"
+    ],
     "coachingCue": "Presiona los talones contra el suelo y mantén una contracción isométrica superior de 2 segundos en cada repetición.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-glute-bridge-two-legs-on-bench-male.gif",
+    "instructions": [
+      "Túmbate en el suelo boca arriba con las rodillas flexionadas y los pies cerca de los glúteos.",
+      "Eleva la pelvis empujando desde los talones hasta alinear tronco y muslos."
+    ]
   },
   {
     "id": "ex_505",
@@ -551,58 +1074,109 @@
     "secondaryMuscles": [],
     "movementPattern": "hip_hinge",
     "equipment": "commercial",
-    "directEquivalents": ["ex_503", "ex_504"],
-    "freeWeightEquivalents": ["ex_504"],
+    "directEquivalents": [
+      "ex_503",
+      "ex_504"
+    ],
+    "freeWeightEquivalents": [
+      "ex_504"
+    ],
     "coachingCue": "Ligera inclinación anterior del tronco para alinear el vector de fuerza con las fibras del glúteo medio.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abductors/lever-seated-hip-abduction.gif",
+    "instructions": [
+      "Siéntate en la máquina de abducción con la espalda recta y las almohadillas por fuera de las rodillas.",
+      "Abre las piernas con fuerza contrayendo el glúteo medio y mantén 1 segundo.",
+      "Cierra de forma controlada sin dejar caer el peso."
+    ]
   },
-
   {
     "id": "ex_601",
     "name": "Press Militar con Barra de Pie (OHP)",
     "subtitle": "Empuje vertical multiarticular para deltoides anterior y fuerza de core",
     "muscleGroup": "shoulders",
-    "secondaryMuscles": ["triceps", "core"],
+    "secondaryMuscles": [
+      "triceps",
+      "core"
+    ],
     "movementPattern": "vertical_push",
     "equipment": "both",
-    "directEquivalents": ["ex_602", "ex_603"],
-    "freeWeightEquivalents": ["ex_602"],
+    "directEquivalents": [
+      "ex_602",
+      "ex_603"
+    ],
+    "freeWeightEquivalents": [
+      "ex_602"
+    ],
     "coachingCue": "Contrae glúteos y abdomen fuertemente. Empuja la barra en línea vertical pasando la cabeza por debajo en el bloqueo superior.",
     "difficulty": "avanzado",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/barbell-standing-military-press.gif",
+    "instructions": [
+      "Barra apoyada sobre las clavículas, manos un poco más anchas que los hombros y core apretado.",
+      "Empuja la barra verticalmente pasando cerca de la cara.",
+      "Mete la cabeza hacia adelante al pasar la frente y bloquea la barra sobre la coronilla.",
+      "Desciende con control sin arquear la espalda baja."
+    ]
   },
   {
     "id": "ex_602",
     "name": "Press de Hombros Sentado con Mancuernas",
     "subtitle": "Empuje vertical con respaldo para aislamiento de deltoides",
     "muscleGroup": "shoulders",
-    "secondaryMuscles": ["triceps"],
+    "secondaryMuscles": [
+      "triceps"
+    ],
     "movementPattern": "vertical_push",
     "equipment": "home",
-    "directEquivalents": ["ex_601", "ex_603"],
-    "freeWeightEquivalents": ["ex_601"],
+    "directEquivalents": [
+      "ex_601",
+      "ex_603"
+    ],
+    "freeWeightEquivalents": [
+      "ex_601"
+    ],
     "coachingCue": "Codos ligeramente adelantados en el plano escapular (15-30º). Empuja hacia arriba sin juntar bruscamente las mancuernas.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-seated-shoulder-press-parallel-grip.gif",
+    "instructions": [
+      "Siéntate con respaldo a 75-80º y eleva las mancuernas a la altura de las orejas.",
+      "Empuja hacia arriba extendiendo los brazos sin chocar las mancuernas arriba.",
+      "Desciende hasta que las mancuernas queden a la altura del cuello."
+    ]
   },
   {
     "id": "ex_603",
     "name": "Press de Hombros en Máquina Guiada",
     "subtitle": "Empuje vertical guiado con estabilidad y control de sobrecarga",
     "muscleGroup": "shoulders",
-    "secondaryMuscles": ["triceps"],
+    "secondaryMuscles": [
+      "triceps"
+    ],
     "movementPattern": "vertical_push",
     "equipment": "commercial",
-    "directEquivalents": ["ex_601", "ex_602"],
-    "freeWeightEquivalents": ["ex_602"],
+    "directEquivalents": [
+      "ex_601",
+      "ex_602"
+    ],
+    "freeWeightEquivalents": [
+      "ex_602"
+    ],
     "coachingCue": "Regula el asiento para que el inicio del recorrido no sobrecargue el manguito rotador. Rango de movimiento uniforme.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 1
+    "tier": 1,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/lever-shoulder-press-v-2.gif",
+    "instructions": [
+      "Ajusta la altura del asiento para que los agarres queden a nivel de los hombros.",
+      "Empuja con fluidez manteniendo los codos en el plano escapular (30º adelantados).",
+      "Desciende con control manteniendo la tensión continua en los deltoides."
+    ]
   },
   {
     "id": "ex_604",
@@ -612,12 +1186,22 @@
     "secondaryMuscles": [],
     "movementPattern": "lateral_raise",
     "equipment": "home",
-    "directEquivalents": ["ex_605"],
-    "freeWeightEquivalents": ["ex_605"],
+    "directEquivalents": [
+      "ex_605"
+    ],
+    "freeWeightEquivalents": [
+      "ex_605"
+    ],
     "coachingCue": "Eleva en el plano escapular (ligeramente hacia el frente). Conduce el movimiento desde los codos sin encoger los trapecios.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.gif",
+    "instructions": [
+      "De pie con las mancuernas a los costados, torso con inclinación mínima hacia adelante.",
+      "Eleva los brazos en el plano escapular (30º adelante) guiando con los codos hasta la altura de los hombros.",
+      "Pausa un instante en la horizontal y baja resistiendo la gravedad."
+    ]
   },
   {
     "id": "ex_605",
@@ -627,44 +1211,76 @@
     "secondaryMuscles": [],
     "movementPattern": "lateral_raise",
     "equipment": "commercial",
-    "directEquivalents": ["ex_604"],
-    "freeWeightEquivalents": ["ex_604"],
+    "directEquivalents": [
+      "ex_604"
+    ],
+    "freeWeightEquivalents": [
+      "ex_604"
+    ],
     "coachingCue": "La polea garantiza tensión desde el inicio del recorrido. Controla la fase excéntrica en 2 segundos.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-lateral-raise.gif",
+    "instructions": [
+      "Coloca la polea a la altura de la rodilla o muñeca para optimizar el perfil de resistencia.",
+      "Eleva el brazo lateralmente manteniendo tensión constante durante todo el recorrido.",
+      "Baja despacio sintiendo la carga en el deltoides lateral."
+    ]
   },
   {
     "id": "ex_606",
     "name": "Face Pull en Polea con Cuerda",
     "subtitle": "Tracción facial para deltoides posterior y salud escapular",
     "muscleGroup": "shoulders",
-    "secondaryMuscles": ["back_upper"],
+    "secondaryMuscles": [
+      "back_upper"
+    ],
     "movementPattern": "horizontal_pull",
     "equipment": "commercial",
-    "directEquivalents": ["ex_607"],
-    "freeWeightEquivalents": ["ex_607"],
+    "directEquivalents": [
+      "ex_607"
+    ],
+    "freeWeightEquivalents": [
+      "ex_607"
+    ],
     "coachingCue": "Tracciona hacia la altura de los ojos rotando externamente los hombros. Excelente ejercicio postural y preventivo.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-standing-rear-delt-row-with-rope.gif",
+    "instructions": [
+      "Polea a la altura de los ojos con cuerda doble.",
+      "Tira hacia la frente separando las manos y rotando externamente los hombros.",
+      "Aprieta los deltoides posteriores y romboides al final del movimiento."
+    ]
   },
   {
     "id": "ex_607",
     "name": "Pájaros con Mancuernas (Rear Delt Flyes)",
     "subtitle": "Aislamiento de deltoides posterior en flexión de tronco",
     "muscleGroup": "shoulders",
-    "secondaryMuscles": ["back_upper"],
+    "secondaryMuscles": [
+      "back_upper"
+    ],
     "movementPattern": "horizontal_pull",
     "equipment": "home",
-    "directEquivalents": ["ex_606"],
-    "freeWeightEquivalents": ["ex_606"],
+    "directEquivalents": [
+      "ex_606"
+    ],
+    "freeWeightEquivalents": [
+      "ex_606"
+    ],
     "coachingCue": "Tronco paralelo al suelo y apertura lateral guiada por los codos. Evita el balanceo lumbar.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-rear-lateral-raise-support-head.gif",
+    "instructions": [
+      "Inclina el torso a 90º apoyando el pecho o libre con espalda recta.",
+      "Eleva las mancuernas hacia los lados con los codos semiflexionados enfocando en deltoides posterior."
+    ]
   },
-
   {
     "id": "ex_701",
     "name": "Curl de Bíceps con Barra Z",
@@ -673,12 +1289,25 @@
     "secondaryMuscles": [],
     "movementPattern": "arm_flexion",
     "equipment": "both",
-    "directEquivalents": ["ex_702", "ex_703", "ex_704"],
-    "freeWeightEquivalents": ["ex_702", "ex_703"],
+    "directEquivalents": [
+      "ex_702",
+      "ex_703",
+      "ex_704"
+    ],
+    "freeWeightEquivalents": [
+      "ex_702",
+      "ex_703"
+    ],
     "coachingCue": "Codos fijos a los costados. Evita la flexión de hombros al subir para mantener el trabajo concentrado en el bíceps braquial.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/ez-bar-biceps-curl-with-arm-blaster.gif",
+    "instructions": [
+      "Toma la barra Z por las curvaturas interiores para reducir el estrés en muñecas.",
+      "Codos pegados a los costados, flexiona los brazos llevando la barra hacia el pecho.",
+      "Aprieta los bíceps arriba y desciende en 2-3 segundos sin balancear el cuerpo."
+    ]
   },
   {
     "id": "ex_702",
@@ -688,12 +1317,24 @@
     "secondaryMuscles": [],
     "movementPattern": "arm_flexion",
     "equipment": "home",
-    "directEquivalents": ["ex_701", "ex_703", "ex_704"],
-    "freeWeightEquivalents": ["ex_701"],
+    "directEquivalents": [
+      "ex_701",
+      "ex_703",
+      "ex_704"
+    ],
+    "freeWeightEquivalents": [
+      "ex_701"
+    ],
     "coachingCue": "Banco inclinado a 60º. Los brazos cuelgan detrás del torso generando máxima tensión pasiva en la fase excéntrica.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-incline-biceps-curl.gif",
+    "instructions": [
+      "Siéntate en banco inclinado a 45-60º dejando los brazos colgar perpendiculares al suelo.",
+      "Flexiona los codos manteniendo la posición de hombros retrasada para estirar la cabeza larga.",
+      "Sube supinando la muñeca y desciende completamente."
+    ]
   },
   {
     "id": "ex_703",
@@ -703,12 +1344,23 @@
     "secondaryMuscles": [],
     "movementPattern": "arm_flexion",
     "equipment": "home",
-    "directEquivalents": ["ex_701", "ex_704"],
-    "freeWeightEquivalents": ["ex_701"],
+    "directEquivalents": [
+      "ex_701",
+      "ex_704"
+    ],
+    "freeWeightEquivalents": [
+      "ex_701"
+    ],
     "coachingCue": "Palmas enfrentadas durante todo el recorrido. Aporta grosor al brazo y soporte articular en muñeca y antebrazo.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-hammer-curl.gif",
+    "instructions": [
+      "Sujeta las mancuernas con agarre neutro (palmas enfrentadas).",
+      "Flexiona los brazos manteniendo las palmas mirándose para trabajar el braquial y braquiorradial.",
+      "Baja con control hasta la extensión total."
+    ]
   },
   {
     "id": "ex_704",
@@ -718,12 +1370,24 @@
     "secondaryMuscles": [],
     "movementPattern": "arm_flexion",
     "equipment": "commercial",
-    "directEquivalents": ["ex_701", "ex_702", "ex_703"],
-    "freeWeightEquivalents": ["ex_701", "ex_702"],
+    "directEquivalents": [
+      "ex_701",
+      "ex_702",
+      "ex_703"
+    ],
+    "freeWeightEquivalents": [
+      "ex_701",
+      "ex_702"
+    ],
     "coachingCue": "La tracción del cable mantiene tensión tanto en el fondo como en la contracción máxima.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/cable-curl.gif",
+    "instructions": [
+      "Conecta una barra recta a la polea baja y colócate erguido.",
+      "Flexiona los brazos manteniendo tensión constante desde el inicio del movimiento."
+    ]
   },
   {
     "id": "ex_705",
@@ -733,28 +1397,53 @@
     "secondaryMuscles": [],
     "movementPattern": "arm_flexion",
     "equipment": "both",
-    "directEquivalents": ["ex_701", "ex_704"],
-    "freeWeightEquivalents": ["ex_702"],
+    "directEquivalents": [
+      "ex_701",
+      "ex_704"
+    ],
+    "freeWeightEquivalents": [
+      "ex_702"
+    ],
     "coachingCue": "Brazos apoyados en el cojín impidiendo cualquier inercia corporal. Control estricto en la extensión final.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/lever-preacher-curl-v-2.gif",
+    "instructions": [
+      "Apoya los brazos en el cojín inclinado fijando los codos y axilas.",
+      "Sube la carga aislando por completo los bíceps sin impulso corporal.",
+      "Baja con cuidado sin hiper-extender bruscamente el codo al final."
+    ]
   },
-
   {
     "id": "ex_801",
     "name": "Press Francés con Barra Z (Skull Crusher)",
     "subtitle": "Extensión de codo en banco plano para cabeza medial y larga",
     "muscleGroup": "triceps",
-    "secondaryMuscles": ["chest"],
+    "secondaryMuscles": [
+      "chest"
+    ],
     "movementPattern": "arm_extension",
     "equipment": "both",
-    "directEquivalents": ["ex_802", "ex_803", "ex_804"],
-    "freeWeightEquivalents": ["ex_802", "ex_804"],
+    "directEquivalents": [
+      "ex_802",
+      "ex_803",
+      "ex_804"
+    ],
+    "freeWeightEquivalents": [
+      "ex_802",
+      "ex_804"
+    ],
     "coachingCue": "Brazos con ligera inclinación hacia atrás respecto a la vertical. Desciende la barra hacia la coronilla manteniendo los codos cerrados.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/barbell-lying-triceps-extension-skull-crusher.gif",
+    "instructions": [
+      "Túmbate en el banco con la barra Z sostenida sobre los hombros.",
+      "Flexiona los codos llevando la barra hacia la coronilla o detrás de la cabeza.",
+      "Extiende los brazos con fuerza manteniendo los codos apuntando al techo."
+    ]
   },
   {
     "id": "ex_802",
@@ -764,12 +1453,25 @@
     "secondaryMuscles": [],
     "movementPattern": "arm_extension",
     "equipment": "commercial",
-    "directEquivalents": ["ex_801", "ex_803", "ex_804"],
-    "freeWeightEquivalents": ["ex_801", "ex_804"],
+    "directEquivalents": [
+      "ex_801",
+      "ex_803",
+      "ex_804"
+    ],
+    "freeWeightEquivalents": [
+      "ex_801",
+      "ex_804"
+    ],
     "coachingCue": "Abre la cuerda hacia los lados al final del movimiento para una contracción completa de la cabeza lateral.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-rope-lying-on-floor-tricep-extension.gif",
+    "instructions": [
+      "Polea alta con cuerda doble, codos pegados a los costados del torso.",
+      "Extiende los brazos hacia abajo separando la cuerda al final para máxima contracción.",
+      "Regresa hasta que los antebrazos superen los 90º sin mover los codos de su eje."
+    ]
   },
   {
     "id": "ex_803",
@@ -779,29 +1481,53 @@
     "secondaryMuscles": [],
     "movementPattern": "arm_extension",
     "equipment": "commercial",
-    "directEquivalents": ["ex_801", "ex_804"],
-    "freeWeightEquivalents": ["ex_804"],
+    "directEquivalents": [
+      "ex_801",
+      "ex_804"
+    ],
+    "freeWeightEquivalents": [
+      "ex_804"
+    ],
     "coachingCue": "La posición por encima de la cabeza coloca la cabeza larga del tríceps en estiramiento óptimo para hipertrofia.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-overhead-triceps-extension-rope-attachment.gif",
+    "instructions": [
+      "Polea a media altura, da un paso adelante e inclina el torso con la cuerda tras la cabeza.",
+      "Extiende los brazos hacia adelante trabajando la cabeza larga del tríceps en estiramiento.",
+      "Controla el regreso flexionando los codos completamente."
+    ]
   },
   {
     "id": "ex_804",
     "name": "Fondos entre Paralelas para Tríceps",
     "subtitle": "Empuje vertical con torso erguido para tríceps",
     "muscleGroup": "triceps",
-    "secondaryMuscles": ["chest", "shoulders"],
+    "secondaryMuscles": [
+      "chest",
+      "shoulders"
+    ],
     "movementPattern": "arm_extension",
     "equipment": "bodyweight",
-    "directEquivalents": ["ex_801", "ex_802"],
-    "freeWeightEquivalents": ["ex_801"],
+    "directEquivalents": [
+      "ex_801",
+      "ex_802"
+    ],
+    "freeWeightEquivalents": [
+      "ex_801"
+    ],
     "coachingCue": "Mantén el torso vertical y los codos pegados al cuerpo para focalizar la extensión en el tríceps.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/parallel-bar-dip.gif",
+    "instructions": [
+      "Súbete a las barras paralelas manteniendo el torso vertical para enfocar en tríceps.",
+      "Baja flexionando los codos hacia atrás hasta los 90º.",
+      "Empuja con fuerza bloqueando los tríceps arriba."
+    ]
   },
-
   {
     "id": "ex_901",
     "name": "Elevación de Piernas Colgado en Barra",
@@ -810,12 +1536,24 @@
     "secondaryMuscles": [],
     "movementPattern": "core_stability",
     "equipment": "bodyweight",
-    "directEquivalents": ["ex_902", "ex_903"],
-    "freeWeightEquivalents": ["ex_902", "ex_904"],
+    "directEquivalents": [
+      "ex_902",
+      "ex_903"
+    ],
+    "freeWeightEquivalents": [
+      "ex_902",
+      "ex_904"
+    ],
     "coachingCue": "Enfócate en enrollar la pelvis hacia el pecho, evitando el balanceo o la simple flexión de cadera.",
     "difficulty": "avanzado",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/hanging-leg-raise.gif",
+    "instructions": [
+      "Cuélgate de la barra con agarre firme y cuerpo relajado.",
+      "Eleva las piernas rectas o flexionadas enrollando la pelvis hacia el esternón.",
+      "Baja despacio sin balancearte para evitar usar el impulso."
+    ]
   },
   {
     "id": "ex_902",
@@ -825,44 +1563,84 @@
     "secondaryMuscles": [],
     "movementPattern": "core_stability",
     "equipment": "commercial",
-    "directEquivalents": ["ex_901", "ex_903", "ex_904"],
-    "freeWeightEquivalents": ["ex_904"],
+    "directEquivalents": [
+      "ex_901",
+      "ex_903",
+      "ex_904"
+    ],
+    "freeWeightEquivalents": [
+      "ex_904"
+    ],
     "coachingCue": "Flexiona la columna acercando el esternón hacia el pubis manteniendo la cadera bloqueada.",
     "difficulty": "intermedio",
     "mechanics": "isolation",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/cable-kneeling-crunch.gif",
+    "instructions": [
+      "Arrodíllate frente a la polea alta con la cuerda sostenida junto a las orejas.",
+      "Flexiona la columna enrollando el torso hacia los muslos contrayendo el abdomen.",
+      "Regresa lentamente resistiendo la carga con el core."
+    ]
   },
   {
     "id": "ex_903",
     "name": "Rueda Abdominal (Ab Wheel Rollout)",
     "subtitle": "Anti-extensión de columna y estabilización de core profunda",
     "muscleGroup": "core",
-    "secondaryMuscles": ["shoulders", "back_upper"],
+    "secondaryMuscles": [
+      "shoulders",
+      "back_upper"
+    ],
     "movementPattern": "core_stability",
     "equipment": "home",
-    "directEquivalents": ["ex_901", "ex_902", "ex_904"],
-    "freeWeightEquivalents": ["ex_904"],
+    "directEquivalents": [
+      "ex_901",
+      "ex_902",
+      "ex_904"
+    ],
+    "freeWeightEquivalents": [
+      "ex_904"
+    ],
     "coachingCue": "Mantén la pelvis en retroversión y el abdomen contraído firmemente sin arquear la zona lumbar.",
     "difficulty": "avanzado",
     "mechanics": "compound",
-    "tier": 2
+    "tier": 2,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/wheel-rollerout.gif",
+    "instructions": [
+      "De rodillas con la rueda abdominal en las manos bajo el pecho.",
+      "Rueda hacia adelante extendiendo el cuerpo manteniendo el abdomen comprimido.",
+      "Tira desde el abdomen para volver a la posición inicial sin arquear la zona lumbar."
+    ]
   },
   {
     "id": "ex_904",
     "name": "Plancha Abdominal Activa (Hardstyle Plank)",
     "subtitle": "Isometría de core con co-contracción máxima",
     "muscleGroup": "core",
-    "secondaryMuscles": ["glutes", "shoulders"],
+    "secondaryMuscles": [
+      "glutes",
+      "shoulders"
+    ],
     "movementPattern": "core_stability",
     "equipment": "bodyweight",
-    "directEquivalents": ["ex_901", "ex_902", "ex_903"],
-    "freeWeightEquivalents": ["ex_903"],
+    "directEquivalents": [
+      "ex_901",
+      "ex_902",
+      "ex_903"
+    ],
+    "freeWeightEquivalents": [
+      "ex_903"
+    ],
     "coachingCue": "Aprieta puños, glúteos, cuádriceps y abdomen simultáneamente como un bloque rígido.",
     "difficulty": "novato",
     "mechanics": "compound",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/front-plank-with-twist.gif",
+    "instructions": [
+      "Apoya los antebrazos y puntas de los pies en el suelo alineando el cuerpo.",
+      "Contrae fuertemente glúteos, cuádriceps y abdomen durante todo el tiempo pautado."
+    ]
   },
-
   {
     "id": "ex_1001",
     "name": "Elevación de Talones de Pie",
@@ -871,12 +1649,22 @@
     "secondaryMuscles": [],
     "movementPattern": "calf_raise",
     "equipment": "both",
-    "directEquivalents": ["ex_1002"],
-    "freeWeightEquivalents": ["ex_1002"],
+    "directEquivalents": [
+      "ex_1002"
+    ],
+    "freeWeightEquivalents": [
+      "ex_1002"
+    ],
     "coachingCue": "Pausa de 2 segundos en el punto más bajo para disipar la elasticidad del tendón de Aquiles antes de subir.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/standing-calf-raise-on-a-staircase.gif",
+    "instructions": [
+      "Apoya la punta de los pies en el borde de un escalón o soporte elevado.",
+      "Baja los talones por debajo del escalón logrando un estiramiento profundo durante 2 segundos.",
+      "Empuja hacia arriba con fuerza sobre el primer y segundo metatarso y aguanta 1 segundo arriba."
+    ]
   },
   {
     "id": "ex_1002",
@@ -886,11 +1674,20 @@
     "secondaryMuscles": [],
     "movementPattern": "calf_raise",
     "equipment": "commercial",
-    "directEquivalents": ["ex_1001"],
-    "freeWeightEquivalents": ["ex_1001"],
+    "directEquivalents": [
+      "ex_1001"
+    ],
+    "freeWeightEquivalents": [
+      "ex_1001"
+    ],
     "coachingCue": "La flexión de rodilla a 90º desactiva el gastrocnemio y focaliza la tensión en el músculo sóleo.",
     "difficulty": "novato",
     "mechanics": "isolation",
-    "tier": 3
+    "tier": 3,
+    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/lever-seated-calf-raise.gif",
+    "instructions": [
+      "Siéntate con las rodillas a 90º y la almohadilla sobre la parte baja de los muslos.",
+      "Desciende los talones para estirar el sóleo y eleva con potencia en rango completo."
+    ]
   }
 ]

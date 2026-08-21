@@ -51,6 +51,8 @@ export interface Exercise {
   difficulty: ExperienceLevel;
   mechanics: 'compound' | 'isolation';
   tier: 1 | 2 | 3; // 1 = main compound, 2 = secondary compound, 3 = isolation / accessory
+  gifUrl?: string;
+  instructions?: string[];
 }
 
 export interface RoutineExercise {

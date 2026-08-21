@@ -10,12 +10,14 @@ import {
   Info,
   Dumbbell,
   MinusCircle,
-  Clock
+  Clock,
+  Play
 } from 'lucide-react';
 import { useRoutineStore } from '../../store/useRoutineStore';
 import rawExercises from '../../data/exercises.json';
 import { Exercise } from '../../types';
 import { MUSCLE_LABELS_ES } from '../../utils/routineEngine';
+import { ExerciseDetailModal } from '../ExerciseModal/ExerciseDetailModal';
 
 const exercisesDb = rawExercises as Exercise[];
 
@@ -36,6 +38,7 @@ export const RoutineView: React.FC = () => {
 
   const [copied, setCopied] = useState(false);
   const [editingNotesId, setEditingNotesId] = useState<string | null>(null);
+  const [modalExercise, setModalExercise] = useState<Exercise | null>(null);
 
   if (!activeRoutine) {
     return (
@@ -254,9 +257,14 @@ export const RoutineView: React.FC = () => {
                     </span>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="text-sm md:text-base font-semibold text-zinc-950">
-                          {exMeta.name}
-                        </h3>
+                        <button
+                          type="button"
+                          onClick={() => setModalExercise(exMeta)}
+                          className="text-sm md:text-base font-semibold text-zinc-950 hover:text-zinc-600 text-left transition-colors flex items-center gap-1.5 group"
+                        >
+                          <span>{exMeta.name}</span>
+                          <Play className="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-zinc-900" />
+                        </button>
                       </div>
                       <p className="text-xs text-zinc-500 mt-0.5">
                         {exMeta.subtitle}
@@ -265,8 +273,16 @@ export const RoutineView: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-1.5 self-start shrink-0">
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 text-zinc-600 border border-zinc-200">
-                      {exMeta.mechanics === 'compound' ? 'Compuesto' : 'Aislamiento'} · Tier {exMeta.tier}
+                    <button
+                      type="button"
+                      onClick={() => setModalExercise(exMeta)}
+                      className="px-2.5 py-1 rounded-lg text-xs font-medium bg-zinc-900 hover:bg-zinc-800 text-white shadow-xs flex items-center gap-1 transition-colors print:hidden"
+                    >
+                      <Play className="w-3 h-3 text-zinc-300" />
+                      <span>Ver Técnica & GIF</span>
+                    </button>
+                    <span className="text-[10px] font-mono uppercase px-2 py-1 rounded bg-zinc-100 text-zinc-600 border border-zinc-200">
+                      {exMeta.mechanics === 'compound' ? 'Compuesto' : 'Aislamiento'}
                     </span>
                   </div>
                 </div>
@@ -417,6 +433,12 @@ export const RoutineView: React.FC = () => {
           })}
         </div>
       </section>
+
+      {/* Exercise Detail Modal with GIF and step instructions */}
+      <ExerciseDetailModal
+        exercise={modalExercise}
+        onClose={() => setModalExercise(null)}
+      />
     </div>
   );
 };
