@@ -1,77 +1,126 @@
-import React from 'react';
-import { RotateCcw, Activity } from 'lucide-react';
+import React, { useState } from 'react';
+import { RotateCcw, Activity, Dumbbell, Heart, Calculator, ChevronDown } from 'lucide-react';
+import { useAppStore } from '../../store/useAppStore';
 import { useRoutineStore } from '../../store/useRoutineStore';
+import { useCardioStore } from '../../store/useCardioStore';
 
 export const Navbar: React.FC = () => {
-  const {
-    step,
-    currentQuestion,
-    activeRoutine,
-    resetAll,
-    setCurrentQuestion
-  } = useRoutineStore();
+  const { activeSection, setActiveSection } = useAppStore();
+  const { activeRoutine, resetAll: resetHypertrophy } = useRoutineStore();
+  const { activeCardioRoutine, resetAll: resetCardio } = useCardioStore();
 
-  const totalQuestions = 6;
-  const questionTitles = ['Objetivo', 'Experiencia', 'Frecuencia', 'Duración', 'Entorno', 'Enfoque'];
+  const [isRoutineMenuOpen, setIsRoutineMenuOpen] = useState(false);
+
+  const handleSelectSection = (section: 'hypertrophy' | 'cardio' | 'calculators') => {
+    setActiveSection(section);
+    setIsRoutineMenuOpen(false);
+  };
+
+  const handleResetCurrent = () => {
+    if (activeSection === 'hypertrophy') {
+      resetHypertrophy();
+    } else if (activeSection === 'cardio') {
+      resetCardio();
+    }
+  };
+
+  const hasActivePlan =
+    (activeSection === 'hypertrophy' && activeRoutine) ||
+    (activeSection === 'cardio' && activeCardioRoutine);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#fcfcfd]/90 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-8 py-3.5 transition-all print:hidden">
-      <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
-        {/* Brand Logo & Title */}
-        <button
-          onClick={resetAll}
-          className="flex items-center gap-2.5 group text-left select-none focus:outline-none"
+    <header className="sticky top-0 z-40 w-full bg-[#fcfcfd]/90 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-8 py-3 transition-all print:hidden">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+        {/* Brand Logo & Name: Kinetic Biomechanics */}
+        <div
+          onClick={() => setActiveSection('hypertrophy')}
+          className="flex items-center gap-2.5 cursor-pointer group select-none"
         >
           <div className="w-7 h-7 rounded-md bg-zinc-950 flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105">
             <Activity className="w-3.5 h-3.5 text-zinc-100" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-display font-bold text-sm tracking-widest text-zinc-950 uppercase">
-                KINETIC
-              </span>
-              <span className="text-[10px] uppercase font-mono tracking-wider px-1.5 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-600 font-medium">
-                BIOMECHANICS
+              <span className="font-display font-bold text-xs sm:text-sm tracking-widest text-zinc-950 uppercase">
+                KINETIC BIOMECHANICS
               </span>
             </div>
           </div>
-        </button>
+        </div>
 
-        {/* Questionnaire Progress Indicator (when in questionnaire mode) */}
-        {step === 'questionnaire' && (
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="font-mono text-xs font-medium text-zinc-400">
-              Paso 0{currentQuestion + 1} / 0{totalQuestions}
-            </span>
-            <div className="flex items-center gap-1">
-              {Array.from({ length: totalQuestions }).map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => idx <= currentQuestion && setCurrentQuestion(idx)}
-                  disabled={idx > currentQuestion}
-                  title={`Paso ${idx + 1}: ${questionTitles[idx]}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    idx === currentQuestion
-                      ? 'w-6 bg-zinc-900'
-                      : idx < currentQuestion
-                      ? 'w-2 bg-zinc-400 hover:bg-zinc-600 cursor-pointer'
-                      : 'w-2 bg-zinc-200 cursor-not-allowed'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Global Action: New Routine / Reset */}
-        <div className="flex items-center gap-2">
-          {activeRoutine && (
+        {/* Top-Level Tools & Modules Switcher */}
+        <nav className="flex items-center gap-1 bg-zinc-100/80 p-1 rounded-xl border border-zinc-200/70">
+          {/* Rutinas Category with Sub-options */}
+          <div className="relative">
             <button
-              onClick={resetAll}
+              type="button"
+              onClick={() => setIsRoutineMenuOpen(!isRoutineMenuOpen)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                activeSection === 'hypertrophy' || activeSection === 'cardio'
+                  ? 'bg-white text-zinc-950 shadow-sm'
+                  : 'text-zinc-600 hover:text-zinc-900'
+              }`}
+            >
+              <span>Rutinas</span>
+              <ChevronDown className="w-3 h-3 opacity-60" />
+            </button>
+
+            {/* Dropdown Menu for Rutinas */}
+            {isRoutineMenuOpen && (
+              <div className="absolute top-full left-0 mt-1.5 w-52 bg-white border border-zinc-200 shadow-elevated rounded-xl p-1.5 z-50 animate-fadeIn">
+                <button
+                  type="button"
+                  onClick={() => handleSelectSection('hypertrophy')}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center gap-2 transition-colors ${
+                    activeSection === 'hypertrophy'
+                      ? 'bg-zinc-950 text-white font-semibold'
+                      : 'text-zinc-700 hover:bg-zinc-100'
+                  }`}
+                >
+                  <Dumbbell className="w-3.5 h-3.5 shrink-0" />
+                  <span>Hipertrofia & Fuerza</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleSelectSection('cardio')}
+                  className={`w-full text-left px-3 py-2 rounded-lg text-xs flex items-center gap-2 transition-colors ${
+                    activeSection === 'cardio'
+                      ? 'bg-zinc-950 text-white font-semibold'
+                      : 'text-zinc-700 hover:bg-zinc-100'
+                  }`}
+                >
+                  <Heart className="w-3.5 h-3.5 shrink-0 text-rose-500" />
+                  <span>Cardio & Resistencia</span>
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Calculadoras Module */}
+          <button
+            type="button"
+            onClick={() => handleSelectSection('calculators')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+              activeSection === 'calculators'
+                ? 'bg-white text-zinc-950 shadow-sm'
+                : 'text-zinc-600 hover:text-zinc-900'
+            }`}
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            <span>Calculadoras</span>
+          </button>
+        </nav>
+
+        {/* Global Action: Reset / New Plan */}
+        <div className="flex items-center gap-2">
+          {hasActivePlan && (
+            <button
+              onClick={handleResetCurrent}
               className="px-3 py-1.5 rounded-md text-xs font-medium text-zinc-600 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/80 border border-zinc-200/60 transition-colors flex items-center gap-1.5"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>Nuevo Plan</span>
+              <span className="hidden sm:inline">Nuevo Plan</span>
             </button>
           )}
         </div>
