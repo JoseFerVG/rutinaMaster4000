@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Check, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Sparkles, RotateCcw } from 'lucide-react';
 import { useRoutineStore } from '../../store/useRoutineStore';
 import {
   TrainingGoal,
   ExperienceLevel,
   EquipmentPreference,
-  MuscleFocusPreset,
   MuscleGroupId
 } from '../../types';
 import { MUSCLE_LABELS_ES } from '../../utils/routineEngine';
+import { InteractiveBodyMap } from '../BodySelector/InteractiveBodyMap';
 
 interface OptionItem<T> {
   key: string;
@@ -25,17 +25,18 @@ export const SingleQuestionFlow: React.FC = () => {
     experience,
     daysPerWeek,
     equipment,
-    focusPreset,
     selectedMuscles,
     setGoal,
     setExperience,
     setDaysPerWeek,
     setEquipment,
-    setFocusPreset,
     toggleMuscle,
+    setSelectedMuscles,
     nextQuestion,
     prevQuestion
   } = useRoutineStore();
+
+  const [activePreset, setActivePreset] = useState<string>('balance');
 
   // 1. Goal Options
   const goalOptions: OptionItem<TrainingGoal>[] = [
@@ -137,37 +138,31 @@ export const SingleQuestionFlow: React.FC = () => {
     }
   ];
 
-  // 5. Focus Preset Options
-  const focusPresetOptions: OptionItem<MuscleFocusPreset>[] = [
+  const presets = [
     {
-      key: '1',
-      value: 'balance',
-      title: 'Distribución Equilibrada',
-      description: 'Volumen simétrico y proporcional en todos los grupos musculares.'
+      id: 'balance',
+      name: 'Cuerpo Completo (Balance)',
+      muscles: ['chest', 'back_upper', 'back_lower', 'shoulders', 'quads', 'glutes', 'hamstrings', 'biceps', 'triceps', 'core', 'calves'] as MuscleGroupId[]
     },
     {
-      key: '2',
-      value: 'upper',
-      title: 'Énfasis Torso Superior',
-      description: 'Prioridad de volumen en Pectoral, Espalda, Deltoides y Brazos.'
+      id: 'upper',
+      name: 'Torso Superior',
+      muscles: ['chest', 'back_upper', 'shoulders', 'biceps', 'triceps'] as MuscleGroupId[]
     },
     {
-      key: '3',
-      value: 'lower',
-      title: 'Énfasis Tren Inferior',
-      description: 'Prioridad en Cuádriceps, Glúteos e Isquiotibiales.'
+      id: 'lower',
+      name: 'Tren Inferior & Glúteos',
+      muscles: ['quads', 'glutes', 'hamstrings', 'calves'] as MuscleGroupId[]
     },
     {
-      key: '4',
-      value: 'shoulders_back',
-      title: 'Énfasis Hombros & Espalda (Silueta V)',
-      description: 'Prioridad en amplitud clavicular, dorsal y deltoides lateral.'
+      id: 'push_pull',
+      name: 'Empuje & Tracción',
+      muscles: ['chest', 'back_upper', 'shoulders', 'biceps', 'triceps', 'back_lower'] as MuscleGroupId[]
     },
     {
-      key: '5',
-      value: 'custom',
-      title: 'Selección Anatómica Personalizada',
-      description: 'Configura manualmente qué grupos musculares específicos deseas incluir.'
+      id: 'posterior_chain',
+      name: 'Cadena Posterior & Core',
+      muscles: ['back_upper', 'back_lower', 'glutes', 'hamstrings', 'core'] as MuscleGroupId[]
     }
   ];
 
@@ -185,10 +180,14 @@ export const SingleQuestionFlow: React.FC = () => {
     'calves'
   ];
 
+  const applyPreset = (presetId: string, muscles: MuscleGroupId[]) => {
+    setActivePreset(presetId);
+    setSelectedMuscles(muscles);
+  };
+
   // Keyboard shortcut listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't trigger if user is typing in an input
       if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) {
         return;
       }
@@ -205,7 +204,6 @@ export const SingleQuestionFlow: React.FC = () => {
         return;
       }
 
-      // Handle numerical selection 1..5
       const num = parseInt(e.key, 10);
       if (isNaN(num)) return;
 
@@ -233,20 +231,12 @@ export const SingleQuestionFlow: React.FC = () => {
           setEquipment(opt.value);
           setTimeout(() => nextQuestion(), 160);
         }
-      } else if (currentQuestion === 4) {
-        const opt = focusPresetOptions[num - 1];
-        if (opt) {
-          setFocusPreset(opt.value);
-          if (opt.value !== 'custom') {
-            setTimeout(() => nextQuestion(), 160);
-          }
-        }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentQuestion, goal, experience, daysPerWeek, equipment, focusPreset]);
+  }, [currentQuestion, goal, experience, daysPerWeek, equipment]);
 
   // Render question content
   const renderQuestion = () => {
@@ -454,88 +444,88 @@ export const SingleQuestionFlow: React.FC = () => {
       case 4:
       default:
         return {
-          meta: '05 / 05 · ENFOQUE ANATÓMICO',
-          title: '¿Deseas priorizar alguna región anatómica o una distribución simétrica?',
-          subtitle: 'Ajusta la asignación de series prioritarias y el orden biomecánico de los ejercicios.',
+          meta: '05 / 05 · ENFOQUE ANATÓMICO & GRUPOS MUSCULARES',
+          title: 'Selecciona los grupos musculares objetivo en el cuerpo o elige un preset',
+          subtitle: 'Pulsa directamente sobre el cuerpo anatómico para añadir o quitar músculos, o selecciona una distribución rápida.',
           content: (
-            <div className="space-y-4 w-full">
-              <div className="grid grid-cols-1 gap-2.5 w-full">
-                {focusPresetOptions.map((opt) => {
-                  const isSelected = focusPreset === opt.value;
-                  return (
-                    <button
-                      key={opt.key}
-                      type="button"
-                      onClick={() => setFocusPreset(opt.value)}
-                      className={`group w-full text-left p-4 rounded-xl border transition-all duration-150 flex items-start gap-4 ${
-                        isSelected
-                          ? 'bg-zinc-950 border-zinc-950 text-white shadow-sm ring-1 ring-zinc-950'
-                          : 'bg-white border-zinc-200 text-zinc-900 hover:border-zinc-400 hover:bg-zinc-50/80 shadow-subtle'
-                      }`}
-                    >
-                      <span
-                        className={`font-mono text-xs px-2 py-0.5 rounded border transition-colors shrink-0 mt-0.5 ${
-                          isSelected
-                            ? 'border-zinc-800 bg-zinc-800 text-zinc-300'
-                            : 'border-zinc-200 bg-zinc-50 text-zinc-500 group-hover:border-zinc-300 group-hover:text-zinc-700'
+            <div className="space-y-6 w-full">
+              {/* Presets Bar */}
+              <div className="space-y-2">
+                <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block">
+                  Opciones Preestablecidas Rápidas:
+                </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  {presets.map((preset) => {
+                    const isPresetActive =
+                      activePreset === preset.id &&
+                      preset.muscles.length === selectedMuscles.length &&
+                      preset.muscles.every((m) => selectedMuscles.includes(m));
+
+                    return (
+                      <button
+                        key={preset.id}
+                        type="button"
+                        onClick={() => applyPreset(preset.id, preset.muscles)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                          isPresetActive
+                            ? 'bg-zinc-950 border-zinc-950 text-white shadow-sm'
+                            : 'bg-white border-zinc-200 text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50'
                         }`}
                       >
-                        {opt.key}
-                      </span>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2">
-                          <span className={`text-sm md:text-base font-semibold ${isSelected ? 'text-white' : 'text-zinc-900'}`}>
-                            {opt.title}
-                          </span>
-                          {isSelected && <Check className="w-4 h-4 text-zinc-200 shrink-0" />}
-                        </div>
-                        <p className={`text-xs md:text-sm mt-1 leading-relaxed ${isSelected ? 'text-zinc-300' : 'text-zinc-500'}`}>
-                          {opt.description}
-                        </p>
-                      </div>
-                    </button>
-                  );
-                })}
+                        {preset.name}
+                      </button>
+                    );
+                  })}
+
+                  <button
+                    type="button"
+                    onClick={() => applyPreset('none', [])}
+                    className="px-2.5 py-1.5 rounded-lg text-xs font-medium border border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 transition-all flex items-center gap-1"
+                  >
+                    <RotateCcw className="w-3 h-3" />
+                    <span>Limpiar</span>
+                  </button>
+                </div>
               </div>
 
-              {/* Custom Muscle Selector Chips (if custom is selected) */}
-              {focusPreset === 'custom' && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="p-4 rounded-xl bg-zinc-50 border border-zinc-200/80 space-y-3"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700">
-                      Selecciona los grupos musculares objetivo:
-                    </span>
-                    <span className="font-mono text-xs text-zinc-500">
-                      {selectedMuscles.length} seleccionados
-                    </span>
-                  </div>
+              {/* Interactive Anatomical Body Map Component */}
+              <InteractiveBodyMap
+                selectedMuscles={selectedMuscles}
+                onToggleMuscle={(m) => {
+                  setActivePreset('custom');
+                  toggleMuscle(m);
+                }}
+              />
 
-                  <div className="flex flex-wrap gap-2">
-                    {allMuscleGroups.map((muscle) => {
-                      const isChecked = selectedMuscles.includes(muscle);
-                      return (
-                        <button
-                          key={muscle}
-                          type="button"
-                          onClick={() => toggleMuscle(muscle)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
-                            isChecked
-                              ? 'bg-zinc-900 border-zinc-900 text-white shadow-sm'
-                              : 'bg-white border-zinc-200 text-zinc-600 hover:border-zinc-300 hover:text-zinc-900'
-                          }`}
-                        >
-                          {MUSCLE_LABELS_ES[muscle]}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
+              {/* Muscle Chips Filter / Toggle */}
+              <div className="space-y-2 pt-2">
+                <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 block">
+                  Selector por Etiquetas:
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {allMuscleGroups.map((muscle) => {
+                    const isChecked = selectedMuscles.includes(muscle);
+                    return (
+                      <button
+                        key={muscle}
+                        type="button"
+                        onClick={() => {
+                          setActivePreset('custom');
+                          toggleMuscle(muscle);
+                        }}
+                        className={`px-3 py-1 rounded-lg text-xs font-medium border transition-all flex items-center gap-1.5 ${
+                          isChecked
+                            ? 'bg-zinc-900 border-zinc-900 text-white shadow-sm'
+                            : 'bg-white border-zinc-200 text-zinc-600 hover:border-zinc-300 hover:text-zinc-900'
+                        }`}
+                      >
+                        <span>{MUSCLE_LABELS_ES[muscle]}</span>
+                        {isChecked && <Check className="w-3 h-3 text-zinc-300" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           )
         };
@@ -545,7 +535,7 @@ export const SingleQuestionFlow: React.FC = () => {
   const currentData = renderQuestion();
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4 py-8 md:py-14 flex flex-col justify-center min-h-[calc(100vh-140px)]">
+    <div className={`w-full ${currentQuestion === 4 ? 'max-w-3xl' : 'max-w-2xl'} mx-auto px-4 py-8 md:py-12 flex flex-col justify-center min-h-[calc(100vh-140px)] transition-all`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentQuestion}
