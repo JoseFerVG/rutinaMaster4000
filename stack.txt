@@ -1,0 +1,88 @@
+Copia este prompt para configurarle el stack y la arquitectura de despliegue al agente:
+
+---
+
+**Prompt:**
+
+Configura la arquitectura técnica del proyecto bajo una premisa estricta: **100% frontend client-side, cero costes de infraestructura (Free Tier permanente), rendimiento instantáneo y despliegue automatizado en 1 clic.**
+
+No configures bases de datos en la nube (PostgreSQL, Supabase, Firebase) ni microservicios con backend. Toda la lógica de compilación de rutinas, sustitución de ejercicios y persistencia de datos debe ejecutarse exclusivamente en el navegador del cliente consumiendo los archivos locales `exercises.json` y `doof_dialogues.json`.
+
+---
+
+### 1. STACK TECNOLÓGICO SELECCIONADO
+
+* **Entorno de Ejecución y Bundler:** `Vite` + `React` + `TypeScript`. (Máxima velocidad de compilación, bundle ultraligero y cero latencia de servidor).
+* **Estilos y Componentes:** `Tailwind CSS` + `Lucide React` (iconografía ligera).
+* **Gestor de Estado Global:** `Zustand` con middleware `persist` (guarda la rutina actual y las preferencias en `localStorage` del navegador sin necesidad de cuentas de usuario).
+* **Animaciones y Transiciones:** `Framer Motion` (para el efecto de iluminación del selector corporal y las animaciones de carga del *Inador*).
+* **Exportación de Rutinas:** `jspdf` o estilos nativos de impresión CSS `@media print` para exportar el plano de entrenamiento sin librerías pesadas.
+
+---
+
+### 2. PLATAFORMA Y FLUJO DE DESPLIEGUE (FREE TIER)
+
+* **Hosting:** **Vercel** o **Cloudflare Pages** (vinculado al repositorio de GitHub).
+* **Configuración de Build:**
+* Build Command: `npm run build`
+* Output Directory: `dist`
+* Install Command: `npm install`
+
+
+* **Enrutamiento:** Si se usan rutas virtuales o SPA fallback, incluye un archivo `vercel.json` o `_redirects` con reescritura a `index.html`:
+
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+
+```
+
+---
+
+### 3. ESTRUCTURA DE ARCHIVOS ESPERADA
+
+Organiza el proyecto de la siguiente forma modular:
+
+```text
+├── public/
+│   └── favicon.ico
+├── src/
+│   ├── assets/              # SVGs del selector de silueta/músculos
+│   ├── data/
+│   │   ├── exercises.json   # Base de datos de ejercicios y equivalencias
+│   │   └── dialogues.json   # Textos y quejas del Dr. Doofenshmirtz
+│   ├── types/
+│   │   └── index.ts         # Interfaces de TypeScript
+│   ├── store/
+│   │   └── useDoofStore.ts  # Estado global con Zustand (Filtros, Rutina, Sustituciones)
+│   ├── components/
+│   │   ├── BodySelector/    # Componente interactivo del cuerpo (SVG interactivo)
+│   │   ├── QuestionWizard/  # Pasos de calibración de Heinz
+│   │   ├── RoutineView/     # Renderizado de la rutina y acciones
+│   │   └── UI/              # Botones, modales de autodestrucción y cards
+│   ├── utils/
+│   │   └── routineEngine.ts # Algoritmo puro de selección y sustitución biomecánica
+│   ├── App.tsx
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── vite.config.ts
+
+```
+
+---
+
+### 4. INSTRUCCIONES DE GENERACIÓN DE CÓDIGO
+
+1. Genera el archivo `package.json` con las versiones estables y dependencias exactas (`zustand`, `lucide-react`, `framer-motion`, `clsx`, `tailwind-merge`).
+2. Configura `useDoofStore.ts` con Zustand para manejar el estado de:
+* Paso actual del asistente (`currentStep`).
+* Músculos seleccionados (`selectedMuscles[]`).
+* Parámetros de entrenamiento (`experience`, `days`, `equipment`).
+* Rutina activa (`activeRoutine`) y métodos: `generateRoutine()`, `replaceTemporary()`, `replacePermanent()`, `selfDestruct()`.
+
+
+3. Asegura que `routineEngine.ts` sea una función determinista pura que no rompa si el usuario selecciona 1 solo músculo o los selecciona todos.

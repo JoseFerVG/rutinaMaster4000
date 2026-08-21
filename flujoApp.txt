@@ -1,0 +1,129 @@
+Entendido perfectamente. Eliminamos todo rastro de descripciones visuales de UI/diseño y nos centramos exclusivamente en la **lógica de programación, el flujo de usuario, la estructura de datos y el copywriting interactivo** de Heinz Doofenshmirtz, integrando las nuevas mecánicas de selección de personaje y sustitución de ejercicios.
+
+Copia y pega este megapront técnico y narrativo:
+
+---
+
+**Prompt Maestro:**
+
+Actúa como un equipo de desarrollo senior compuesto por un **Product Manager especializado en Lógica de Flujos**, un **Líder de Desarrollo Backend**, un **Entrenador Personal certificado (especialista en biomecánica y selección de ejercicios equivalentes)** y el **guionista principal de Doofenshmirtz Evil Incorporated** (*Phineas y Ferb*).
+
+Tu tarea es diseñar la arquitectura de lógica, el flujo de usuario de extremo a extremo, el sistema de lógica condicional, la estructura de la base de datos de ejercicios y todo el copywriting interactivo para una aplicación cuyo **único propósito es generar rutinas de gimnasio personalizadas mediante interacción directa del usuario**, con la personalidad y narrativa del **Dr. Heinz Doofenshmirtz**.
+
+---
+
+### I. DIRECTRICES NARRATIVAS (THE DOOFENSHMIRTZ PROTOCOL)
+
+* **Voz y Personalidad:** Todo el texto lo narra el Dr. Doofenshmirtz en primera persona. Su tono debe ser melodramático, inseguro, quejica, obsesionado con derrotar a su hermano Roger, traumatizado por su infancia en Gimmelshtump (días como gnomo de jardín, etc.) y paranoico con la presencia de Perry el Ornitorrinco.
+* **Nomenclatura Obligatoria:**
+* La app se llama internamente **"El Generador-de-Rutinas-Inador 3000"**.
+* Cada rutina generada debe bautizarse obligatoriamente como un **"-inador"**.
+* Los ejercicios deben mostrar su nombre biomecánico real, pero acompañados de un subtítulo cómico de Doofenshmirtz.
+
+
+
+---
+
+### II. FLUJO DETALLADO DE LA APLICACIÓN (STATE MACHINE & LOGIC FLOW)
+
+Diseña la lógica y el guion para las siguientes 6 fases del flujo de usuario:
+
+#### **Fase 0: Bienvenida (Initialization & Tone Setting)**
+
+* **Texto de Heinz:** Un monólogo explicando por qué los habitantes del Área Limítrofe están demasiado en forma y por qué necesita construirte un plan de entrenamiento maligno (rutina) para nivelar la balanza.
+* **Acción del Usuario:** Botón para iniciar el cuestionario: *«¡Construir mi Inador de Entrenamiento!»*.
+
+#### **Fase 1: Selector de Objetivo Corporal ("Target Zone Illumination-inator")**
+
+* **Mecánica de Lógica:** Esta pantalla presenta un mapa corporal/personaje (sin distinción de sexo). El usuario hace clic en los grupos musculares principales para seleccionarlos o deseleccionarlos. Al seleccionar, la zona se "ilumina".
+* **Grupos Musculares Base a Mapear:** Pectoral, Espalda Alta, Espalda Baja/Isquios, Hombros (Deltoides Lateral/Posterior), Cuádriceps, Glúteos, Bíceps, Tríceps, Core (Abdomen).
+* **Copywriting Reactivo de Heinz:** Diseña frases cómicas breves que Heinz suelta cuando el usuario selecciona ciertas zonas.
+* *Ejemplo si selecciona Glúteos:* «¡Ah, el Glúteo-de-Acero-Inador! Entendido, necesitas piernas capaces de patear a Roger directamente fuera del ayuntamiento».
+* *Ejemplo si selecciona Bíceps:* «¡Bíceps para apretar tuercas gigantes de inadores! ¡Me gusta tu estilo!».
+
+
+
+#### **Fase 2: Calibración de Logística y Esfuerzo**
+
+* **Pregunta A: Frecuencia Semanal:** *«¿Cuántos días por semana puedes escapar de tus responsabilidades cívicas antes de que sospechen?»* (Opciones: 2-6 días).
+* **Pregunta B: Nivel de Experiencia:** *«¿Cuál es tu historial levantando objetos pesados del suelo?»* (Opciones: Novato / Intermedio / Avanzado).
+* **Pregunta C: Entorno de Entrenamiento:** *«¿Dónde vas a desplegar esta maquinaria del dolor?»*
+* *Opción 1:* Gimnasio Comercial Completo (*«El Megalaboratorio con todas las poleas y barras»*).
+* *Opción 2:* Gimnasio Casero Básico (*«Mi sótano con dos mancuernas oxidadas y rencor acumulado»*).
+
+
+
+#### **Fase 3: Pantalla de Carga y Compilación (The Compil-inator)**
+
+* Simulación de proceso con textos aleatorios cambiantes de Heinz:
+* *«Ajustando tuercas del rencor...»*
+* *«Eliminando fotos de mi hermano Roger...»*
+* *«Comprobando que no haya ningún ornitorrinco saboteando las poleas...»*
+* *«Soldando el botón de autodestrucción...»*
+
+
+
+#### **Fase 4: Entrega del Blueprint (La Rutina Generada) y Gestión de Sustituciones**
+
+* **Cabecera:** Nombre personalizado del Inador (ej. *El Pectoral-y-Glúteo-Destructor-Inador*).
+* **Estructura de Datos de la Rutina (JSON/Table):** Para cada ejercicio de la rutina, la app debe generar los siguientes campos de datos para el usuario:
+1. Nombre Técnico del Ejercicio.
+2. Subtítulo de Doofenshmirtz.
+3. Series, Repeticiones, Descanso.
+4. **Lógica 1: "Sustitución de Máquina Ocupada" (Botón de Acción Inmediata):** Un botón llamado *"¡Polea/Máquina Ocupada! Sustitución Rápida"*.
+5. **Lógica 2: "Cambiar este Ejercicio Permanentemente" (Botón de Acción de Lógica Condicional):** Un botón llamado *"No tengo esta máquina / No me gusta este ejercicio"*.
+
+
+
+---
+
+### III. LÓGICA DE PROGRAMACIÓN Y ESTRUCTURA DE DATOS DE EJERCICIOS
+
+Esta es la parte crítica del prompt. Diseña la lógica que gestiona las sustituciones de la Fase 4.
+
+#### **1. Base de Datos de Ejercicios y Sistema de "Equivalencia Biomecánica"**
+
+Diseña una matriz o tabla de base de datos de ejercicios (mínimo 30-40 ejercicios). Cada ejercicio DEBE tener un campo oculto que lo vincule con sus "Ejercicio Equivalente Directo (Mismo Patrón de Movimiento)".
+
+* **Estructura de la Tabla de Ejercicios (Ejemplo Concepto):**
+* `ID_Ejercicio`: 101
+* `Nombre`: Sentadilla con Barra (Back Squat)
+* `Subtitulo_Doof`: *«El Triturador de Piernas de Gimmelshtump»*
+* `Patron_Movimiento`: Dominante de Cuádriceps (Vertical Push)
+* `Equivalentes_Directos`: [102, 103] -> (IDs de Prensa de Piernas, Sentadilla Goblet)
+* `Equivalentes_Peso_Libre`: [103] -> (ID de Sentadilla Goblet con Mancuerna)
+* `Consejo_Doof`: «Mantén la espalda recta o tu columna se autodestruirá».
+
+
+
+#### **2. Lógica Condicional para los Botones de Sustitución**
+
+* **Lógica A: El Botón "¡Polea/Máquina Ocupada! Sustitución Rápida"**
+* **Acción del Usuario:** El usuario pulsa el botón junto al ejercicio *Prensa de Piernas* porque la máquina está en uso.
+* **Lógica Backend:** La app consulta la `ID_Ejercicio` -> campo `Equivalentes_Directos` -> Filtra por el entorno elegido en Fase 2 (Comercial vs Casero) -> Muestra aleatoriamente uno de los equivalentes biomecánicos (ej. *Sentadilla Goblet*).
+* **UI/Copy:** El ejercicio se reemplaza *temporalmente* en la vista actual, con un mensaje breve de Heinz: «¡Ugh, siempre hay alguien perdiendo el tiempo en esa máquina! Prueba este *Hackle-Squat-Inador-Alternativo* mientras tanto».
+
+
+* **Lógica B: El Botón "No tengo esta máquina / No me gusta este ejercicio"**
+* **Acción del Usuario:** El usuario pulsa el botón junto a *Sentadilla con Barra* porque no tiene barra o le duele la rodilla.
+* **Lógica Backend:** La app consulta `ID_Ejercicio` -> campo `Equivalentes_Peso_Libre` o `Equivalentes_Directos` (filtrado por material disponible) -> Reemplaza el ejercicio *permanentemente* en la rutina base guardada del usuario.
+* **UI/Copy de Queja/Sustitución de Heinz:** Heinz se queja de la "exigencia" del usuario pero hace el cambio.
+* *Ejemplo de Copy de Queja:* «¿Qué? ¿No te gusta el *Peso Muerto Romano*? ¿Es "demasiado doloroso"? ¡En mis tiempos solo teníamos dolor y nos gustaba! Está bien, te lo cambio por este *Curl Femoral con Máquina*, pero no te acostumbres».
+
+
+
+
+
+#### **3. Mapeo Condicional de Lógica de Volumen (Series/Reps)**
+
+* Define cómo varían las series, repeticiones y descansos base según el nivel de experiencia elegido en Fase 2 (Novato, Intermedio, Avanzado).
+
+---
+
+### IV. FORMATO DE ENTREGA ESPERADO
+
+Proporciona tu respuesta con la siguiente estructura y detalle:
+
+1. **Guion Completo del Flujo Interactivo:** Textos exactos de Heinz, opciones, micro-copys y respuestas reactivas para cada una de las fases del flujo (Fases 0 a 4).
+2. **Matriz de Base de Datos de Ejercicios:** Muestra una tabla/JSON con 10 ejercicios de ejemplo biomecánicamente válidos, mostrando claramente cómo se estructuran sus `IDs`, `Nombres_Técnicos`, `Patrones_Movimiento`, y la lista crítica de `IDs_Equivalentes_Directos`.
+3. **Algoritmo de Sustitución:** Una descripción técnica paso a paso (pseudocódigo o diagrama de flujo lógico) de qué sucede exactamente en el backend cuando el usuario pulsa los botones "Polea Ocupada" y "Cambiar Permanentemente", garantizando biomecánica correcta.

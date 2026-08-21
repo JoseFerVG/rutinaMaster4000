@@ -1,0 +1,157 @@
+{
+  "general": {
+    "appTitle": "El Generador-de-Rutinas-Inador 3000",
+    "appSubtitle": "Tecnología de Hipertrofia Científica de Doofenshmirtz Evil Incorporated",
+    "jingle": "🎵 Doofenshmirtz Evil Incorporaaated! 🎵"
+  },
+  "welcome": {
+    "headline": "¡Bienvenido a mi última y más malvada creación!",
+    "monologue": "¡Ah, bienvenido a Doofenshmirtz Evil Incorporated! Verás, he estado observando a los ciudadanos del Área Limítrofe... ¡y están ridículamente en forma! Especialmente mi hermano Roger, el 'Alcalde Perfecto', con su mandíbula esculpida y sus paseos matutinos. ¡Es insoportable! Por eso he diseñado este dispositivo: el Generador-de-Rutinas-Inador 3000. No es una simple tabla de ejercicios aburrida, ¡es una obra de ingeniería biomecánica despiadada diseñada para construir una musculatura implacable que me ayude a conquistar toda la región! ¿Estás listo para construir tu propio Inador de entrenamiento?",
+    "ctaButton": "¡Construir mi Inador de Entrenamiento!",
+    "secondaryNote": "Nota legal: Doofenshmirtz Evil Inc. no se hace responsable de agujetas cósmicas ni de botones de autodestrucción presionados por error."
+  },
+  "muscleQuotes": {
+    "chest": "¡El Pectoral-de-Hierro-Inador! Excelente, para lucir una bata de laboratorio imponente cuando dé mis discursos malvados.",
+    "back_upper": "¡Ah, dorsales como alas de murciélago! Ideales para planear lejos cuando un ornitorrinco active la dinamita.",
+    "back_lower": "¡Espalda baja blindada! Porque levantar piezas de inadores del suelo me dejó con lumbago durante tres semanas en 1998.",
+    "shoulders": "¡Hombros de titán! Para que las hombreras de mi traje de villano se vean absolutamente amenazantes frente a Roger.",
+    "quads": "¡Cuádriceps de acero! Necesitarás piernas potentes para pedalear en el Generador-de-Rayos-Láser cuando se corte la luz.",
+    "glutes": "¡Ah, el Glúteo-de-Acero-Inador! Entendido, necesitas piernas capaces de patear a Roger directamente fuera del ayuntamiento.",
+    "hamstrings": "¡Isquiotibiales elásticos! Cruciales para esquivar las trampas y patadas giratorias de ese molesto agente con sombrero.",
+    "biceps": "¡Bíceps para apretar tuercas gigantes de inadores! ¡Me gusta tu estilo!",
+    "triceps": "¡Tríceps demoledores! Para empujar la palanca del apocalipsis con la fuerza de diez mil gnomos de jardín enfurecidos.",
+    "core": "¡Core blindado! Si un ornitorrinco te da una patada en el estómago, ¡que se rompa la pata!",
+    "calves": "¡Pantorrillas de roca! Para mantenerte erguido 14 horas seguidas como cuando fui un gnomo de jardín en Gimmelshtump."
+  },
+  "muscleDeselectQuotes": [
+    "¿Quitando ese músculo? Bueno, supongo que prefieres una asimetría malvada experimental.",
+    "Desactivando esa zona en el holograma... ¡menos tuercas que calibrar para mí!",
+    "¿Seguro? No me culpes luego si esa zona no resiste el retroceso del rayo desintegrador."
+  ],
+  "presets": [
+    {
+      "id": "full_body",
+      "name": "Cuerpo Completo de Conquista",
+      "description": "Estimula todas las palancas y engranajes musculares del cuerpo.",
+      "muscles": ["chest", "back_upper", "back_lower", "shoulders", "quads", "glutes", "hamstrings", "biceps", "triceps", "core", "calves"]
+    },
+    {
+      "id": "upper_torso",
+      "name": "Torso Destructor de Alcaldes",
+      "description": "Pecho, espalda gigante y brazos de acero para intimidar a Roger.",
+      "muscles": ["chest", "back_upper", "shoulders", "biceps", "triceps"]
+    },
+    {
+      "id": "titan_legs",
+      "name": "Piernas de Titán de Gimmelshtump",
+      "description": "Fuerza demoledora en cuádriceps, glúteos e isquios.",
+      "muscles": ["quads", "glutes", "hamstrings", "calves", "back_lower"]
+    },
+    {
+      "id": "arms_and_armor",
+      "name": "Brazos & Blindaje Abdominal",
+      "description": "Bíceps, tríceps, hombros y un abdomen a prueba de patadas de ornitorrinco.",
+      "muscles": ["biceps", "triceps", "shoulders", "core"]
+    }
+  ],
+  "wizard": {
+    "daysQuestion": {
+      "title": "¿Cuántos días por semana puedes escapar de tus responsabilidades cívicas antes de que sospechen?",
+      "subtitle": "Frecuencia de despliegue de maquinaria",
+      "options": [
+        { "days": 2, "label": "2 Días", "doofComment": "Mmm, minimalista... Una rutina de Frecuencia A/B para villanos ocupados." },
+        { "days": 3, "label": "3 Días", "doofComment": "¡El clásico 3 días! El equilibrio perfecto entre entrenar y planear trampas complejas." },
+        { "days": 4, "label": "4 Días", "doofComment": "¡4 días! División Torso/Pierna de élite. ¡Roger no sabrá por dónde le vinieron las ganancias!" },
+        { "days": 5, "label": "5 Días", "doofComment": "¡5 días de disciplina malvada! Despliegue Push/Pull/Legs/Torso de máxima hipertrofia." },
+        { "days": 6, "label": "6 Días", "doofComment": "¡6 DÍAS! ¿Acaso no tienes vida social? ¡Excelente, yo tampoco desde 1982!" }
+      ]
+    },
+    "experienceQuestion": {
+      "title": "¿Cuál es tu historial levantando objetos pesados del suelo?",
+      "subtitle": "Calibración del nivel de esfuerzo y volumen",
+      "options": [
+        {
+          "level": "novato",
+          "label": "Novato del Mal",
+          "description": "Apenas comienzo a moverme y mis brazos tiemblan al abrir un bote de pepinillos.",
+          "doofComment": "¡Todos empezamos desde abajo! Como cuando yo era un humilde gnomo de jardín."
+        },
+        {
+          "level": "intermedio",
+          "label": "Villano Experimentado",
+          "description": "Llevo meses o años cargando pesas y ya no me asusta el peso muerto.",
+          "doofComment": "¡Ah, un operador con kilometraje! Aplicaremos sobrecarga progresiva despiadada."
+        },
+        {
+          "level": "avanzado",
+          "label": "Señor de la Hipertrofia",
+          "description": "Muevo cargas hercúleas con RPE 9-10 y mi recuperación es sobrenatural.",
+          "doofComment": "¡Asombroso! Ajustaremos series al fallo técnico y volumen de élite. ¡Prepárate!"
+        }
+      ]
+    },
+    "equipmentQuestion": {
+      "title": "¿Dónde vas a desplegar esta maquinaria del dolor?",
+      "subtitle": "Disponibilidad de armamento y poleas",
+      "options": [
+        {
+          "type": "commercial",
+          "label": "El Megalaboratorio Comercial",
+          "description": "Gimnasio completo con todas las poleas, máquinas de palanca, barras olímpicas y mancuernas.",
+          "doofComment": "¡Música para mis oídos! Tendremos acceso a todos los mecanismos biomecánicos del universo."
+        },
+        {
+          "type": "home",
+          "label": "Mi Sótano con Mancuernas y Rencor",
+          "description": "Espacio casero con mancuernas, barra, banco y peso corporal.",
+          "doofComment": "¡Auténtico espíritu 'Evil Inc'! Reconfiguraré todos los ejercicios para peso libre puro y duro."
+        }
+      ]
+    }
+  },
+  "compilingPhrases": [
+    "Ajustando tuercas del rencor...",
+    "Eliminando fotos de mi hermano Roger...",
+    "Comprobando que no haya ningún ornitorrinco saboteando las poleas...",
+    "Soldando el botón de autodestrucción reglamentario...",
+    "Calculando trayectorias para lanzar mancuernas al ayuntamiento...",
+    "Comprando piezas de repuesto baratas importadas de Gimmelshtump...",
+    "Asegurando que Balloony esté orgulloso de estas series y repeticiones...",
+    "Calibrando el ángulo de los cables para aislamiento biomecánico perfecto...",
+    "Imprimiendo plano confidencial en tinta púrpura indeleble...",
+    "¡Casi listo! Ajustando el temporizador de descanso entre series..."
+  ],
+  "occupiedMachineComplaints": [
+    "¡Ugh! ¡Siempre hay alguien perdiendo el tiempo mirando memes en esa máquina! Prueba este ejercicio equivalente mientras tanto.",
+    "¿Máquina ocupada? ¡Típico del Área Limítrofe! No te preocupes, el Inador-de-Reemplazo-Inmediato tiene exactamente el mismo estímulo motor.",
+    "¡Maldición! Seguro que fue Roger quien contrató a ese sujeto para acaparar la polea. ¡Toma esta alternativa y no pierdas el bombeo!",
+    "¡Ese individuo lleva 25 minutos haciendo extensiones mientras habla por teléfono! Usa esta variante antes de que use mi rayo desintegrador.",
+    "¡Interferencia en el megalaboratorio! Desplegando variante biomecánica instantánea con igual patrón de reclutamiento."
+  ],
+  "permanentChangeComplaints": [
+    "¿Qué? ¿No te gusta este ejercicio? ¿Es 'demasiado doloroso'? ¡En mis tiempos en Gimmelshtump solo teníamos dolor y nos gustaba! Está bien, te lo cambio permanentemente, pero no te acostumbres.",
+    "¡Qué tiquismiquis te me has vuelto! Modificando el plano biomecánico central... Espero que tus fibras musculares aprecien mi generosidad.",
+    "¿Problemas con esa articulación? ¡Bah, la fragilidad biológica! Reconfigurando la base de datos con una variante biomecánicamente óptima.",
+    "¡Reemplazo permanente ejecutado! He borrado el ejercicio anterior del plano con líquido corrector industrial.",
+    "¡Muy bien, muy bien! Cambiando ese ejercicio por uno de peso libre. Pero conste en acta que yo no me quejo cuando mis inadores explotan."
+  ],
+  "selfDestructDialogues": {
+    "title": "¡ADVERTENCIA DE AUTODESTRUCCIÓN!",
+    "warning": "¡ALERTA ROJA! Estás a punto de accionar el botón de autodestrucción. Toda la rutina se desintegrará en átomos, la base de datos se reseteará y Perry el Ornitorrinco habrá ganado. ¿Realmente quieres destruirlo todo?",
+    "confirmButton": "¡SÍ, AUTODESTRUIR EL INADOR!",
+    "cancelButton": "¡No, espera! ¡Quiero seguir mamadísimo!",
+    "explodedToast": "¡BOOOOOOM! ¡Maldito seas, Perry el Ornitorrincooooo! (Rutina desintegrada con éxito)"
+  },
+  "perryEasterEgg": {
+    "quote1": "¿Un simple ornitorrinco con una toalla en el gimnasio?",
+    "quote2": "¡¿PERRY EL ORNITORRINCO?!",
+    "quote3": "¡¿Qué haces saboteando mi creador de rutinas biomecánicas?!",
+    "audio": "k-k-k-k-k-k-k-r-r-r"
+  },
+  "restDayQuotes": [
+    "Pausa táctica por interferencia de un ornitorrinco.",
+    "Día de recuperación obligatoria: los músculos crecen mientras duermes y planeas venganzas.",
+    "Sin entrenamiento hoy: las máquinas se están enfriando tras el exceso de vatios malvados.",
+    "Pausa de regeneración celular. Roger cree que descansamos, ¡pero estamos asimilando las ganancias!"
+  ]
+}

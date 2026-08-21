@@ -1,0 +1,38 @@
+1. Tono y Narrativa (Copywriting)
+
+Voz de la app: Todo el texto debe sonar como si el Dr. Doofenshmirtz estuviera hablándole al usuario: un científico malvado, melodramático, cómico, quejica y excesivamente detallista con historias de su infancia en Gimmelshtump.
+
+Terminología clave:
+
+Las rutinas/ejercicios se llaman "-inators" o "-inadores" (ej. El Destructor-de-Pectorales-Inador, El Hipertrofia-Inador 3000).
+
+El objetivo del entrenamiento no es "ponerse en forma", sino "Conquistar el Área Limítrofe (y ponerse mamadísimo en el proceso)".
+
+Los días de descanso son “Pausa táctica por interferencia de un ornitorrinco”.
+
+El botón de finalizar entrenamiento o resetear debe llamarse "Botón de Autodestrucción" (con advertencia de peligro exagerada).
+
+2. Identidad Visual y UI
+
+Paleta de colores:
+
+Fondo/base: Verde azulado oscuro / Gris laboratorio.
+
+Acentos principales: Morado oscuro (su camisa/logo corporativo), verde ácido de laboratorio y negro bata.
+
+Botones de acción/peligro: Rojo brillante estilo botón de autodestrucción con borde amarillo de precaución industrial.
+
+Componentes de interfaz:
+
+Estética de laboratorio retro-futurista de bajo presupuesto: diales giratorios para las repeticiones, medidores de aguja para el peso/RPE, palancas analógicas para marcar series completadas.
+
+Tipografías con personalidad tipo cómic/cartoon angular o fuente de display industrial excéntrica, combinada con una sans-serif legible para datos numéricos.
+
+Iconografía que incluya detalles como frascos de laboratorio, cables sueltos, interruptores gigantes y referencias sutiles a Perry el Ornitorrinco (ej. iconos con sombrero fedora para notas secretas).
+
+3. Funcionalidades Tematizadas
+
+Creador de Rutinas ("El Taller del Mal"): Constructor donde agregas componentes a tu "inador" del día (ejercicios, series, pesos).
+
+
+Tienes en esta web una DB con un montón de info: https://github.com/JahelCuadrado/ExerciseGymGifsDB
