@@ -9,7 +9,6 @@ import {
   FileText,
   Calendar,
   Download,
-  Dumbbell,
   MinusCircle,
   Clock,
   Play,
@@ -41,7 +40,6 @@ export const RoutineView: React.FC = () => {
     activeRoutine,
     activeDayTab,
     setActiveDayTab,
-    replaceWithFreeWeight,
     setSpecificExercise,
     setSpecificAlternative,
     toggleUseAlternative,
@@ -157,7 +155,6 @@ export const RoutineView: React.FC = () => {
     if (!exMeta) return null;
 
     const altMeta = exInst.alternativeExerciseId ? exercisesDb.find(e => e.id === exInst.alternativeExerciseId) : null;
-    const isSecondary = exMeta.tier >= 2 || exMeta.mechanics === 'isolation';
 
     if (exInst.isOmitted) {
       return (
@@ -311,79 +308,65 @@ export const RoutineView: React.FC = () => {
             </div>
           </div>
 
-          {/* Action Buttons for Plan B */}
-          <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0 print:hidden flex-wrap">
-            {altMeta && (
+          {/* Quick Activate Plan B Switch */}
+          {altMeta && (
+            <div className="shrink-0 print:hidden">
               <button
                 type="button"
                 onClick={() => toggleUseAlternative(dayNumber, exInst.instanceId)}
                 title="Activar alternativa si la máquina principal está ocupada hoy"
-                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 border ${
+                className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 border cursor-pointer ${
                   exInst.isUsingAlternative
                     ? 'bg-zinc-950 text-white border-zinc-950 shadow-xs'
                     : 'bg-white hover:bg-zinc-100 text-zinc-800 border-zinc-200'
                 }`}
               >
-                <Zap className="w-3 h-3" />
+                <Zap className="w-3 h-3" aria-hidden="true" />
                 <span>{exInst.isUsingAlternative ? 'Usando Plan B (Activo)' : 'Usar Plan B'}</span>
               </button>
-            )}
-
-            <button
-              type="button"
-              onClick={() => openSwapModal(dayNumber, exInst.instanceId, altMeta || exMeta, 'alternative')}
-              title="No dispongo de esta alternativa / Seleccionar otro Plan B de por si acaso"
-              className="px-2.5 py-1 rounded-lg text-xs font-medium text-zinc-700 hover:text-zinc-950 bg-white hover:bg-zinc-100 border border-zinc-200 transition-colors flex items-center gap-1"
-            >
-              <RefreshCw className="w-3 h-3 text-zinc-400" />
-              <span>Cambiar Alternativa</span>
-            </button>
-          </div>
+            </div>
+          )}
         </div>
 
-        {/* Customization Actions Bar (Cambiar Ejercicio Principal, Peso Libre, Omitir) */}
+        {/* Standardized 3 Actions Bar: Cambiar Ej. Principal, Cambiar Ej. Secundario, Omitir */}
         <div className="pt-2 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-2 print:hidden">
           <div className="flex items-center gap-1.5 text-xs text-zinc-400 font-mono">
             <span>Músculo: {MUSCLE_LABELS_ES[exMeta.muscleGroup] || exMeta.muscleGroup}</span>
           </div>
 
           <div className="flex items-center gap-1.5 flex-wrap">
-            {/* Direct Exercise Swap Modal Button for Main Exercise */}
+            {/* 1. Cambiar Ejercicio Principal */}
             <button
               type="button"
               onClick={() => openSwapModal(dayNumber, exInst.instanceId, exMeta, 'main')}
-              title="Seleccionar otro ejercicio principal de la base de datos"
-              className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1"
+              title="Cambiar ejercicio principal"
+              className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1 cursor-pointer"
             >
-              <RefreshCw className="w-3 h-3 text-zinc-500" />
-              <span>Cambiar Principal</span>
+              <RefreshCw className="w-3 h-3 text-zinc-500" aria-hidden="true" />
+              <span>Cambiar Ej. Principal</span>
             </button>
 
-            {/* Free Weight Alternative */}
-            {isSecondary && (
-              <button
-                type="button"
-                onClick={() => replaceWithFreeWeight(dayNumber, exInst.instanceId)}
-                title="Reemplazar por variante con mancuernas o peso libre"
-                className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1"
-              >
-                <Dumbbell className="w-3 h-3 text-zinc-500" />
-                <span>No tengo secundario / Peso Libre</span>
-              </button>
-            )}
+            {/* 2. Cambiar Ejercicio Secundario */}
+            <button
+              type="button"
+              onClick={() => openSwapModal(dayNumber, exInst.instanceId, altMeta || exMeta, 'alternative')}
+              title="Cambiar ejercicio secundario / Plan B"
+              className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-700 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1 cursor-pointer"
+            >
+              <RefreshCw className="w-3 h-3 text-zinc-500" aria-hidden="true" />
+              <span>Cambiar Ej. Secundario</span>
+            </button>
 
-            {/* Omit Exercise */}
-            {isSecondary && (
-              <button
-                type="button"
-                onClick={() => toggleOmitExercise(dayNumber, exInst.instanceId)}
-                title="Retirar este ejercicio de la sesión"
-                className="px-2 py-1 rounded-md text-[11px] font-medium text-zinc-500 hover:text-rose-600 bg-white hover:bg-rose-50 border border-zinc-200 hover:border-rose-200 transition-colors flex items-center gap-1"
-              >
-                <MinusCircle className="w-3 h-3" />
-                <span>Omitir</span>
-              </button>
-            )}
+            {/* 3. Omitir Ejercicio */}
+            <button
+              type="button"
+              onClick={() => toggleOmitExercise(dayNumber, exInst.instanceId)}
+              title="Omitir este ejercicio de la sesión"
+              className="px-2 py-1 rounded-md text-[11px] font-medium text-zinc-500 hover:text-rose-600 bg-white hover:bg-rose-50 border border-zinc-200 hover:border-rose-200 transition-colors flex items-center gap-1 cursor-pointer"
+            >
+              <MinusCircle className="w-3 h-3" aria-hidden="true" />
+              <span>Omitir</span>
+            </button>
           </div>
         </div>
       </div>

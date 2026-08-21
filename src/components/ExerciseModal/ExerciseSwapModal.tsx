@@ -140,16 +140,16 @@ export const ExerciseSwapModal: React.FC<ExerciseSwapModalProps> = ({
               <div className="flex items-center gap-1.5">
                 {isAltMode ? <Shield className="w-3.5 h-3.5 text-zinc-600" /> : <Sparkles className="w-3.5 h-3.5 text-zinc-600" />}
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400">
-                  {isAltMode ? 'Configuración de Plan B / Alternativa de Respaldo' : 'Sustitución de Ejercicio Principal'}
+                  {isAltMode ? 'Configuración de Ejercicio Secundario / Plan B' : 'Sustitución de Ejercicio Principal'}
                 </span>
               </div>
               <h2 className="text-lg sm:text-xl font-bold text-zinc-950">
-                {isAltMode ? `Elegir Alternativa para: ${currentExercise.name}` : `Cambiar: ${currentExercise.name}`}
+                {isAltMode ? `Elegir Ejercicio Secundario para: ${currentExercise.name}` : `Cambiar Ejercicio Principal: ${currentExercise.name}`}
               </h2>
               <p className="text-xs text-zinc-500">
                 {isAltMode
-                  ? `Selecciona el ejercicio de respaldo en caso de que la máquina principal esté ocupada (${MUSCLE_LABELS_ES[currentExercise.muscleGroup] || currentExercise.muscleGroup}).`
-                  : `Selecciona una alternativa por grupo muscular (${MUSCLE_LABELS_ES[currentExercise.muscleGroup] || currentExercise.muscleGroup}) o explora el catálogo completo.`}
+                  ? `Selecciona el ejercicio secundario / Plan B de respaldo (${MUSCLE_LABELS_ES[currentExercise.muscleGroup] || currentExercise.muscleGroup}) con el Top 3 recomendado.`
+                  : `Selecciona un ejercicio principal sustituto (${MUSCLE_LABELS_ES[currentExercise.muscleGroup] || currentExercise.muscleGroup}) con el Top 3 recomendado.`}
               </p>
             </div>
 
