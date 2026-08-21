@@ -31,6 +31,8 @@ export type ExperienceLevel = 'novato' | 'intermedio' | 'avanzado';
 
 export type EquipmentPreference = 'commercial' | 'home';
 
+export type GenderPreference = 'male' | 'female' | 'neutral';
+
 export interface Exercise {
   id: string;
   name: string;
@@ -76,6 +78,7 @@ export interface Routine {
   name: string;
   subtitle: string;
   createdAt: string;
+  gender?: GenderPreference;
   experience: ExperienceLevel;
   daysPerWeek: number;
   equipment: EquipmentPreference;
@@ -84,7 +87,7 @@ export interface Routine {
   heinzBlueprintComment: string;
 }
 
-export type HeinzMood = 'normal' | 'excited' | 'complaining' | 'evil' | 'paranoid' | 'shocked';
+export type HeinzMood = 'normal' | 'evil' | 'complaining' | 'shocked' | 'excited' | 'paranoid';
 
 export interface ToastMessage {
   id: string;

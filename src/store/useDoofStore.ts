@@ -4,6 +4,7 @@ import {
   MuscleGroupId,
   ExperienceLevel,
   EquipmentPreference,
+  GenderPreference,
   Routine,
   HeinzMood,
   ToastMessage,
@@ -22,7 +23,8 @@ const exercisesDb = rawExercises as Exercise[];
 
 interface DoofStore {
   // Wizard & App State
-  step: number; // 0 = Welcome, 1 = Body Target, 2 = Logistics, 3 = Compil-inator, 4 = Blueprint
+  step: number; // 0 = Welcome, 1 = Gender & Body Target, 2 = Logistics, 3 = Compil-inator, 4 = Blueprint
+  gender: GenderPreference;
   selectedMuscles: MuscleGroupId[];
   experience: ExperienceLevel;
   daysPerWeek: number;
@@ -47,6 +49,7 @@ interface DoofStore {
   setStep: (step: number) => void;
   nextStep: () => void;
   prevStep: () => void;
+  setGender: (gender: GenderPreference) => void;
   toggleMuscle: (muscleId: MuscleGroupId) => void;
   selectPreset: (presetId: string) => void;
   clearMuscles: () => void;
@@ -78,6 +81,7 @@ export const useDoofStore = create<DoofStore>()(
   persist(
     (set, get) => ({
       step: 0,
+      gender: 'male',
       selectedMuscles: ['chest', 'back_upper', 'quads', 'shoulders'],
       experience: 'intermedio',
       daysPerWeek: 4,
@@ -114,6 +118,19 @@ export const useDoofStore = create<DoofStore>()(
           soundFx.playGearClick();
           set({ step: step - 1 });
         }
+      },
+
+      setGender: (gender: GenderPreference) => {
+        soundFx.playLaser();
+        let comment = '';
+        if (gender === 'male') {
+          comment = '¡Configurando morfología masculina! Hombros anchos, torso en V y brazos listos para cargar piezas de inadores.';
+        } else if (gender === 'female') {
+          comment = '¡Configurando morfología femenina! Centro de gravedad optimizado, potencia glútea y resistencia hercúlea.';
+        } else {
+          comment = '¡Configurando morfología balanceada! Proporciones anatómicas simétricas para el Inador.';
+        }
+        set({ gender, heinzSpeech: comment, heinzMood: 'excited' });
       },
 
       toggleMuscle: (muscleId: MuscleGroupId) => {
@@ -196,8 +213,9 @@ export const useDoofStore = create<DoofStore>()(
       },
 
       generateRoutine: () => {
-        const { selectedMuscles, daysPerWeek, experience, equipment } = get();
+        const { selectedMuscles, daysPerWeek, experience, equipment, gender } = get();
         const newRoutine = buildRoutine(selectedMuscles, daysPerWeek, experience, equipment, exercisesDb);
+        newRoutine.gender = gender;
         set({
           activeRoutine: newRoutine,
           activeDayTab: 1,
@@ -431,6 +449,7 @@ export const useDoofStore = create<DoofStore>()(
       name: 'doof-rutinamaster-storage',
       storage: createJSONStorage(() => localStorage),
       partialize: state => ({
+        gender: state.gender,
         selectedMuscles: state.selectedMuscles,
         experience: state.experience,
         daysPerWeek: state.daysPerWeek,
