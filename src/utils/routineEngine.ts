@@ -5,69 +5,130 @@ import {
   MuscleGroupId,
   Routine,
   RoutineDay,
-  RoutineExercise
+  RoutineExercise,
+  TrainingGoal
 } from '../types';
 
-const MUSCLE_NAMES_ES: Record<MuscleGroupId, string> = {
+export const MUSCLE_LABELS_ES: Record<MuscleGroupId, string> = {
   chest: 'Pectoral',
-  back_upper: 'Espalda-Alta',
-  back_lower: 'Espalda-Baja',
-  shoulders: 'Hombros',
+  back_upper: 'Espalda Alta',
+  back_lower: 'Espalda Baja',
+  shoulders: 'Hombros / Deltoides',
   quads: 'Cuádriceps',
   glutes: 'Glúteos',
-  hamstrings: 'Isquios',
+  hamstrings: 'Isquiotibiales',
   biceps: 'Bíceps',
   triceps: 'Tríceps',
-  core: 'Abdomen',
-  calves: 'Pantorrillas'
+  core: 'Core / Abdomen',
+  calves: 'Gemelos / Pantorrillas'
 };
 
-export function generateInadorName(selectedMuscles: MuscleGroupId[], days: number): { name: string; subtitle: string } {
-  if (selectedMuscles.length === 0 || selectedMuscles.length >= 8) {
-    const epicNames = [
-      'El Hipertrofia-Total-Anti-Roger-Inador 4000',
-      'El Conquistador-del-Área-Limítrofe-Inador 3000',
-      'El Destructor-Corporal-Supremo-Inador 5000',
-      'El Mega-Músculo-de-Gimmelshtump-Inador 9000'
-    ];
-    const picked = epicNames[Math.floor(Math.random() * epicNames.length)];
-    return {
-      name: picked,
-      subtitle: `Protocolo Malvado Completo de ${days} Días de Furia Biomecánica`
-    };
-  }
-
-  const primaryMuscle = MUSCLE_NAMES_ES[selectedMuscles[0]] || 'Músculo';
-  const secondaryMuscle = selectedMuscles.length > 1 ? MUSCLE_NAMES_ES[selectedMuscles[1]] : null;
-
-  let baseName = '';
-  if (secondaryMuscle) {
-    baseName = `El ${primaryMuscle}-y-${secondaryMuscle}-Destructor-Inador`;
+export function generateRoutineName(
+  daysCount: number,
+  goal: TrainingGoal,
+  selectedMuscles: MuscleGroupId[]
+): { name: string; subtitle: string; summaryNote: string } {
+  let splitName = '';
+  if (daysCount === 2) {
+    splitName = 'Full Body A/B';
+  } else if (daysCount === 3) {
+    splitName = 'Push / Pull / Legs';
+  } else if (daysCount === 4) {
+    splitName = 'Torso / Pierna';
+  } else if (daysCount === 5) {
+    splitName = 'PPL / Torso / Pierna';
   } else {
-    baseName = `El Mega-${primaryMuscle}-Expulsa-Alcaldes-Inador`;
+    splitName = 'Push / Pull / Legs x 2';
   }
 
-  const version = (Math.floor(Math.random() * 5) + 3) * 1000;
-  return {
-    name: `${baseName} ${version}`,
-    subtitle: `Arquitectura de Crecimiento Acelerado para Vencer a Roger en ${days} Días`
+  const goalLabels: Record<TrainingGoal, string> = {
+    hipertrofia: 'Hipertrofia & Tensión Mecánica',
+    fuerza: 'Fuerza & Sobrecarga Progresiva',
+    recomposicion: 'Recomposición Corporal',
+    longevidad: 'Salud Articular & Rendimiento'
   };
+
+  const name = `Protocolo ${splitName} · ${daysCount} Días`;
+  const subtitle = `Arquitectura de entrenamiento optimizada para ${goalLabels[goal] || 'Hipertrofia'}.`;
+  
+  let summaryNote = `Estructura de ${daysCount} sesiones semanales con distribución calculada de volumen, descansos programados y selección biomecánica de ejercicios.`;
+  if (selectedMuscles.length > 0 && selectedMuscles.length < 8) {
+    const focusNames = selectedMuscles.map(m => MUSCLE_LABELS_ES[m] || m).slice(0, 3).join(', ');
+    summaryNote += ` Enfoque prioritario en: ${focusNames}.`;
+  }
+
+  return { name, subtitle, summaryNote };
 }
 
-function getSetsRepsRest(tier: 1 | 2 | 3, experience: ExperienceLevel): { sets: number; reps: string; rest: string } {
+function getSetsRepsRest(
+  tier: 1 | 2 | 3,
+  experience: ExperienceLevel,
+  goal: TrainingGoal
+): { sets: number; reps: string; rest: string; targetRir: string } {
+  if (goal === 'fuerza') {
+    if (tier === 1) {
+      return {
+        sets: experience === 'novato' ? 3 : 4,
+        reps: '4 - 6 reps',
+        rest: '3 - 4 min',
+        targetRir: 'RIR 1-2'
+      };
+    } else if (tier === 2) {
+      return {
+        sets: 3,
+        reps: '6 - 8 reps',
+        rest: '2.5 min',
+        targetRir: 'RIR 2'
+      };
+    } else {
+      return {
+        sets: 3,
+        reps: '8 - 10 reps',
+        rest: '90 seg',
+        targetRir: 'RIR 1-2'
+      };
+    }
+  }
+
+  if (goal === 'longevidad') {
+    if (tier === 1) {
+      return {
+        sets: 3,
+        reps: '8 - 10 reps',
+        rest: '2 min',
+        targetRir: 'RIR 2-3'
+      };
+    } else if (tier === 2) {
+      return {
+        sets: 3,
+        reps: '10 - 12 reps',
+        rest: '90 seg',
+        targetRir: 'RIR 2'
+      };
+    } else {
+      return {
+        sets: 2,
+        reps: '12 - 15 reps',
+        rest: '60 seg',
+        targetRir: 'RIR 2'
+      };
+    }
+  }
+
+  // Hipertrofia & Recomposición
   if (experience === 'novato') {
-    if (tier === 1) return { sets: 3, reps: '8 - 10 reps', rest: '2 min' };
-    if (tier === 2) return { sets: 3, reps: '10 - 12 reps', rest: '90 seg' };
-    return { sets: 2, reps: '12 - 15 reps', rest: '60 seg' };
+    if (tier === 1) return { sets: 3, reps: '6 - 8 reps', rest: '2 min', targetRir: 'RIR 2' };
+    if (tier === 2) return { sets: 3, reps: '8 - 10 reps', rest: '90 seg', targetRir: 'RIR 1-2' };
+    return { sets: 2, reps: '10 - 12 reps', rest: '60 - 75 seg', targetRir: 'RIR 1' };
   } else if (experience === 'intermedio') {
-    if (tier === 1) return { sets: 4, reps: '6 - 8 reps', rest: '2.5 min' };
-    if (tier === 2) return { sets: 3, reps: '8 - 10 reps', rest: '90 - 120 seg' };
-    return { sets: 3, reps: '10 - 12 reps', rest: '75 seg' };
+    if (tier === 1) return { sets: 4, reps: '6 - 8 reps', rest: '2.5 min', targetRir: 'RIR 1-2' };
+    if (tier === 2) return { sets: 3, reps: '8 - 10 reps', rest: '90 - 120 seg', targetRir: 'RIR 1' };
+    return { sets: 3, reps: '10 - 12 reps', rest: '75 seg', targetRir: 'RIR 0-1' };
   } else {
     // Avanzado
-    if (tier === 1) return { sets: 4, reps: '5 - 7 reps (RIR 1)', rest: '3 min' };
-    if (tier === 2) return { sets: 4, reps: '8 - 10 reps (RIR 0-1)', rest: '2 min' };
-    return { sets: 4, reps: '10 - 15 reps (Fallo técnico)', rest: '60 - 75 seg' };
+    if (tier === 1) return { sets: 4, reps: '5 - 7 reps', rest: '3 min', targetRir: 'RIR 1' };
+    if (tier === 2) return { sets: 4, reps: '8 - 10 reps', rest: '2 min', targetRir: 'RIR 0-1' };
+    return { sets: 3, reps: '10 - 15 reps', rest: '60 - 75 seg', targetRir: 'Fallo técnico / RIR 0' };
   }
 }
 
@@ -81,19 +142,18 @@ export function buildRoutine(
   daysCount: number,
   experience: ExperienceLevel,
   equipment: EquipmentPreference,
+  goal: TrainingGoal = 'hipertrofia',
   exercisesDb: Exercise[]
 ): Routine {
-  // If no muscles selected, use all muscles
   const focusMuscles = selectedMuscles.length > 0
     ? selectedMuscles
     : (['chest', 'back_upper', 'shoulders', 'quads', 'hamstrings', 'glutes', 'biceps', 'triceps', 'core'] as MuscleGroupId[]);
 
   const availableExercises = exercisesDb.filter(ex => isExerciseAllowed(ex, equipment));
-  const { name, subtitle } = generateInadorName(selectedMuscles, daysCount);
+  const { name, subtitle, summaryNote } = generateRoutineName(daysCount, goal, selectedMuscles);
 
   const days: RoutineDay[] = [];
 
-  // Helper to pick exercises for a day
   const pickExercisesForMuscles = (
     targetMuscles: MuscleGroupId[],
     maxExercises: number = 6
@@ -101,14 +161,13 @@ export function buildRoutine(
     const picked: RoutineExercise[] = [];
     const usedIds = new Set<string>();
 
-    // 1. Give prioritized slots to targetMuscles that match focusMuscles
     const sortedTargets = [...targetMuscles].sort((a, b) => {
       const aFocus = focusMuscles.includes(a) ? 1 : 0;
       const bFocus = focusMuscles.includes(b) ? 1 : 0;
       return bFocus - aFocus;
     });
 
-    // Pick Tier 1 compounds first for main muscles
+    // 1. Tier 1 Main Compounds
     for (const muscle of sortedTargets) {
       if (picked.length >= maxExercises) break;
       const tier1 = availableExercises.find(
@@ -116,7 +175,7 @@ export function buildRoutine(
       );
       if (tier1) {
         usedIds.add(tier1.id);
-        const { sets, reps, rest } = getSetsRepsRest(tier1.tier, experience);
+        const { sets, reps, rest, targetRir } = getSetsRepsRest(tier1.tier, experience, goal);
         picked.push({
           instanceId: `inst_${tier1.id}_${Math.random().toString(36).substring(2, 7)}`,
           exerciseId: tier1.id,
@@ -124,13 +183,14 @@ export function buildRoutine(
           sets,
           reps,
           rest,
+          targetRir,
           isTemporarilyReplaced: false,
           completedSets: new Array(sets).fill(false)
         });
       }
     }
 
-    // Pick Tier 2 compounds or secondary movements
+    // 2. Tier 2 Secondary Compounds
     for (const muscle of sortedTargets) {
       if (picked.length >= maxExercises) break;
       const tier2 = availableExercises.find(
@@ -138,7 +198,7 @@ export function buildRoutine(
       );
       if (tier2) {
         usedIds.add(tier2.id);
-        const { sets, reps, rest } = getSetsRepsRest(tier2.tier, experience);
+        const { sets, reps, rest, targetRir } = getSetsRepsRest(tier2.tier, experience, goal);
         picked.push({
           instanceId: `inst_${tier2.id}_${Math.random().toString(36).substring(2, 7)}`,
           exerciseId: tier2.id,
@@ -146,13 +206,14 @@ export function buildRoutine(
           sets,
           reps,
           rest,
+          targetRir,
           isTemporarilyReplaced: false,
           completedSets: new Array(sets).fill(false)
         });
       }
     }
 
-    // Pick Tier 3 isolation / accessories
+    // 3. Tier 3 Isolation & Accessories
     for (const muscle of sortedTargets) {
       if (picked.length >= maxExercises) break;
       const tier3 = availableExercises.find(
@@ -160,7 +221,7 @@ export function buildRoutine(
       );
       if (tier3) {
         usedIds.add(tier3.id);
-        const { sets, reps, rest } = getSetsRepsRest(tier3.tier, experience);
+        const { sets, reps, rest, targetRir } = getSetsRepsRest(tier3.tier, experience, goal);
         picked.push({
           instanceId: `inst_${tier3.id}_${Math.random().toString(36).substring(2, 7)}`,
           exerciseId: tier3.id,
@@ -168,13 +229,14 @@ export function buildRoutine(
           sets,
           reps,
           rest,
+          targetRir,
           isTemporarilyReplaced: false,
           completedSets: new Array(sets).fill(false)
         });
       }
     }
 
-    // If still have capacity, fill with general compound from target muscles
+    // 4. Fill remaining slots if any
     for (const muscle of sortedTargets) {
       if (picked.length >= maxExercises) break;
       const filler = availableExercises.find(
@@ -182,7 +244,7 @@ export function buildRoutine(
       );
       if (filler) {
         usedIds.add(filler.id);
-        const { sets, reps, rest } = getSetsRepsRest(filler.tier, experience);
+        const { sets, reps, rest, targetRir } = getSetsRepsRest(filler.tier, experience, goal);
         picked.push({
           instanceId: `inst_${filler.id}_${Math.random().toString(36).substring(2, 7)}`,
           exerciseId: filler.id,
@@ -190,6 +252,7 @@ export function buildRoutine(
           sets,
           reps,
           rest,
+          targetRir,
           isTemporarilyReplaced: false,
           completedSets: new Array(sets).fill(false)
         });
@@ -203,16 +266,16 @@ export function buildRoutine(
   if (daysCount === 2) {
     days.push({
       dayNumber: 1,
-      title: 'Día 1: Despliegue de Fuego Anterior (Full Body A)',
-      subtitle: 'Enfoque Pectoral, Cuádriceps, Hombro y Core',
+      title: 'Día 1 · Full Body A',
+      subtitle: 'Enfoque Pectoral, Cuádriceps, Deltoides y Core',
       focusMuscles: ['chest', 'quads', 'shoulders', 'triceps', 'core'],
       exercises: pickExercisesForMuscles(['chest', 'quads', 'shoulders', 'triceps', 'core'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 2,
-      title: 'Día 2: Tracción y Retaguardia (Full Body B)',
-      subtitle: 'Enfoque Dorsales, Isquios, Glúteos y Bíceps',
+      title: 'Día 2 · Full Body B',
+      subtitle: 'Enfoque Dorsales, Isquiotibiales, Glúteos y Bíceps',
       focusMuscles: ['back_upper', 'hamstrings', 'glutes', 'biceps', 'back_lower'],
       exercises: pickExercisesForMuscles(['back_upper', 'hamstrings', 'glutes', 'biceps', 'back_lower'], 6),
       isRestDay: false
@@ -220,24 +283,24 @@ export function buildRoutine(
   } else if (daysCount === 3) {
     days.push({
       dayNumber: 1,
-      title: 'Día 1: El Empuje-Destructor (Push)',
-      subtitle: 'Pectoral mayor, deltoides anterior/lateral y tríceps de acero',
+      title: 'Día 1 · Empuje (Push)',
+      subtitle: 'Pectoral, Deltoides anterior/lateral y Tríceps',
       focusMuscles: ['chest', 'shoulders', 'triceps'],
       exercises: pickExercisesForMuscles(['chest', 'shoulders', 'triceps'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 2,
-      title: 'Día 2: La Tracción-del-Abismo (Pull)',
-      subtitle: 'Dorsales amplios, espalda alta, deltoides posterior y bíceps',
+      title: 'Día 2 · Tracción (Pull)',
+      subtitle: 'Dorsal ancho, Espalda alta, Deltoides posterior y Bíceps',
       focusMuscles: ['back_upper', 'back_lower', 'biceps', 'shoulders'],
       exercises: pickExercisesForMuscles(['back_upper', 'back_lower', 'biceps', 'shoulders'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 3,
-      title: 'Día 3: La Base-de-Titán (Legs & Core)',
-      subtitle: 'Cuádriceps, isquiotibiales, glúteos y blindaje abdominal',
+      title: 'Día 3 · Pierna & Core (Legs)',
+      subtitle: 'Cuádriceps, Isquiotibiales, Glúteos y Estabilidad abdominal',
       focusMuscles: ['quads', 'hamstrings', 'glutes', 'core', 'calves'],
       exercises: pickExercisesForMuscles(['quads', 'hamstrings', 'glutes', 'core', 'calves'], 6),
       isRestDay: false
@@ -245,32 +308,32 @@ export function buildRoutine(
   } else if (daysCount === 4) {
     days.push({
       dayNumber: 1,
-      title: 'Día 1: Torso Superior Alfa (Fuerza & Densidad)',
-      subtitle: 'Press horizontal, tracción vertical pesada y hombros',
+      title: 'Día 1 · Torso Superior A',
+      subtitle: 'Fuerza e hipertrofia en press horizontal, tracción vertical y hombros',
       focusMuscles: ['chest', 'back_upper', 'shoulders', 'triceps'],
       exercises: pickExercisesForMuscles(['chest', 'back_upper', 'shoulders', 'triceps'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 2,
-      title: 'Día 2: Tren Inferior de Choque (Potencia de Gimmelshtump)',
-      subtitle: 'Sentadilla pesada, cadena posterior y abdomen',
+      title: 'Día 2 · Tren Inferior A',
+      subtitle: 'Dominante de cuádriceps, cadena posterior y estabilidad de core',
       focusMuscles: ['quads', 'hamstrings', 'glutes', 'core'],
       exercises: pickExercisesForMuscles(['quads', 'hamstrings', 'glutes', 'core'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 3,
-      title: 'Día 3: Torso Superior Beta (Hipertrofia & Bombeo)',
-      subtitle: 'Inclinados, remos densos, brazos y deltoides lateral',
+      title: 'Día 3 · Torso Superior B',
+      subtitle: 'Volumen e hipertrofia en planos inclinados, remos y brazos',
       focusMuscles: ['chest', 'back_upper', 'biceps', 'shoulders', 'triceps'],
       exercises: pickExercisesForMuscles(['chest', 'back_upper', 'biceps', 'shoulders', 'triceps'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 4,
-      title: 'Día 4: Piernas & Glúteos Beta (Esculpir y Destruir)',
-      subtitle: 'Hip hinge, aislamiento femoral, glúteos y pantorrillas',
+      title: 'Día 4 · Tren Inferior B',
+      subtitle: 'Dominante de cadera, flexión de rodilla, glúteos y pantorrillas',
       focusMuscles: ['glutes', 'hamstrings', 'quads', 'calves', 'core'],
       exercises: pickExercisesForMuscles(['glutes', 'hamstrings', 'quads', 'calves', 'core'], 6),
       isRestDay: false
@@ -278,53 +341,53 @@ export function buildRoutine(
   } else if (daysCount === 5) {
     days.push({
       dayNumber: 1,
-      title: 'Día 1: Empuje Pesado (Push A)',
-      subtitle: 'Pectoral pesado, hombro y tríceps',
+      title: 'Día 1 · Empuje Pesado (Push A)',
+      subtitle: 'Pectoral pesado, press militar y tríceps',
       focusMuscles: ['chest', 'shoulders', 'triceps'],
       exercises: pickExercisesForMuscles(['chest', 'shoulders', 'triceps'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 2,
-      title: 'Día 2: Tracción Pesada (Pull A)',
-      subtitle: 'Dominadas, remos pesados y bíceps',
+      title: 'Día 2 · Tracción Pesada (Pull A)',
+      subtitle: 'Tracciones verticales pesadas, remos y bíceps',
       focusMuscles: ['back_upper', 'back_lower', 'biceps'],
       exercises: pickExercisesForMuscles(['back_upper', 'back_lower', 'biceps'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 3,
-      title: 'Día 3: Piernas de Acero (Legs Focus)',
-      subtitle: 'Cuádriceps, prensa y pantorrillas',
+      title: 'Día 3 · Pierna Enfoque Cuádriceps (Legs A)',
+      subtitle: 'Sentadilla, prensa y trabajo de pantorrillas',
       focusMuscles: ['quads', 'glutes', 'calves', 'core'],
       exercises: pickExercisesForMuscles(['quads', 'glutes', 'calves', 'core'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 4,
-      title: 'Día 4: Torso Hipertrofia (Upper Pump)',
-      subtitle: 'Aislamientos de pecho, espalda y hombros',
+      title: 'Día 4 · Torso Hipertrofia (Upper B)',
+      subtitle: 'Aislamientos de pectoral, espalda alta y deltoides lateral',
       focusMuscles: ['chest', 'back_upper', 'shoulders', 'biceps', 'triceps'],
       exercises: pickExercisesForMuscles(['chest', 'back_upper', 'shoulders', 'biceps', 'triceps'], 6),
       isRestDay: false
     });
     days.push({
       dayNumber: 5,
-      title: 'Día 5: Cadena Posterior & Brazos',
-      subtitle: 'Isquios, glúteos y súper-series de brazos',
+      title: 'Día 5 · Cadena Posterior & Brazos (Lower B + Arms)',
+      subtitle: 'Isquiotibiales, glúteos y trabajo directo de brazos',
       focusMuscles: ['hamstrings', 'glutes', 'biceps', 'triceps', 'core'],
       exercises: pickExercisesForMuscles(['hamstrings', 'glutes', 'biceps', 'triceps', 'core'], 6),
       isRestDay: false
     });
   } else {
-    // 6 Days Push / Pull / Legs x 2
+    // 6 Days PPL x 2
     const splits = [
-      { num: 1, title: 'Día 1: Empuje A (Fuerza Pectoral)', sub: 'Banca pesada y hombros', muscles: ['chest', 'shoulders', 'triceps'] as MuscleGroupId[] },
-      { num: 2, title: 'Día 2: Tracción A (Dorsal & Espesor)', sub: 'Remos y dominadas', muscles: ['back_upper', 'back_lower', 'biceps'] as MuscleGroupId[] },
-      { num: 3, title: 'Día 3: Pierna A (Dominante Cuádriceps)', sub: 'Sentadilla y prensa', muscles: ['quads', 'glutes', 'calves'] as MuscleGroupId[] },
-      { num: 4, title: 'Día 4: Empuje B (Hipertrofia & Deltoides)', sub: 'Inclinados y elevaciones', muscles: ['chest', 'shoulders', 'triceps'] as MuscleGroupId[] },
-      { num: 5, title: 'Día 5: Tracción B (Detalle & Bíceps)', sub: 'Poleas y brazos', muscles: ['back_upper', 'biceps', 'shoulders'] as MuscleGroupId[] },
-      { num: 6, title: 'Día 6: Pierna B (Glúteos & Isquios)', sub: 'RDL y curls femorales', muscles: ['hamstrings', 'glutes', 'core'] as MuscleGroupId[] }
+      { num: 1, title: 'Día 1 · Empuje A (Fuerza)', sub: 'Press banca pesado, hombro y tríceps', muscles: ['chest', 'shoulders', 'triceps'] as MuscleGroupId[] },
+      { num: 2, title: 'Día 2 · Tracción A (Densidad)', sub: 'Remos pesados, dominadas y bíceps', muscles: ['back_upper', 'back_lower', 'biceps'] as MuscleGroupId[] },
+      { num: 3, title: 'Día 3 · Pierna A (Cuádriceps)', sub: 'Sentadilla trasera, prensa y gemelos', muscles: ['quads', 'glutes', 'calves'] as MuscleGroupId[] },
+      { num: 4, title: 'Día 4 · Empuje B (Hipertrofia)', sub: 'Press inclinado, cruces y elevaciones laterales', muscles: ['chest', 'shoulders', 'triceps'] as MuscleGroupId[] },
+      { num: 5, title: 'Día 5 · Tracción B (Amplitud)', sub: 'Jalones, remos apoyados y brazos', muscles: ['back_upper', 'biceps', 'shoulders'] as MuscleGroupId[] },
+      { num: 6, title: 'Día 6 · Pierna B (Isquios & Glúteos)', sub: 'Peso muerto rumano, curls femorales y core', muscles: ['hamstrings', 'glutes', 'core'] as MuscleGroupId[] }
     ];
 
     splits.forEach(s => {
@@ -339,19 +402,18 @@ export function buildRoutine(
     });
   }
 
-  const blueprintComment = `«¡Ajá! El plano está sellado. Este ${name} transferirá la masa muscular directamente desde el ego de Roger hacia tus fibras. Sigue los descansos y no toques cables pelados».`;
-
   return {
     id: `routine_${Date.now()}`,
     name,
     subtitle,
     createdAt: new Date().toISOString(),
+    goal,
     experience,
     daysPerWeek: daysCount,
     equipment,
     selectedMuscles,
     days,
-    heinzBlueprintComment: blueprintComment
+    summaryNote
   };
 }
 
@@ -360,11 +422,10 @@ export function findQuickSubstitution(
   equipment: EquipmentPreference,
   allExercises: Exercise[],
   currentDayExerciseIds: string[]
-): { replacement: Exercise | null; complaint: string } {
+): { replacement: Exercise | null; feedback: string } {
   const current = allExercises.find(e => e.id === currentExId);
-  if (!current) return { replacement: null, complaint: '¡Ejercicio desconocido! Perry debió alterar los planos.' };
+  if (!current) return { replacement: null, feedback: 'Ejercicio no encontrado en la base de datos.' };
 
-  // Candidates: direct equivalents first, then free weight equivalents
   const candidateIds = [...current.directEquivalents, ...current.freeWeightEquivalents];
   const validCandidates = allExercises.filter(ex =>
     candidateIds.includes(ex.id) &&
@@ -374,7 +435,6 @@ export function findQuickSubstitution(
   );
 
   if (validCandidates.length === 0) {
-    // Fallback: any exercise with same movement pattern
     const patternFallback = allExercises.find(ex =>
       ex.movementPattern === current.movementPattern &&
       ex.id !== currentExId &&
@@ -384,19 +444,19 @@ export function findQuickSubstitution(
     if (patternFallback) {
       return {
         replacement: patternFallback,
-        complaint: `¡Ugh, todas las máquinas habituales están colapsadas! Toma este ${patternFallback.doofSubtitle} que cumple el mismo patrón biomecánico.`
+        feedback: `Sustituido por ${patternFallback.name} (mismo patrón biomecánico).`
       };
     }
     return {
       replacement: null,
-      complaint: '¡No hay más máquinas equivalentes disponibles en tu entorno! Tendrás que esperar o pelear por la polea.'
+      feedback: 'No hay más alternativas viables disponibles en este entorno.'
     };
   }
 
   const picked = validCandidates[Math.floor(Math.random() * validCandidates.length)];
   return {
     replacement: picked,
-    complaint: `¡Maldito sujeto acaparador! Reemplazando temporalmente por ${picked.name} (${picked.doofSubtitle}). ¡Mismo estímulo de hipertrofia!`
+    feedback: `Sustituido temporalmente por ${picked.name} para esta sesión.`
   };
 }
 
@@ -405,11 +465,10 @@ export function findPermanentSubstitution(
   equipment: EquipmentPreference,
   allExercises: Exercise[],
   currentDayExerciseIds: string[]
-): { replacement: Exercise | null; complaint: string } {
+): { replacement: Exercise | null; feedback: string } {
   const current = allExercises.find(e => e.id === currentExId);
-  if (!current) return { replacement: null, complaint: '¡Ejercicio no encontrado!' };
+  if (!current) return { replacement: null, feedback: 'Ejercicio no encontrado.' };
 
-  // For permanent change, prefer freeWeightEquivalents if home, or directEquivalents
   const candidateIds = equipment === 'home'
     ? [...current.freeWeightEquivalents, ...current.directEquivalents]
     : [...current.directEquivalents, ...current.freeWeightEquivalents];
@@ -431,18 +490,18 @@ export function findPermanentSubstitution(
     if (fallback) {
       return {
         replacement: fallback,
-        complaint: `¿Qué? ¿Tan delicado eres? He modificado el plano permanentemente por ${fallback.name}. ¡Espero que tus articulaciones queden contentas!`
+        feedback: `Protocolo actualizado permanentemente con ${fallback.name}.`
       };
     }
     return {
       replacement: null,
-      complaint: '¡No encontré un reemplazo viable en la base de datos para tu equipamiento!'
+      feedback: 'No se encontró un reemplazo disponible para tu equipamiento.'
     };
   }
 
   const picked = validCandidates[0];
   return {
     replacement: picked,
-    complaint: `¿No te gusta ${current.name}? ¡En mis tiempos en Gimmelshtump levantábamos yunques oxidados! Pero bien, he soldado ${picked.name} permanentemente en tu plano.`
+    feedback: `Protocolo actualizado: ${current.name} sustituido por ${picked.name}.`
   };
 }

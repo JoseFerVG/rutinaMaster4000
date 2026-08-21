@@ -3,18 +3,21 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    color-scheme: light;
+  }
+
   body {
-    @apply bg-zen-darkest text-slate-100 antialiased font-sans;
-    background-image: radial-gradient(circle at 50% -20%, rgba(16, 185, 129, 0.05), transparent 70%),
-                      radial-gradient(circle at 100% 100%, rgba(14, 165, 233, 0.03), transparent 50%);
-    background-attachment: fixed;
+    @apply bg-[#fcfcfd] text-zinc-900 antialiased font-sans selection:bg-zinc-900 selection:text-white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-/* Minimalist Zen Scrollbars */
+/* Minimalist Austere Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -22,47 +25,39 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: #d4d4d8;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 185, 129, 0.5);
+  background: #a1a1aa;
 }
 
-/* Glassmorphism card helpers */
-.zen-glass {
-  background: linear-gradient(135deg, rgba(22, 27, 38, 0.75) 0%, rgba(14, 17, 24, 0.85) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.zen-glass-hover {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.zen-glass-hover:hover {
-  background: linear-gradient(135deg, rgba(28, 34, 48, 0.85) 0%, rgba(17, 21, 30, 0.95) 100%);
-  border-color: rgba(255, 255, 255, 0.16);
-  transform: translateY(-1px);
-}
-
-/* Print Styles */
+/* Print Stylesheet for High-End Physical Workout Sheets */
 @media print {
+  @page {
+    margin: 1.2cm;
+    size: A4 portrait;
+  }
+
   body {
     background: #ffffff !important;
-    color: #0f172a !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
   }
 
   header, footer, button, .print\:hidden {
     display: none !important;
   }
 
+  .print\:border-black {
+    border-color: #000000 !important;
+  }
+
   * {
-    color: #0f172a !important;
+    color: #000000 !important;
     background-color: transparent !important;
-    border-color: #e2e8f0 !important;
-    text-shadow: none !important;
     box-shadow: none !important;
+    text-shadow: none !important;
   }
 }

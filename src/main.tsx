@@ -17,7 +17,7 @@ class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('RutinaMaster caught an error:', error, errorInfo);
+    console.error('KINETIC Error Boundary caught:', error, errorInfo);
   }
 
   render() {
@@ -25,8 +25,8 @@ class ErrorBoundary extends React.Component<
       return (
         <div style={{
           minHeight: '100vh',
-          backgroundColor: '#07080a',
-          color: '#f8fafc',
+          backgroundColor: '#fcfcfd',
+          color: '#09090b',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -36,18 +36,18 @@ class ErrorBoundary extends React.Component<
           textAlign: 'center'
         }}>
           <div style={{
-            maxWidth: '480px',
-            backgroundColor: '#11141c',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '24px',
+            maxWidth: '440px',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e4e4e7',
+            borderRadius: '16px',
             padding: '32px',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
           }}>
-            <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>
-              Restableciendo Interfaz Zen
+            <h2 style={{ fontSize: '18px', fontWeight: 600, marginBottom: '8px', letterSpacing: '-0.02em' }}>
+              Actualizando Protocolo
             </h2>
-            <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '24px', lineHeight: 1.6 }}>
-              Se ha detectado una versión anterior en la memoria local. Pulsa el botón para limpiar la caché y recargar.
+            <p style={{ fontSize: '13px', color: '#71717a', marginBottom: '24px', lineHeight: 1.6 }}>
+              Se ha detectado una versión anterior guardada en memoria local. Pulsa el botón para actualizar la configuración.
             </p>
             <button
               onClick={() => {
@@ -55,17 +55,17 @@ class ErrorBoundary extends React.Component<
                 window.location.reload();
               }}
               style={{
-                backgroundColor: '#10b981',
-                color: '#07080a',
+                backgroundColor: '#09090b',
+                color: '#ffffff',
                 fontWeight: 600,
                 border: 'none',
-                padding: '12px 24px',
-                borderRadius: '12px',
+                padding: '10px 20px',
+                borderRadius: '8px',
                 cursor: 'pointer',
-                fontSize: '14px'
+                fontSize: '13px'
               }}
             >
-              Reiniciar & Recargar
+              Restablecer & Continuar
             </button>
           </div>
         </div>

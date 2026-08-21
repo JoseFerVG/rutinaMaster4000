@@ -1,30 +1,18 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   Printer,
   Copy,
   Check,
-  Dumbbell,
-  Clock,
-  Repeat,
-  Layers,
-  Sparkles,
-  Sliders,
-  ChevronDown,
-  ChevronUp,
-  Award,
-  Info,
+  RotateCcw,
+  RefreshCw,
   Edit3,
-  RefreshCw
+  Zap,
+  Info
 } from 'lucide-react';
-import { useDoofStore } from '../../store/useDoofStore';
-import { DoofenshmirtzAvatar } from '../Dialogue/DoofenshmirtzAvatar';
-import { DialogueBubble } from '../Dialogue/DialogueBubble';
-import { HazardButton } from '../UI/HazardButton';
+import { useRoutineStore } from '../../store/useRoutineStore';
 import rawExercises from '../../data/exercises.json';
 import { Exercise } from '../../types';
-import dialogues from '../../data/dialogues.json';
-import { soundFx } from '../../utils/audioSynth';
+import { MUSCLE_LABELS_ES } from '../../utils/routineEngine';
 
 const exercisesDb = rawExercises as Exercise[];
 
@@ -37,25 +25,24 @@ export const RoutineView: React.FC = () => {
     replacePermanent,
     toggleSetCompleted,
     updateExerciseNotes,
-    openSelfDestructModal,
-    setStep,
-    heinzSpeech,
-    heinzMood,
+    resetAll,
     showToast
-  } = useDoofStore();
+  } = useRoutineStore();
 
   const [copied, setCopied] = useState(false);
-  const [expandedTip, setExpandedTip] = useState<string | null>(null);
-  const [editingNotes, setEditingNotes] = useState<string | null>(null);
+  const [editingNotesId, setEditingNotesId] = useState<string | null>(null);
 
   if (!activeRoutine) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-16 text-center space-y-4">
-        <h2 className="font-display font-semibold text-2xl text-slate-200">No hay protocolo activo</h2>
-        <p className="text-slate-400 text-sm">Configura tus preferencias para generar un plan de entrenamiento.</p>
-        <HazardButton variant="purple" onClick={() => setStep(0)}>
+      <div className="max-w-2xl mx-auto px-4 py-20 text-center space-y-4">
+        <h2 className="text-xl font-semibold text-zinc-900">No hay protocolo activo</h2>
+        <p className="text-sm text-zinc-500">Configura tus preferencias para generar un plan de entrenamiento biomecánico.</p>
+        <button
+          onClick={resetAll}
+          className="px-4 py-2 rounded-lg bg-zinc-950 text-white text-xs font-semibold hover:bg-zinc-800 transition-colors"
+        >
           Iniciar Configuración
-        </HazardButton>
+        </button>
       </div>
     );
   }
@@ -63,11 +50,10 @@ export const RoutineView: React.FC = () => {
   const currentDay = activeRoutine.days.find(d => d.dayNumber === activeDayTab) || activeRoutine.days[0];
 
   const handleCopyText = () => {
-    soundFx.playLaser();
     let text = `=========================================\n`;
-    text += `⚡ ${activeRoutine.name} ⚡\n`;
+    text += `📋 ${activeRoutine.name}\n`;
     text += `${activeRoutine.subtitle}\n`;
-    text += `Protocolo Biomecánico Personalizado\n`;
+    text += `Objetivo: ${activeRoutine.goal.toUpperCase()} | Nivel: ${activeRoutine.experience.toUpperCase()} | Entorno: ${activeRoutine.equipment.toUpperCase()}\n`;
     text += `=========================================\n\n`;
 
     activeRoutine.days.forEach(day => {
@@ -78,8 +64,8 @@ export const RoutineView: React.FC = () => {
         const exMeta = exercisesDb.find(e => e.id === exInst.exerciseId);
         if (exMeta) {
           text += `${idx + 1}. ${exMeta.name}\n`;
-          text += `   Series: ${exInst.sets} | Reps: ${exInst.reps} | Descanso: ${exInst.rest}\n`;
-          text += `   Consejo: "${exMeta.doofTip}"\n\n`;
+          text += `   Series: ${exInst.sets} | Reps: ${exInst.reps} | Descanso: ${exInst.rest} | Intensidad: ${exInst.targetRir || 'RIR 1-2'}\n`;
+          text += `   Guía técnica: ${exMeta.coachingCue}\n\n`;
         }
       });
       text += `\n`;
@@ -87,386 +73,285 @@ export const RoutineView: React.FC = () => {
 
     navigator.clipboard.writeText(text);
     setCopied(true);
-    showToast('Protocolo Copiado', 'La rutina completa ha sido transferida a tu portapapeles.', 'success');
+    showToast('Protocolo Copiado', 'La rutina completa ha sido copiada a tu portapapeles.', 'success');
     setTimeout(() => setCopied(false), 3000);
   };
 
   const handlePrint = () => {
-    soundFx.playGearClick();
     window.print();
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6 md:py-8 space-y-6 print:p-0 print:m-0 print:max-w-none">
-      {/* Routine Hero Header Box */}
-      <div className="rounded-3xl zen-glass p-6 md:p-8 shadow-zen-lg overflow-hidden border border-white/10 print:border-none print:shadow-none print:p-2">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-8 print:p-0 print:m-0 print:max-w-none">
+      {/* Top Header Card */}
+      <section className="bg-white border border-zinc-200/90 rounded-2xl p-6 md:p-8 shadow-card space-y-6 print:border-none print:p-0 print:shadow-none">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium tracking-wide flex items-center gap-1.5 shadow-sm">
-                <Sparkles className="w-3 h-3 text-emerald-400" />
-                PROTOCOLO OPTIMIZADO
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-100 text-zinc-700 border border-zinc-200">
+                {activeRoutine.goal.toUpperCase()}
               </span>
-              <span className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-slate-300 text-xs font-medium">
-                {activeRoutine.daysPerWeek} DÍAS/SEM · {activeRoutine.experience.toUpperCase()} · {activeRoutine.equipment === 'commercial' ? 'GIMNASIO' : 'CASA'}
+              <span className="font-mono text-[11px] font-medium uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-50 text-zinc-600 border border-zinc-200">
+                Nivel {activeRoutine.experience}
+              </span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-50 text-zinc-600 border border-zinc-200">
+                {activeRoutine.equipment === 'commercial' ? 'Gimnasio Comercial' : 'Gimnasio en Casa'}
+              </span>
+              <span className="font-mono text-[11px] font-medium uppercase tracking-wider px-2 py-0.5 rounded bg-zinc-50 text-zinc-600 border border-zinc-200">
+                {activeRoutine.daysPerWeek} Días / Sem
               </span>
             </div>
 
-            <h1 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white tracking-tight leading-tight">
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-950">
               {activeRoutine.name}
             </h1>
-
-            <p className="text-sm md:text-base text-slate-300 font-normal">
+            <p className="text-xs md:text-sm text-zinc-500 leading-relaxed max-w-2xl">
               {activeRoutine.subtitle}
             </p>
           </div>
 
-          {/* Quick Action Toolbar */}
-          <div className="flex flex-wrap items-center gap-2 print:hidden">
-            <button
-              onClick={handlePrint}
-              className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/10 text-xs font-medium flex items-center gap-2 transition-all shadow-sm"
-              title="Imprimir / Exportar PDF"
-            >
-              <Printer className="w-4 h-4 text-slate-400" />
-              <span>Imprimir / PDF</span>
-            </button>
-
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 shrink-0 print:hidden">
             <button
               onClick={handleCopyText}
-              className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-200 border border-white/10 text-xs font-medium flex items-center gap-2 transition-all shadow-sm"
-              title="Copiar texto de rutina"
+              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors"
             >
-              {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-slate-400" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-zinc-500" />}
               <span>{copied ? 'Copiado' : 'Copiar'}</span>
             </button>
 
             <button
-              onClick={() => setStep(1)}
-              className="px-4 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-medium flex items-center gap-2 transition-all shadow-sm"
-              title="Re-calibrar parámetros"
+              onClick={handlePrint}
+              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors"
             >
-              <Sliders className="w-4 h-4" />
-              <span>Re-calibrar</span>
+              <Printer className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Imprimir / PDF</span>
+            </button>
+
+            <button
+              onClick={resetAll}
+              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-zinc-950 hover:bg-zinc-800 text-white shadow-subtle flex items-center gap-1.5 transition-colors"
+            >
+              <RotateCcw className="w-3.5 h-3.5 text-zinc-300" />
+              <span>Nuevo Plan</span>
             </button>
           </div>
         </div>
-      </div>
 
-      {/* AI Coach Live Dialogue Strip */}
-      <div className="print:hidden rounded-2xl zen-glass p-4 md:p-6 shadow-zen-md grid grid-cols-1 md:grid-cols-12 gap-5 items-center border border-white/10">
-        <div className="md:col-span-3 flex flex-col items-center justify-center">
-          <DoofenshmirtzAvatar mood={heinzMood} isTalking={true} size="md" />
-        </div>
-        <div className="md:col-span-9">
-          <DialogueBubble
-            text={heinzSpeech}
-            mood={heinzMood}
-            title="Asesor Biomecánico"
-          />
-        </div>
-      </div>
+        {activeRoutine.summaryNote && (
+          <div className="pt-4 border-t border-zinc-100 text-xs text-zinc-600 leading-relaxed font-normal">
+            {activeRoutine.summaryNote}
+          </div>
+        )}
+      </section>
 
       {/* Day Selector Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin print:hidden">
-        {activeRoutine.days.map(day => {
-          const isActive = day.dayNumber === activeDayTab;
-          return (
-            <button
-              key={day.dayNumber}
-              onClick={() => setActiveDayTab(day.dayNumber)}
-              className={`flex-shrink-0 px-4 py-2.5 rounded-2xl border transition-all flex items-center gap-3 text-left ${
-                isActive
-                  ? 'bg-emerald-500/15 border-emerald-500/40 text-white shadow-zen-glow'
-                  : 'bg-white/[0.02] border-white/[0.06] text-slate-400 hover:border-white/[0.12] hover:text-slate-200'
-              }`}
-            >
-              <div
-                className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold ${
-                  isActive ? 'bg-emerald-500 text-slate-950 font-bold' : 'bg-white/[0.04] text-slate-400'
+      <section className="space-y-4 print:hidden">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+          {activeRoutine.days.map((day) => {
+            const isActive = day.dayNumber === activeDayTab;
+            return (
+              <button
+                key={day.dayNumber}
+                onClick={() => setActiveDayTab(day.dayNumber)}
+                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 ${
+                  isActive
+                    ? 'bg-zinc-950 text-white shadow-sm'
+                    : 'bg-white border border-zinc-200/80 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
                 }`}
               >
-                {day.dayNumber}
-              </div>
-              <div>
-                <div className="text-xs font-semibold text-slate-100">
-                  Día {day.dayNumber}
-                </div>
-                <div className="text-[11px] text-slate-400 truncate max-w-[140px]">
-                  {day.title.split(':')[1] || day.title}
-                </div>
-              </div>
-            </button>
-          );
-        })}
-      </div>
+                <span className="font-mono text-[10px] opacity-60">0{day.dayNumber}</span>
+                <span>{day.title.split('·')[1]?.trim() || day.title}</span>
+                <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded ${isActive ? 'bg-zinc-800 text-zinc-300' : 'bg-zinc-100 text-zinc-500'}`}>
+                  {day.exercises.length}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
 
-      {/* Current Day Detail Header */}
-      <div className="p-5 rounded-2xl zen-glass shadow-zen-sm flex flex-col md:flex-row md:items-center justify-between gap-4 border border-white/10">
-        <div>
-          <div className="text-xs font-medium text-emerald-400 uppercase tracking-wide flex items-center gap-1.5">
-            <Award className="w-3.5 h-3.5" /> Sesión Programada
+      {/* Active Day Section */}
+      <section className="space-y-4">
+        {/* Day Header Info */}
+        <div className="bg-zinc-50 border border-zinc-200/70 rounded-xl p-4 md:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 className="text-base md:text-lg font-bold text-zinc-900">
+              {currentDay.title}
+            </h2>
+            <p className="text-xs text-zinc-500 mt-0.5">
+              {currentDay.subtitle}
+            </p>
           </div>
-          <h2 className="font-display font-semibold text-xl md:text-2xl text-white mt-0.5">
-            {currentDay.title}
-          </h2>
-          <p className="text-xs md:text-sm text-slate-400 mt-1">
-            {currentDay.subtitle}
-          </p>
+
+          <div className="flex flex-wrap items-center gap-1.5">
+            {currentDay.focusMuscles.map((muscle) => (
+              <span
+                key={muscle}
+                className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-white border border-zinc-200 text-zinc-700"
+              >
+                {MUSCLE_LABELS_ES[muscle] || muscle}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="flex items-center gap-3 bg-white/[0.03] px-4 py-2 rounded-xl border border-white/[0.06]">
-          <div className="text-right">
-            <div className="text-[10px] uppercase text-slate-500 font-medium">Ejercicios</div>
-            <div className="text-sm font-semibold text-emerald-400">{currentDay.exercises.length} Movimientos</div>
-          </div>
-          <div className="w-px h-6 bg-white/[0.08]" />
-          <div className="text-right">
-            <div className="text-[10px] uppercase text-slate-500 font-medium">Estímulo</div>
-            <div className="text-sm font-semibold text-slate-200">Hipertrofia</div>
-          </div>
-        </div>
-      </div>
+        {/* Exercises List */}
+        <div className="space-y-3">
+          {currentDay.exercises.map((exInst, index) => {
+            const exMeta = exercisesDb.find(e => e.id === exInst.exerciseId);
+            if (!exMeta) return null;
 
-      {/* Exercise Cards List */}
-      <div className="space-y-3.5">
-        {currentDay.exercises.map((exInst, index) => {
-          const exMeta = exercisesDb.find(e => e.id === exInst.exerciseId);
-          if (!exMeta) return null;
+            const isEditingNotes = editingNotesId === exInst.instanceId;
 
-          const isTipOpen = expandedTip === exInst.instanceId;
-          const isEditing = editingNotes === exInst.instanceId;
+            return (
+              <div
+                key={exInst.instanceId}
+                className="bg-white border border-zinc-200/90 rounded-xl p-4 md:p-5 shadow-subtle hover:border-zinc-300 transition-all space-y-4"
+              >
+                {/* Exercise Main Header */}
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+                  <div className="flex items-start gap-3">
+                    <span className="font-mono text-xs font-bold text-zinc-400 px-2 py-1 rounded bg-zinc-50 border border-zinc-200/60 shrink-0 mt-0.5">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <h3 className="text-sm md:text-base font-semibold text-zinc-950">
+                        {exMeta.name}
+                      </h3>
+                      <p className="text-xs text-zinc-500 mt-0.5">
+                        {exMeta.subtitle}
+                      </p>
+                    </div>
+                  </div>
 
-          return (
-            <motion.div
-              key={exInst.instanceId}
-              layout
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              className={`rounded-2xl p-5 border transition-all duration-300 zen-glass shadow-zen-sm ${
-                exInst.isTemporarilyReplaced
-                  ? 'border-amber-500/30 bg-amber-500/[0.03]'
-                  : exInst.isPermanentlyReplaced
-                  ? 'border-sky-500/30 bg-sky-500/[0.03]'
-                  : 'border-white/10 hover:border-white/15'
-              }`}
-            >
-              {/* Substitution Banner if Replaced */}
-              {exInst.replacementMessage && (
-                <div className="mb-3.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-xs flex items-start gap-2">
-                  <RefreshCw className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                  <div className="flex-1">
-                    <span className="font-semibold">
-                      {exInst.isTemporarilyReplaced ? 'Sustitución rápida activa:' : 'Reemplazo permanente:'}
-                    </span>{' '}
-                    <span>{exInst.replacementMessage}</span>
+                  <div className="flex items-center gap-1.5 self-start shrink-0">
+                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 text-zinc-600 border border-zinc-200">
+                      {exMeta.mechanics === 'compound' ? 'Compuesto' : 'Aislamiento'} · Tier {exMeta.tier}
+                    </span>
                   </div>
                 </div>
-              )}
 
-              <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
-                {/* Exercise Info */}
-                <div className="space-y-1.5 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="w-5 h-5 rounded-md bg-white/[0.05] border border-white/10 flex items-center justify-center text-xs font-semibold text-emerald-400">
-                      {index + 1}
-                    </span>
-                    <span className="text-[10px] uppercase font-medium px-2 py-0.5 rounded bg-white/[0.04] text-slate-300 border border-white/[0.06]">
-                      {exMeta.muscleGroup.replace('_', ' ').toUpperCase()}
-                    </span>
-                    <span className="text-[10px] uppercase font-medium px-2 py-0.5 rounded bg-white/[0.04] text-slate-400 border border-white/[0.06]">
-                      {exMeta.equipment.toUpperCase()}
-                    </span>
+                {/* Replacement Banner if Substituted */}
+                {(exInst.isTemporarilyReplaced || exInst.isPermanentlyReplaced) && (
+                  <div className="p-2.5 rounded-lg bg-zinc-50 border border-zinc-200/80 text-xs text-zinc-700 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5">
+                      <Zap className="w-3.5 h-3.5 text-zinc-600 shrink-0" />
+                      <span>{exInst.replacementMessage || 'Ejercicio adaptado.'}</span>
+                    </div>
                   </div>
+                )}
 
-                  <div>
-                    <h3 className="font-semibold text-base md:text-lg text-white">
-                      {exMeta.name}
-                    </h3>
-                    <p className="text-xs text-slate-400 font-normal">
-                      {exMeta.doofSubtitle}
+                {/* Parameters & Metrics Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-zinc-100">
+                  <div className="p-2 rounded-lg bg-zinc-50/60 border border-zinc-100">
+                    <span className="text-[10px] font-mono uppercase text-zinc-400 block">Series</span>
+                    <span className="text-xs md:text-sm font-semibold text-zinc-900">{exInst.sets} series</span>
+                  </div>
+                  <div className="p-2 rounded-lg bg-zinc-50/60 border border-zinc-100">
+                    <span className="text-[10px] font-mono uppercase text-zinc-400 block">Repeticiones</span>
+                    <span className="text-xs md:text-sm font-semibold text-zinc-900">{exInst.reps}</span>
+                  </div>
+                  <div className="p-2 rounded-lg bg-zinc-50/60 border border-zinc-100">
+                    <span className="text-[10px] font-mono uppercase text-zinc-400 block">Descanso</span>
+                    <span className="text-xs md:text-sm font-semibold text-zinc-900">{exInst.rest}</span>
+                  </div>
+                  <div className="p-2 rounded-lg bg-zinc-50/60 border border-zinc-100">
+                    <span className="text-[10px] font-mono uppercase text-zinc-400 block">Intensidad</span>
+                    <span className="text-xs md:text-sm font-semibold text-zinc-900">{exInst.targetRir || 'RIR 1-2'}</span>
+                  </div>
+                </div>
+
+                {/* Technical Biomechanical Cue */}
+                {exMeta.coachingCue && (
+                  <div className="p-3 rounded-lg bg-zinc-50 border border-zinc-200/60 text-xs text-zinc-700 space-y-1">
+                    <div className="flex items-center gap-1.5 font-semibold text-zinc-900">
+                      <Info className="w-3.5 h-3.5 text-zinc-500" />
+                      <span>Indicación Técnica / Biomecánica:</span>
+                    </div>
+                    <p className="leading-relaxed pl-5">
+                      {exMeta.coachingCue}
                     </p>
                   </div>
-                </div>
-
-                {/* Sets, Reps, Rest Badges */}
-                <div className="flex items-center gap-3 bg-white/[0.03] p-2.5 rounded-xl border border-white/[0.06] flex-shrink-0">
-                  <div className="text-center px-2">
-                    <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500 uppercase font-medium">
-                      <Layers className="w-3 h-3 text-slate-400" /> Series
-                    </div>
-                    <div className="font-semibold text-base text-white">{exInst.sets}</div>
-                  </div>
-
-                  <div className="w-px h-5 bg-white/[0.08]" />
-
-                  <div className="text-center px-2">
-                    <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500 uppercase font-medium">
-                      <Repeat className="w-3 h-3 text-emerald-400" /> Reps
-                    </div>
-                    <div className="font-semibold text-sm text-emerald-300">{exInst.reps}</div>
-                  </div>
-
-                  <div className="w-px h-5 bg-white/[0.08]" />
-
-                  <div className="text-center px-2">
-                    <div className="flex items-center justify-center gap-1 text-[10px] text-slate-500 uppercase font-medium">
-                      <Clock className="w-3 h-3 text-sky-400" /> Descanso
-                    </div>
-                    <div className="font-semibold text-sm text-slate-300">{exInst.rest}</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Set Checkbox Tracker */}
-              <div className="mt-4 pt-3.5 border-t border-white/[0.06] flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400 font-medium">Series:</span>
-                  <div className="flex items-center gap-1.5">
-                    {exInst.completedSets.map((done, sIdx) => (
-                      <button
-                        key={sIdx}
-                        onClick={() => toggleSetCompleted(currentDay.dayNumber, exInst.instanceId, sIdx)}
-                        className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1 border ${
-                          done
-                            ? 'bg-emerald-500 border-emerald-400 text-slate-950 shadow-sm'
-                            : 'bg-white/[0.02] border-white/[0.08] text-slate-400 hover:text-white hover:border-white/20'
-                        }`}
-                      >
-                        <span>S{sIdx + 1}</span>
-                        {done && <Check className="w-3 h-3 stroke-[2.5]" />}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  {/* Notes button */}
-                  <button
-                    onClick={() => setEditingNotes(isEditing ? null : exInst.instanceId)}
-                    className="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-1 font-medium transition-colors"
-                  >
-                    <Edit3 className="w-3.5 h-3.5" />
-                    <span>{exInst.notes ? 'Editar Notas' : 'Añadir Carga'}</span>
-                  </button>
-
-                  {/* Advice toggle */}
-                  <button
-                    onClick={() => setExpandedTip(isTipOpen ? null : exInst.instanceId)}
-                    className="text-xs text-slate-400 hover:text-emerald-300 flex items-center gap-1 font-medium transition-colors"
-                  >
-                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>{isTipOpen ? 'Ocultar Detalle' : 'Detalle Biomecánico'}</span>
-                    {isTipOpen ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Notes Input Field */}
-              {(isEditing || exInst.notes) && (
-                <div className="mt-3 p-3 rounded-xl bg-white/[0.02] border border-white/[0.06]">
-                  <div className="text-[10px] text-slate-500 uppercase font-medium mb-1">Registro de Peso / RPE:</div>
-                  {isEditing ? (
-                    <input
-                      type="text"
-                      defaultValue={exInst.notes || ''}
-                      placeholder="Ej. 40kg x 10 reps (RIR 1)"
-                      onBlur={(e) => {
-                        updateExerciseNotes(currentDay.dayNumber, exInst.instanceId, e.target.value);
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          updateExerciseNotes(currentDay.dayNumber, exInst.instanceId, (e.target as HTMLInputElement).value);
-                          setEditingNotes(null);
-                        }
-                      }}
-                      className="w-full bg-zen-darkest border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-400"
-                      autoFocus
-                    />
-                  ) : (
-                    <div
-                      onClick={() => setEditingNotes(exInst.instanceId)}
-                      className="text-xs text-slate-300 cursor-pointer hover:text-emerald-300"
-                    >
-                      {exInst.notes}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Collapsible Advice */}
-              <AnimatePresence>
-                {isTipOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-3 p-3.5 rounded-xl bg-emerald-500/[0.04] border border-emerald-500/20 text-xs text-slate-300 leading-relaxed font-sans"
-                  >
-                    <strong className="text-emerald-400 font-medium">Clave Técnica:</strong> «{exMeta.doofTip}»
-                  </motion.div>
                 )}
-              </AnimatePresence>
 
-              {/* Substitution Action Controls */}
-              <div className="mt-3.5 pt-3 border-t border-white/[0.04] flex flex-wrap items-center justify-between gap-2.5 print:hidden">
-                <button
-                  onClick={() => replaceTemporary(currentDay.dayNumber, exInst.instanceId)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.03] hover:bg-amber-500/10 border border-white/[0.08] hover:border-amber-500/30 text-slate-300 hover:text-amber-200 text-xs font-medium transition-all"
-                  title="Sustituye por ejercicio equivalente si la máquina está ocupada"
-                >
-                  <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Máquina Ocupada · Sustitución Rápida</span>
-                </button>
+                {/* Interactive Series Tracker */}
+                <div className="pt-2 border-t border-zinc-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-mono text-zinc-400 uppercase mr-1">Progreso:</span>
+                    <div className="flex items-center gap-1.5">
+                      {Array.from({ length: exInst.sets }).map((_, setIdx) => {
+                        const isDone = exInst.completedSets[setIdx];
+                        return (
+                          <button
+                            key={setIdx}
+                            type="button"
+                            onClick={() => toggleSetCompleted(currentDay.dayNumber, exInst.instanceId, setIdx)}
+                            className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium border transition-all flex items-center gap-1 ${
+                              isDone
+                                ? 'bg-zinc-900 border-zinc-900 text-white'
+                                : 'bg-white border-zinc-200 text-zinc-600 hover:border-zinc-300'
+                            }`}
+                          >
+                            <span>S{setIdx + 1}</span>
+                            {isDone && <Check className="w-3 h-3 text-zinc-300" />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
 
-                <button
-                  onClick={() => replacePermanent(currentDay.dayNumber, exInst.instanceId)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/[0.08] hover:border-white/20 text-slate-400 hover:text-slate-200 text-xs font-medium transition-all"
-                  title="Cambia permanentemente en la rutina por molestia o preferencia"
-                >
-                  <Dumbbell className="w-3.5 h-3.5" />
-                  <span>Cambiar permanentemente de variante</span>
-                </button>
+                  {/* Actions: Substitution & Session Notes */}
+                  <div className="flex items-center gap-2 flex-wrap print:hidden">
+                    <button
+                      type="button"
+                      onClick={() => replaceTemporary(currentDay.dayNumber, exInst.instanceId)}
+                      title="Sustituir por máquina ocupada o alternativa rápida"
+                      className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-600 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1"
+                    >
+                      <RefreshCw className="w-3 h-3" />
+                      <span>Máquina Ocupada</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => replacePermanent(currentDay.dayNumber, exInst.instanceId)}
+                      title="Cambiar este ejercicio permanentemente en el protocolo"
+                      className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-600 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1"
+                    >
+                      <Zap className="w-3 h-3" />
+                      <span>Cambiar Ejercicio</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setEditingNotesId(isEditingNotes ? null : exInst.instanceId)}
+                      title="Añadir notas o pesos levantados"
+                      className="px-2.5 py-1 rounded-md text-[11px] font-medium text-zinc-600 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/70 border border-zinc-200 transition-colors flex items-center gap-1"
+                    >
+                      <Edit3 className="w-3 h-3" />
+                      <span>{exInst.notes ? 'Ver Notas' : 'Anotar Peso'}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Session Notes Input Box */}
+                {isEditingNotes && (
+                  <div className="pt-2">
+                    <textarea
+                      value={exInst.notes || ''}
+                      onChange={(e) => updateExerciseNotes(currentDay.dayNumber, exInst.instanceId, e.target.value)}
+                      placeholder="Registra aquí los pesos, repeticiones y sensaciones (ej. 80kg x 8, 8, 8)..."
+                      rows={2}
+                      className="w-full text-xs p-2.5 rounded-lg border border-zinc-200 bg-zinc-50/50 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-900 focus:bg-white"
+                    />
+                  </div>
+                )}
               </div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Rest Days Note */}
-      <div className="p-4 rounded-2xl zen-glass border border-white/10 flex items-start gap-3.5 shadow-sm">
-        <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 flex-shrink-0">
-          <Info className="w-4 h-4" />
+            );
+          })}
         </div>
-        <div className="text-xs text-slate-300 space-y-0.5">
-          <h4 className="font-semibold text-emerald-400">
-            Recuperación & Adaptación
-          </h4>
-          <p className="text-slate-400">
-            «{dialogues.restDayQuotes[Math.floor(Math.random() * dialogues.restDayQuotes.length)]}»
-          </p>
-        </div>
-      </div>
-
-      {/* Reset Section */}
-      <div className="pt-4 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4 print:hidden">
-        <div>
-          <h4 className="font-display font-semibold text-sm text-slate-300">
-            Gestión del Protocolo
-          </h4>
-          <p className="text-xs text-slate-500">
-            Puedes restablecer todos los parámetros para iniciar una nueva calibración desde cero.
-          </p>
-        </div>
-
-        <button
-          onClick={openSelfDestructModal}
-          className="px-4 py-2 rounded-xl bg-white/[0.03] hover:bg-rose-500/15 text-slate-400 hover:text-rose-300 font-medium text-xs border border-white/10 hover:border-rose-500/30 flex items-center gap-2 transition-all"
-        >
-          <span>Restablecer Todo</span>
-        </button>
-      </div>
+      </section>
     </div>
   );
 };

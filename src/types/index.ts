@@ -29,24 +29,26 @@ export type EquipmentCategory = 'commercial' | 'home' | 'bodyweight' | 'both';
 
 export type ExperienceLevel = 'novato' | 'intermedio' | 'avanzado';
 
+export type TrainingGoal = 'hipertrofia' | 'fuerza' | 'recomposicion' | 'longevidad';
+
 export type EquipmentPreference = 'commercial' | 'home';
 
-export type GenderPreference = 'male' | 'female' | 'neutral';
+export type MuscleFocusPreset = 'balance' | 'upper' | 'lower' | 'shoulders_back' | 'custom';
 
 export interface Exercise {
   id: string;
   name: string;
-  doofSubtitle: string;
+  subtitle: string;
   muscleGroup: MuscleGroupId;
   secondaryMuscles: MuscleGroupId[];
   movementPattern: MovementPattern;
   equipment: EquipmentCategory;
   directEquivalents: string[];
   freeWeightEquivalents: string[];
-  doofTip: string;
+  coachingCue: string;
   difficulty: ExperienceLevel;
   mechanics: 'compound' | 'isolation';
-  tier: 1 | 2 | 3; // 1 = main compound, 2 = secondary, 3 = accessory/isolation
+  tier: 1 | 2 | 3; // 1 = main compound, 2 = secondary, 3 = isolation / accessory
 }
 
 export interface RoutineExercise {
@@ -56,6 +58,7 @@ export interface RoutineExercise {
   sets: number;
   reps: string;
   rest: string;
+  targetRir?: string;
   isTemporarilyReplaced: boolean;
   isPermanentlyReplaced?: boolean;
   replacementMessage?: string;
@@ -78,21 +81,19 @@ export interface Routine {
   name: string;
   subtitle: string;
   createdAt: string;
-  gender?: GenderPreference;
+  goal: TrainingGoal;
   experience: ExperienceLevel;
   daysPerWeek: number;
   equipment: EquipmentPreference;
   selectedMuscles: MuscleGroupId[];
   days: RoutineDay[];
-  heinzBlueprintComment: string;
+  summaryNote: string;
 }
-
-export type HeinzMood = 'normal' | 'evil' | 'complaining' | 'shocked' | 'excited' | 'paranoid';
 
 export interface ToastMessage {
   id: string;
   title: string;
   message: string;
-  type: 'info' | 'warning' | 'danger' | 'success' | 'perry';
+  type: 'info' | 'success' | 'warning' | 'error';
   duration?: number;
 }
