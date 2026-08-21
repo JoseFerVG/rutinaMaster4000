@@ -134,9 +134,10 @@ export const CalculatorDetailView: React.FC<CalculatorDetailViewProps> = ({ tool
                       type="range"
                       min="1"
                       max="10"
+                      aria-label="Calidad de Sueño de 1 a 10"
                       value={readinessSleep}
                       onChange={(e) => setReadinessSleep(Number(e.target.value))}
-                      className="w-full accent-zinc-900"
+                      className="w-full accent-zinc-900 cursor-pointer"
                     />
                     <div className="flex justify-between text-[10px] text-zinc-400">
                       <span>1: Pésimo</span>
@@ -153,9 +154,10 @@ export const CalculatorDetailView: React.FC<CalculatorDetailViewProps> = ({ tool
                       type="range"
                       min="1"
                       max="10"
+                      aria-label="Dolor Muscular DOMS de 1 a 10"
                       value={readinessDOMS}
                       onChange={(e) => setReadinessDOMS(Number(e.target.value))}
-                      className="w-full accent-zinc-900"
+                      className="w-full accent-zinc-900 cursor-pointer"
                     />
                     <div className="flex justify-between text-[10px] text-zinc-400">
                       <span>1: Sin Dolor</span>
@@ -172,9 +174,10 @@ export const CalculatorDetailView: React.FC<CalculatorDetailViewProps> = ({ tool
                       type="range"
                       min="1"
                       max="10"
+                      aria-label="Nivel de Estrés de 1 a 10"
                       value={readinessStress}
                       onChange={(e) => setReadinessStress(Number(e.target.value))}
-                      className="w-full accent-zinc-900"
+                      className="w-full accent-zinc-900 cursor-pointer"
                     />
                   </div>
 
@@ -187,9 +190,10 @@ export const CalculatorDetailView: React.FC<CalculatorDetailViewProps> = ({ tool
                       type="range"
                       min="1"
                       max="10"
+                      aria-label="Nivel de Fatiga de 1 a 10"
                       value={readinessFatigue}
                       onChange={(e) => setReadinessFatigue(Number(e.target.value))}
-                      className="w-full accent-zinc-900"
+                      className="w-full accent-zinc-900 cursor-pointer"
                     />
                   </div>
                 </div>

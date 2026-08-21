@@ -423,23 +423,27 @@ export const RoutineView: React.FC = () => {
             </p>
           </div>
 
-          {/* Master Export Suite Actions */}
+          {/* Master Action Bar */}
           <div className="flex items-center gap-2 shrink-0 print:hidden flex-wrap">
-            {/* Export Excel Button (Primary) */}
+            {/* Primary Excel Export Button */}
             <button
+              type="button"
               onClick={handleExportExcel}
-              className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm flex items-center gap-1.5 transition-all"
+              aria-label="Exportar rutina a Excel"
+              className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
             >
-              <FileSpreadsheet className="w-3.5 h-3.5" />
+              <FileSpreadsheet className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Exportar Excel (.xlsx)</span>
             </button>
 
             {/* Print / PDF Button */}
             <button
+              type="button"
               onClick={handlePrint}
-              className="px-3.5 py-2 rounded-xl text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors"
+              aria-label="Imprimir o guardar como PDF"
+              className="px-3.5 py-2 rounded-xl text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              <Printer className="w-3.5 h-3.5 text-zinc-500" />
+              <Printer className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />
               <span>Imprimir / PDF</span>
             </button>
 
@@ -448,60 +452,67 @@ export const RoutineView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsExportMenuOpen(!isExportMenuOpen)}
-                className="px-3 py-2 rounded-xl text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors"
+                aria-expanded={isExportMenuOpen}
+                aria-haspopup="true"
+                aria-label="Más formatos de exportación"
+                className="px-3 py-2 rounded-xl text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                <Download className="w-3.5 h-3.5 text-zinc-500" />
+                <Download className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />
                 <span>Más Opciones</span>
-                <ChevronDown className="w-3 h-3 opacity-60" />
+                <ChevronDown className="w-3 h-3 opacity-60" aria-hidden="true" />
               </button>
 
               {isExportMenuOpen && (
-                <div className="absolute right-0 mt-1.5 w-56 bg-white border border-zinc-200 shadow-elevated rounded-xl p-1.5 z-50 animate-fadeIn">
+                <div role="menu" className="absolute right-0 mt-1.5 w-56 bg-white border border-zinc-200 shadow-elevated rounded-xl p-1.5 z-50 animate-fadeIn">
                   <button
                     type="button"
+                    role="menuitem"
                     onClick={() => {
                       handleExportMarkdown();
                       setIsExportMenuOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors"
+                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors cursor-pointer"
                   >
-                    <FileText className="w-3.5 h-3.5 text-zinc-500" />
+                    <FileText className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />
                     <span>Descargar Markdown (.md)</span>
                   </button>
 
                   <button
                     type="button"
+                    role="menuitem"
                     onClick={() => {
                       handleExportCalendar();
                       setIsExportMenuOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors"
+                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors cursor-pointer"
                   >
-                    <Calendar className="w-3.5 h-3.5 text-zinc-500" />
+                    <Calendar className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />
                     <span>Añadir a Calendario (.ics)</span>
                   </button>
 
                   <button
                     type="button"
+                    role="menuitem"
                     onClick={() => {
                       handleCopyText();
                       setIsExportMenuOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors"
+                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors cursor-pointer"
                   >
-                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-zinc-500" />}
+                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" /> : <Copy className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />}
                     <span>{copied ? 'Copiado al Portapapeles' : 'Copiar al Portapapeles'}</span>
                   </button>
 
                   <button
                     type="button"
+                    role="menuitem"
                     onClick={() => {
                       handleExportJSON();
                       setIsExportMenuOpen(false);
                     }}
-                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors border-t border-zinc-100"
+                    className="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-700 hover:bg-zinc-100 flex items-center gap-2 transition-colors border-t border-zinc-100 cursor-pointer"
                   >
-                    <Share2 className="w-3.5 h-3.5 text-zinc-500" />
+                    <Share2 className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />
                     <span>Backup JSON (.json)</span>
                   </button>
                 </div>
@@ -509,38 +520,52 @@ export const RoutineView: React.FC = () => {
             </div>
 
             <button
+              type="button"
               onClick={resetAll}
-              className="px-3 py-2 rounded-xl text-xs font-medium bg-zinc-950 hover:bg-zinc-800 text-white shadow-subtle flex items-center gap-1.5 transition-colors"
+              aria-label="Crear nuevo mesociclo"
+              className="px-3 py-2 rounded-xl text-xs font-medium bg-zinc-950 hover:bg-zinc-800 text-white shadow-subtle flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-zinc-300" />
+              <RotateCcw className="w-3.5 h-3.5 text-zinc-300" aria-hidden="true" />
               <span>Nuevo</span>
             </button>
           </div>
         </div>
 
-        {activeRoutine.summaryNote && (
-          <div className="pt-4 border-t border-zinc-100 text-xs text-zinc-600 leading-relaxed font-normal">
-            {activeRoutine.summaryNote}
+        {/* Prescription Summary Bar */}
+        <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200/80 flex flex-wrap items-center justify-between gap-3 text-xs text-zinc-600 font-mono">
+          <div>
+            <strong className="text-zinc-900 font-sans font-bold">Resumen de Carga:</strong> {activeRoutine.days.length} días de entrenamiento · {activeRoutine.days.reduce((acc, d) => acc + d.exercises.filter(e => !e.isOmitted).length, 0)} ejercicios totales
           </div>
-        )}
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 rounded bg-white border border-zinc-200 text-zinc-800">
+              RIR Objetivo: 1-2
+            </span>
+            <span className="px-2 py-0.5 rounded bg-white border border-zinc-200 text-zinc-800">
+              Foco: {activeRoutine.goal.toUpperCase()}
+            </span>
+          </div>
+        </div>
       </section>
 
-      {/* View Switcher & Day Tabs Bar */}
-      <section className="space-y-4 print:hidden">
+      {/* Day Selector Tabs */}
+      <section className="space-y-4 print:hidden" aria-label="Días del mesociclo">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           {/* Day Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+          <div role="tablist" aria-label="Días de entrenamiento" className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
             {activeRoutine.days.map((day) => {
               const isActive = viewMode === 'day' && day.dayNumber === activeDayTab;
               const activeExercisesCount = day.exercises.filter(e => !e.isOmitted).length;
               return (
                 <button
                   key={day.dayNumber}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
                   onClick={() => {
                     setViewMode('day');
                     setActiveDayTab(day.dayNumber);
                   }}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 ${
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
                     isActive
                       ? 'bg-zinc-950 text-white shadow-sm'
                       : 'bg-white border border-zinc-200/80 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
@@ -560,13 +585,13 @@ export const RoutineView: React.FC = () => {
           <button
             type="button"
             onClick={() => setViewMode(viewMode === 'all' ? 'day' : 'all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all flex items-center gap-1.5 shrink-0 self-start sm:self-auto ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all flex items-center gap-1.5 shrink-0 self-start sm:self-auto cursor-pointer ${
               viewMode === 'all'
                 ? 'bg-zinc-900 border-zinc-900 text-white font-semibold'
                 : 'bg-white border-zinc-200 text-zinc-700 hover:border-zinc-300'
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
+            <Layers className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{viewMode === 'all' ? 'Vista por Días' : 'Ver Semana Completa'}</span>
           </button>
         </div>

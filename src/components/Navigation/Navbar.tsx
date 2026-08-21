@@ -29,44 +29,48 @@ export const Navbar: React.FC = () => {
     (activeTool === 'cardio' && activeCardioRoutine);
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#fcfcfd]/90 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-8 py-3 transition-all print:hidden">
+    <header role="banner" className="sticky top-0 z-40 w-full bg-[#fbfbfa]/90 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-8 py-3 transition-all print:hidden">
       <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
         {/* Brand Logo & Name: Kinetic Biomechanics */}
         <div className="flex items-center gap-3">
-          <div
+          <button
+            type="button"
             onClick={goHome}
-            className="flex items-center gap-2.5 cursor-pointer group select-none"
+            aria-label="Kinetic Biomechanics - Ir al Inicio"
+            className="flex items-center gap-2.5 cursor-pointer group select-none text-left focus-visible:ring-2 focus-visible:ring-zinc-900 rounded-lg p-0.5"
           >
-            <div className="w-7 h-7 rounded-md bg-zinc-950 flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105">
-              <Activity className="w-3.5 h-3.5 text-zinc-100" />
+            <div className="w-7 h-7 rounded-md bg-zinc-950 flex items-center justify-center text-white shadow-xs transition-transform group-hover:scale-105">
+              <Activity className="w-3.5 h-3.5 text-zinc-100" aria-hidden="true" />
             </div>
             <div>
               <span className="font-display font-bold text-xs sm:text-sm tracking-widest text-zinc-950 uppercase">
                 KINETIC BIOMECHANICS
               </span>
             </div>
-          </div>
+          </button>
 
           {/* Breadcrumb Navigation Trail */}
-          <div className="hidden md:flex items-center gap-1.5 pl-3 border-l border-zinc-200 text-xs font-medium text-zinc-500">
+          <nav aria-label="Ruta de navegación" className="hidden md:flex items-center gap-1.5 pl-3 border-l border-zinc-200 text-xs font-medium text-zinc-500">
             <button
               type="button"
               onClick={goHome}
-              className={`hover:text-zinc-950 transition-colors flex items-center gap-1 ${
+              aria-current={currentView === 'home' ? 'page' : undefined}
+              className={`hover:text-zinc-950 transition-colors flex items-center gap-1 cursor-pointer rounded px-1.5 py-0.5 ${
                 currentView === 'home' ? 'text-zinc-950 font-semibold' : ''
               }`}
             >
-              <Home className="w-3 h-3" />
+              <Home className="w-3 h-3" aria-hidden="true" />
               <span>Inicio</span>
             </button>
 
             {activeCategory && (
               <>
-                <ChevronRight className="w-3 h-3 text-zinc-400" />
+                <ChevronRight className="w-3 h-3 text-zinc-400" aria-hidden="true" />
                 <button
                   type="button"
                   onClick={() => goToCategory(activeCategory)}
-                  className={`hover:text-zinc-950 transition-colors ${
+                  aria-current={currentView === 'category' ? 'page' : undefined}
+                  className={`hover:text-zinc-950 transition-colors cursor-pointer rounded px-1.5 py-0.5 ${
                     currentView === 'category' ? 'text-zinc-950 font-semibold' : ''
                   }`}
                 >
@@ -77,8 +81,8 @@ export const Navbar: React.FC = () => {
 
             {currentView === 'tool' && activeTool && (
               <>
-                <ChevronRight className="w-3 h-3 text-zinc-400" />
-                <span className="text-zinc-950 font-semibold">
+                <ChevronRight className="w-3 h-3 text-zinc-400" aria-hidden="true" />
+                <span className="text-zinc-950 font-semibold px-1.5 py-0.5" aria-current="page">
                   {activeTool === 'hypertrophy'
                     ? 'Hipertrofia & Fuerza'
                     : activeTool === 'cardio'
@@ -87,36 +91,40 @@ export const Navbar: React.FC = () => {
                 </span>
               </>
             )}
-          </div>
+          </nav>
         </div>
 
         {/* Top Switcher & Quick Navigation */}
         <div className="flex items-center gap-2">
           {/* Direct Category Jump Tabs */}
-          <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded-xl border border-zinc-200/60">
+          <div role="tablist" aria-label="Categorías principales" className="flex items-center gap-1 bg-zinc-100 p-1 rounded-xl border border-zinc-200/60">
             <button
               type="button"
+              role="tab"
+              aria-selected={activeCategory === 'routines'}
               onClick={() => goToCategory('routines')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
                 activeCategory === 'routines'
                   ? 'bg-white text-zinc-950 shadow-xs'
                   : 'text-zinc-600 hover:text-zinc-900'
               }`}
             >
-              <Layers className="w-3.5 h-3.5" />
+              <Layers className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Rutinas</span>
             </button>
 
             <button
               type="button"
+              role="tab"
+              aria-selected={activeCategory === 'calculators'}
               onClick={() => goToCategory('calculators')}
-              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 ${
+              className={`px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer ${
                 activeCategory === 'calculators'
                   ? 'bg-white text-zinc-950 shadow-xs'
                   : 'text-zinc-600 hover:text-zinc-900'
               }`}
             >
-              <Calculator className="w-3.5 h-3.5" />
+              <Calculator className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Calculadoras</span>
             </button>
           </div>
@@ -124,10 +132,12 @@ export const Navbar: React.FC = () => {
           {/* Action: Reset current plan when in tool view */}
           {currentView === 'tool' && hasActivePlan && (
             <button
+              type="button"
               onClick={handleResetCurrent}
-              className="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/80 border border-zinc-200/60 transition-colors flex items-center gap-1.5"
+              aria-label="Reiniciar protocolo actual"
+              className="px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200/80 border border-zinc-200/60 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
-              <RotateCcw className="w-3.5 h-3.5" />
+              <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
               <span className="hidden sm:inline">Nuevo</span>
             </button>
           )}

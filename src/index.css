@@ -1,6 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary: #18181b;
+  --color-accent: #2563eb;
+  --color-success: #16a34a;
+  --color-surface: #ffffff;
+  --color-bg: #fbfbfa;
+  --color-border: rgba(228, 228, 231, 0.8);
+  
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+}
 
 @layer base {
   html {
@@ -8,9 +30,26 @@
   }
 
   body {
-    @apply bg-[#fcfcfd] text-zinc-900 antialiased font-sans selection:bg-zinc-900 selection:text-white;
+    @apply bg-[#fbfbfa] text-zinc-900 antialiased font-sans selection:bg-zinc-900 selection:text-white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Accessible Focus States */
+  button, input, select, textarea, [tabindex="0"] {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-1;
+  }
+}
+
+/* Reduced Motion Support (WCAG 2.2 Requirement) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

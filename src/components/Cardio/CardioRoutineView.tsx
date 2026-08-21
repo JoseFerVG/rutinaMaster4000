@@ -121,50 +121,60 @@ export const CardioRoutineView: React.FC = () => {
           {/* Action Buttons */}
           <div className="flex items-center gap-2 shrink-0 print:hidden flex-wrap">
             <button
+              type="button"
               onClick={() => exportCardioToExcel(activeCardioRoutine)}
-              className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm flex items-center gap-1.5 transition-all"
+              aria-label="Exportar rutina de cardio a Excel"
+              className="px-3.5 py-2 rounded-lg text-xs font-semibold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
             >
-              <FileSpreadsheet className="w-3.5 h-3.5" />
+              <FileSpreadsheet className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Exportar Excel (.xlsx)</span>
             </button>
 
             <button
+              type="button"
               onClick={handleCopyText}
-              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors"
+              aria-label="Copiar texto de la rutina al portapapeles"
+              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-zinc-500" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" /> : <Copy className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />}
               <span>{copied ? 'Copiado' : 'Copiar'}</span>
             </button>
 
             <button
+              type="button"
               onClick={handlePrint}
-              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors"
+              aria-label="Imprimir o guardar como PDF"
+              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-white hover:bg-zinc-50 text-zinc-800 border border-zinc-200 shadow-subtle flex items-center gap-1.5 transition-colors cursor-pointer"
             >
-              <Printer className="w-3.5 h-3.5 text-zinc-500" />
+              <Printer className="w-3.5 h-3.5 text-zinc-500" aria-hidden="true" />
               <span>Imprimir / PDF</span>
             </button>
 
             <button
+              type="button"
               onClick={resetAll}
-              className="px-3.5 py-2 rounded-lg text-xs font-medium bg-zinc-950 hover:bg-zinc-800 text-white shadow-subtle flex items-center gap-1.5 transition-colors"
+              aria-label="Crear nuevo plan de cardio"
+              className="px-3 py-2 rounded-lg text-xs font-medium text-zinc-600 hover:text-zinc-950 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 transition-colors flex items-center gap-1 cursor-pointer"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-zinc-300" />
-              <span>Nuevo Plan</span>
+              <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
+              <span className="hidden sm:inline">Nuevo</span>
             </button>
           </div>
         </div>
 
-        {/* Zones Guide Accordion Trigger */}
-        <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
-          <div className="text-xs text-zinc-600 font-normal">
+        {/* Prescription Summary Bar */}
+        <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200/80 flex items-center justify-between text-xs text-zinc-700">
+          <div className="leading-relaxed">
+            <strong className="font-semibold text-zinc-900">Enfoque Fisiológico: </strong>
             {activeCardioRoutine.summaryNote}
           </div>
           <button
             type="button"
             onClick={() => setShowZonesGuide(!showZonesGuide)}
-            className="text-xs font-semibold text-zinc-900 hover:text-zinc-600 flex items-center gap-1 shrink-0 ml-4 print:hidden"
+            aria-expanded={showZonesGuide}
+            className="text-xs font-semibold text-zinc-900 hover:text-zinc-600 flex items-center gap-1 shrink-0 ml-4 print:hidden cursor-pointer"
           >
-            <Activity className="w-3.5 h-3.5" />
+            <Activity className="w-3.5 h-3.5" aria-hidden="true" />
             <span>{showZonesGuide ? 'Ocultar Zonas Cardíacas' : 'Ver Guía de Zonas Fisiológicas'}</span>
           </button>
         </div>
@@ -195,15 +205,18 @@ export const CardioRoutineView: React.FC = () => {
       </section>
 
       {/* Session Selector Tabs */}
-      <section className="space-y-4 print:hidden">
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+      <section className="space-y-4 print:hidden" aria-label="Selector de sesiones de cardio">
+        <div role="tablist" aria-label="Sesiones de entrenamiento" className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
           {activeCardioRoutine.sessions.map((sess) => {
             const isActive = sess.sessionNumber === activeSessionTab;
             return (
               <button
                 key={sess.sessionNumber}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActiveSessionTab(sess.sessionNumber)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 ${
+                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
                   isActive
                     ? 'bg-zinc-950 text-white shadow-sm'
                     : 'bg-white border border-zinc-200/80 text-zinc-600 hover:text-zinc-900 hover:border-zinc-300'
@@ -214,7 +227,7 @@ export const CardioRoutineView: React.FC = () => {
                 <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded border ${getZoneBadgeColor(sess.primaryZone)}`}>
                   {sess.primaryZone}
                 </span>
-                {sess.isCompleted && <Check className="w-3 h-3 text-emerald-500" />}
+                {sess.isCompleted && <Check className="w-3 h-3 text-emerald-500" aria-hidden="true" />}
               </button>
             );
           })}

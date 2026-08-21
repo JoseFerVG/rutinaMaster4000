@@ -457,7 +457,7 @@ export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
   );
 
   return (
-    <div className="w-full bg-white border border-zinc-200/90 rounded-2xl p-4 sm:p-6 shadow-subtle space-y-4 select-none">
+    <div role="region" aria-label="Mapa Anatómico Interactivo" className="w-full bg-white border border-zinc-200/90 rounded-2xl p-4 sm:p-6 shadow-subtle space-y-4 select-none">
       {/* Top Controls & View Mode Switcher */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-3 border-b border-zinc-100">
         <div className="flex items-center gap-2">
@@ -468,11 +468,13 @@ export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
         </div>
 
         {/* View Switcher Tabs */}
-        <div className="flex items-center gap-1 bg-zinc-100 p-1 rounded-lg border border-zinc-200/60">
+        <div role="tablist" aria-label="Vistas del mapa corporal" className="flex items-center gap-1 bg-zinc-100 p-1 rounded-lg border border-zinc-200/60">
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'both'}
             onClick={() => setActiveTab('both')}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all ${
+            className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
               activeTab === 'both'
                 ? 'bg-white text-zinc-950 shadow-sm font-semibold'
                 : 'text-zinc-500 hover:text-zinc-900'
@@ -482,8 +484,10 @@ export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
           </button>
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'front'}
             onClick={() => setActiveTab('front')}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all ${
+            className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
               activeTab === 'front'
                 ? 'bg-white text-zinc-950 shadow-sm font-semibold'
                 : 'text-zinc-500 hover:text-zinc-900'
@@ -493,8 +497,10 @@ export const InteractiveBodyMap: React.FC<InteractiveBodyMapProps> = ({
           </button>
           <button
             type="button"
+            role="tab"
+            aria-selected={activeTab === 'back'}
             onClick={() => setActiveTab('back')}
-            className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all ${
+            className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
               activeTab === 'back'
                 ? 'bg-white text-zinc-950 shadow-sm font-semibold'
                 : 'text-zinc-500 hover:text-zinc-900'
