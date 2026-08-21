@@ -3,49 +3,61 @@ import { useAppStore } from './store/useAppStore';
 import { useRoutineStore } from './store/useRoutineStore';
 import { useCardioStore } from './store/useCardioStore';
 import { Navbar } from './components/Navigation/Navbar';
+import { HomeHub } from './components/Home/HomeHub';
+import { CategoryHubView } from './components/CategoryHub/CategoryHubView';
 import { SingleQuestionFlow } from './components/Wizard/SingleQuestionFlow';
 import { GeneratingView } from './components/Compilator/GeneratingView';
 import { RoutineView } from './components/RoutineView/RoutineView';
 import { CardioWizard } from './components/Cardio/CardioWizard';
 import { CardioGeneratingView } from './components/Cardio/CardioGeneratingView';
 import { CardioRoutineView } from './components/Cardio/CardioRoutineView';
-import { CalculatorsView } from './components/Calculators/CalculatorsView';
 import { Toast } from './components/UI/Toast';
 
 export function App() {
-  const { activeSection } = useAppStore();
+  const { currentView, activeCategory, activeTool } = useAppStore();
   const { step: hypertrophyStep } = useRoutineStore();
   const { step: cardioStep } = useCardioStore();
 
   const renderContent = () => {
-    if (activeSection === 'calculators') {
-      return <CalculatorsView key="calculators-view" />;
+    // Level 1: Index of Tool Categories
+    if (currentView === 'home') {
+      return <HomeHub key="home-hub" />;
     }
 
-    if (activeSection === 'cardio') {
-      switch (cardioStep) {
-        case 'wizard':
-          return <CardioWizard key="cardio-wizard" />;
+    // Level 2: Tools within Chosen Category
+    if (currentView === 'category') {
+      return <CategoryHubView key={`category-${activeCategory}`} />;
+    }
+
+    // Level 3: Specific Active Tool Execution
+    if (currentView === 'tool') {
+      if (activeTool === 'cardio') {
+        switch (cardioStep) {
+          case 'wizard':
+            return <CardioWizard key="cardio-wizard" />;
+          case 'generating':
+            return <CardioGeneratingView key="cardio-generating" />;
+          case 'routine':
+            return <CardioRoutineView key="cardio-routine" />;
+          default:
+            return <CardioWizard key="cardio-default" />;
+        }
+      }
+
+      // Default Tool: Hypertrophy & Strength
+      switch (hypertrophyStep) {
+        case 'questionnaire':
+          return <SingleQuestionFlow key="hypertrophy-questionnaire" />;
         case 'generating':
-          return <CardioGeneratingView key="cardio-generating" />;
+          return <GeneratingView key="hypertrophy-generating" />;
         case 'routine':
-          return <CardioRoutineView key="cardio-routine" />;
+          return <RoutineView key="hypertrophy-routine" />;
         default:
-          return <CardioWizard key="cardio-default" />;
+          return <SingleQuestionFlow key="hypertrophy-default" />;
       }
     }
 
-    // Default: Hypertrophy & Strength module
-    switch (hypertrophyStep) {
-      case 'questionnaire':
-        return <SingleQuestionFlow key="hypertrophy-questionnaire" />;
-      case 'generating':
-        return <GeneratingView key="hypertrophy-generating" />;
-      case 'routine':
-        return <RoutineView key="hypertrophy-routine" />;
-      default:
-        return <SingleQuestionFlow key="hypertrophy-default" />;
-    }
+    return <HomeHub key="home-fallback" />;
   };
 
   return (
@@ -57,11 +69,11 @@ export function App() {
       <main className="flex-1 w-full flex flex-col justify-center relative">
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${activeSection}-${activeSection === 'hypertrophy' ? hypertrophyStep : activeSection === 'cardio' ? cardioStep : 'static'}`}
+            key={`${currentView}-${activeCategory}-${activeTool}-${activeTool === 'hypertrophy' ? hypertrophyStep : cardioStep}`}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.18 }}
             className="w-full"
           >
             {renderContent()}
