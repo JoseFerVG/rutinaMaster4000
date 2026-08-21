@@ -4,7 +4,6 @@ import {
   Printer,
   Copy,
   Check,
-  RefreshCw,
   Flame,
   AlertCircle,
   Dumbbell,
@@ -17,10 +16,12 @@ import {
   ChevronUp,
   Award,
   Info,
-  Edit3
+  Edit3,
+  MessageSquare
 } from 'lucide-react';
 import { useDoofStore } from '../../store/useDoofStore';
-import { HeinzSpeechBubble } from '../UI/HeinzSpeechBubble';
+import { DoofenshmirtzAvatar } from '../Dialogue/DoofenshmirtzAvatar';
+import { DialogueBubble } from '../Dialogue/DialogueBubble';
 import { HazardButton } from '../UI/HazardButton';
 import rawExercises from '../../data/exercises.json';
 import { Exercise } from '../../types';
@@ -158,9 +159,18 @@ export const RoutineView: React.FC = () => {
         </div>
       </div>
 
-      {/* Heinz Speech Reactive Bubble */}
-      <div className="print:hidden">
-        <HeinzSpeechBubble speech={heinzSpeech} mood={heinzMood} />
+      {/* Heinz Interactive Character & Speech Stage at the War Room */}
+      <div className="print:hidden rounded-3xl bg-gradient-to-r from-doof-panel via-doof-card to-slate-900 border-2 border-purple-500/40 p-4 md:p-6 shadow-xl grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+        <div className="md:col-span-3 flex flex-col items-center justify-center">
+          <DoofenshmirtzAvatar mood={heinzMood} isTalking={true} size="md" />
+        </div>
+        <div className="md:col-span-9">
+          <DialogueBubble
+            text={heinzSpeech}
+            mood={heinzMood}
+            title="Dr. Doofenshmirtz • Monitor de Entrenamiento"
+          />
+        </div>
       </div>
 
       {/* Day Selector Tabs */}
@@ -408,26 +418,26 @@ export const RoutineView: React.FC = () => {
                 )}
               </AnimatePresence>
 
-              {/* Substitution Action Buttons (Lógica 1 & Lógica 2) */}
+              {/* Substitution Action Bocadillos (Lógica 1 & Lógica 2) */}
               <div className="mt-4 pt-3 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2.5 print:hidden">
                 {/* Lógica 1: Sustitución de máquina ocupada */}
                 <button
                   onClick={() => replaceTemporary(currentDay.dayNumber, exInst.instanceId)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-950/50 hover:bg-amber-900/60 border border-amber-500/50 text-amber-300 text-xs font-bold tracking-wide transition-all active:scale-95 shadow-sm"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-amber-950/60 hover:bg-amber-900/80 border-2 border-amber-500/60 text-amber-200 text-xs font-bold tracking-wide transition-all active:scale-95 shadow-md group"
                   title="Reemplaza inmediatamente por si la máquina está ocupada en el gym"
                 >
-                  <RefreshCw className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" />
-                  <span>¡Polea/Máquina Ocupada! Sustitución Rápida</span>
+                  <MessageSquare className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="font-comic text-sm">«¡Heinz, polea ocupada! Dame otra variante»</span>
                 </button>
 
                 {/* Lógica 2: Cambiar permanentemente */}
                 <button
                   onClick={() => replacePermanent(currentDay.dayNumber, exInst.instanceId)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-red-950/50 border border-slate-700 hover:border-red-500/40 text-slate-300 hover:text-red-200 text-xs font-bold tracking-wide transition-all active:scale-95"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-slate-800/90 hover:bg-red-950/60 border-2 border-slate-600 hover:border-red-500/60 text-slate-200 hover:text-red-200 text-xs font-bold tracking-wide transition-all active:scale-95 shadow-md group"
                   title="Cambia permanentemente en el plano por no disponer de máquina o molestia articular"
                 >
-                  <Dumbbell className="w-3.5 h-3.5 text-slate-400" />
-                  <span>No tengo esta máquina / No me gusta este ejercicio</span>
+                  <Dumbbell className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-400" />
+                  <span className="font-comic text-sm">«No tengo esta máquina / No me gusta este ejercicio»</span>
                 </button>
               </div>
             </motion.div>
