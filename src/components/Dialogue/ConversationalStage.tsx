@@ -17,24 +17,26 @@ import { BodySelector } from '../BodySelector/BodySelector';
 
 export const ConversationalStage: React.FC = () => {
   const {
-    step,
+    step = 0,
     setStep,
-    gender,
+    gender = 'male',
     setGender,
-    selectedMuscles,
-    daysPerWeek,
+    selectedMuscles = [],
+    daysPerWeek = 4,
     setDaysPerWeek,
-    experience,
+    experience = 'intermedio',
     setExperience,
-    equipment,
+    equipment = 'commercial',
     setEquipment,
-    heinzSpeech,
+    heinzSpeech = '',
     setHeinzSpeech,
     selectPreset
   } = useDoofStore();
 
   const [stageMode, setStageMode] = useState<'dialogue' | 'hologram'>('dialogue');
   const [genderSelectedInStep1, setGenderSelectedInStep1] = useState<boolean>(true);
+
+  const safeMuscles = selectedMuscles || [];
 
   // Step 0: Welcome Conversation Options
   const getWelcomeChoices = (): DialogueChoiceOption[] => [
@@ -133,7 +135,7 @@ export const ConversationalStage: React.FC = () => {
       speechText: '«Cuerpo Completo (Full Body equilibrado para todos los grupos)»',
       tag: 'Full Body',
       variant: 'green',
-      isSelected: selectedMuscles.length >= 8,
+      isSelected: safeMuscles.length >= 8,
       onClick: () => selectPreset('full_body')
     },
     {
@@ -141,7 +143,7 @@ export const ConversationalStage: React.FC = () => {
       speechText: '«Torso & Brazos (Énfasis en pectoral, dorsales, deltoides y brazos)»',
       tag: 'Torso & Brazos',
       variant: 'purple',
-      isSelected: selectedMuscles.includes('chest') && selectedMuscles.includes('back_upper') && selectedMuscles.includes('biceps') && !selectedMuscles.includes('quads'),
+      isSelected: safeMuscles.includes('chest') && safeMuscles.includes('back_upper') && safeMuscles.includes('biceps') && !safeMuscles.includes('quads'),
       onClick: () => selectPreset('upper_torso')
     },
     {
@@ -149,12 +151,12 @@ export const ConversationalStage: React.FC = () => {
       speechText: '«Tren Inferior Completo (Cuádriceps, glúteos, isquiotibiales y gemelos)»',
       tag: 'Piernas',
       variant: 'amber',
-      isSelected: selectedMuscles.includes('quads') && selectedMuscles.includes('glutes') && !selectedMuscles.includes('chest'),
+      isSelected: safeMuscles.includes('quads') && safeMuscles.includes('glutes') && !safeMuscles.includes('chest'),
       onClick: () => selectPreset('titan_legs')
     },
     {
       id: 'confirm_muscles',
-      speechText: `«Confirmar selección (${selectedMuscles.length} grupos activos) y pasar a frecuencia de días.»`,
+      speechText: `«Confirmar selección (${safeMuscles.length} grupos activos) y pasar a frecuencia de días.»`,
       tag: 'Siguiente Paso',
       variant: 'green',
       icon: <ArrowRight className="w-4 h-4" />,

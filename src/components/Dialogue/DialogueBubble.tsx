@@ -5,7 +5,7 @@ import { soundFx } from '../../utils/audioSynth';
 import { HeinzMood } from '../../types';
 
 interface DialogueBubbleProps {
-  text: string;
+  text?: string;
   mood?: HeinzMood;
   title?: string;
   className?: string;
@@ -13,11 +13,12 @@ interface DialogueBubbleProps {
 }
 
 export const DialogueBubble: React.FC<DialogueBubbleProps> = ({
-  text,
+  text = '',
   title = 'Asesor de Entrenamiento',
   className = '',
   onFinishedTyping
 }) => {
+  const safeText = text || '';
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
 
@@ -26,9 +27,14 @@ export const DialogueBubble: React.FC<DialogueBubbleProps> = ({
     setIsTyping(true);
     let index = 0;
 
+    if (!safeText) {
+      setIsTyping(false);
+      return;
+    }
+
     const timer = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText(prev => prev + text.charAt(index));
+      if (index < safeText.length) {
+        setDisplayedText(prev => prev + safeText.charAt(index));
         index++;
         if (index % 12 === 0) {
           soundFx.playGearClick();
@@ -41,10 +47,10 @@ export const DialogueBubble: React.FC<DialogueBubbleProps> = ({
     }, 12);
 
     return () => clearInterval(timer);
-  }, [text, onFinishedTyping]);
+  }, [safeText, onFinishedTyping]);
 
   const handleSkipTyping = () => {
-    setDisplayedText(text);
+    setDisplayedText(safeText);
     setIsTyping(false);
   };
 
@@ -52,7 +58,7 @@ export const DialogueBubble: React.FC<DialogueBubbleProps> = ({
     <div className={`relative flex flex-col ${className}`}>
       {/* Sleek Glass Dialogue Card */}
       <motion.div
-        key={text}
+        key={safeText}
         initial={{ scale: 0.98, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.25 }}
@@ -82,7 +88,7 @@ export const DialogueBubble: React.FC<DialogueBubbleProps> = ({
         </div>
 
         {/* Typed Dialogue */}
-        <p className="text-slate-200 font-sans text-sm sm:text-base md:text-lg leading-relaxed font-normal">
+        <p className="text-slate-200 font-sans text-sm sm:text-base md:text-lg leading-relaxed font-normal min-h-[48px]">
           {displayedText}
           {isTyping && <span className="inline-block w-1.5 h-4 bg-emerald-400 ml-1 animate-pulse" />}
         </p>
