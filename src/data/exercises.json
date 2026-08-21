@@ -23,13 +23,14 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-bench-press.gif",
+    "gifUrl": "/gifs/ex_101.gif",
     "instructions": [
       "Túmbate en el banco con los ojos alineados debajo de la barra y los pies firmemente anclados al suelo.",
       "Junta y desciende las escápulas (retracción y depresión escapular) creando un arco lumbar fisiológico natural.",
       "Desengancha la barra y desciende de forma controlada (2-3 seg) hacia el tercio inferior del esternón, con codos a 45-60º.",
       "Pausa un instante en el pecho sin rebotar y empuja con potencia manteniendo la tensión en el pectoral."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-bench-press.gif"
   },
   {
     "id": "ex_102",
@@ -55,13 +56,14 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/dumbbell-incline-bench-press.gif",
+    "gifUrl": "/gifs/ex_102.gif",
     "instructions": [
       "Siéntate en el banco con las mancuernas en los muslos; impúlsate hacia atrás para colocarlas a la altura del pecho.",
       "Mantén las escápulas retraídas y desciende las mancuernas ampliando el rango de movimiento hasta sentir un estiramiento profundo.",
       "Empuja convergiendo ligeramente hacia arriba sin chocar las mancuernas en la cúspide.",
       "Mantén los antebrazos completamente verticales durante todo el recorrido."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-incline-bench-press.gif"
   },
   {
     "id": "ex_103",
@@ -87,13 +89,14 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/lever-chest-press-0577.gif",
+    "gifUrl": "/gifs/ex_103.gif",
     "instructions": [
       "Ajusta la altura del asiento para que los agarres queden alineados con la línea media de los pezones.",
       "Apoya la espalda y la cabeza firmemente contra el respaldo y retrae las escápulas.",
       "Empuja hacia adelante extendiendo los brazos sin llegar a bloquear bruscamente los codos.",
       "Regresa lentamente controlando la carga hasta que las empuñaduras lleguen al nivel del pecho."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-chest-press-0577.gif"
   },
   {
     "id": "ex_104",
@@ -118,13 +121,14 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/push-up.gif",
+    "gifUrl": "/gifs/ex_104.gif",
     "instructions": [
       "Colócate en posición de plancha con las manos separadas a la anchura de los hombros.",
       "Activa el core, glúteos y cuádriceps para mantener una línea recta desde la cabeza a los talones.",
       "Desciende flexionando los codos en un ángulo de 45º hasta rozar el suelo con el esternón.",
       "Empuja contra el suelo extendiendo los brazos y manteniendo el abdomen firme."
-    ]
+    ],
+    "localGifPath": "/gifs/push-up.gif"
   },
   {
     "id": "ex_105",
@@ -148,13 +152,14 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/dumbbell-incline-bench-press.gif",
+    "gifUrl": "/gifs/ex_105.gif",
     "instructions": [
       "Ajusta el banco a una inclinación de 30º a 45º.",
       "Apoya la espalda, fija los pies y lleva las mancuernas al nivel de la clavícula.",
       "Desciende controlando la fase excéntrica enfatizando la porción clavicular del pectoral.",
       "Empuja verticalmente con fuerza manteniendo los hombros pegados al respaldo."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-incline-bench-press.gif"
   },
   {
     "id": "ex_106",
@@ -178,12 +183,13 @@
     "difficulty": "avanzado",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/barbell-incline-bench-press.gif",
+    "gifUrl": "/gifs/ex_106.gif",
     "instructions": [
       "Colócate en banco inclinado a 30º con agarre ligeramente superior al ancho de hombros.",
       "Desciende la barra hacia la parte superior del tórax rozando la clavícula de forma controlada.",
       "Empuja la barra en una trayectoria vertical sin adelantar los hombros en la parte superior."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-incline-bench-press.gif"
   },
   {
     "id": "ex_107",
@@ -206,13 +212,14 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/cable-middle-fly.gif",
+    "gifUrl": "/gifs/ex_107.gif",
     "instructions": [
       "Ajusta las poleas a la altura media o alta y sujeta las manetas con un paso hacia adelante.",
       "Con los codos ligeramente flexionados, junta las manos al frente realizando una aducción horizontal.",
       "Aprieta conscientemente el pectoral en la contracción máxima durante 1 segundo.",
       "Abre los brazos lentamente sintiendo el estiramiento en la fascia del pectoral."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-middle-fly.gif"
   },
   {
     "id": "ex_108",
@@ -235,12 +242,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/dumbbell-fly.gif",
+    "gifUrl": "/gifs/ex_108.gif",
     "instructions": [
       "Túmbate en el banco con las mancuernas sobre el pecho y los codos semiflexionados.",
       "Abre los brazos en arco amplio hasta sentir el estiramiento máximo a nivel de los hombros.",
       "Cierra el arco contrayendo los pectorales sin variar el ángulo del codo."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-fly.gif"
   },
   {
     "id": "ex_109",
@@ -261,12 +269,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/lever-seated-fly.gif",
+    "gifUrl": "/gifs/ex_109.gif",
     "instructions": [
       "Regula el asiento de la máquina contractora (Pec Deck) para que los codos y antebrazos queden a la altura del pecho.",
       "Junta los brazos en el centro apretando los pectorales con fuerza en la posición final.",
       "Controla el regreso excéntrico evitando que los brazos sobrepasen excesivamente la línea dorsal."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-seated-fly.gif"
   },
   {
     "id": "ex_110",
@@ -290,12 +299,13 @@
     "difficulty": "avanzado",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/pectorals/chest-dip.gif",
+    "gifUrl": "/gifs/ex_110.gif",
     "instructions": [
       "Súbete a las barras paralelas e inclina el torso unos 30º hacia adelante para focalizar en pectoral.",
       "Desciende flexionando los codos hasta que los hombros queden ligeramente por debajo de los codos.",
       "Empuja con fuerza extendiendo los brazos y manteniendo el torso inclinado."
-    ]
+    ],
+    "localGifPath": "/gifs/chest-dip.gif"
   },
   {
     "id": "ex_201",
@@ -320,13 +330,14 @@
     "difficulty": "avanzado",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/pull-up.gif",
+    "gifUrl": "/gifs/ex_201.gif",
     "instructions": [
       "Cuélgate de la barra con agarre prono ligeramente más ancho que los hombros.",
       "Inicia el movimiento deprimiendo y retrayendo las escápulas.",
       "Tracciona dirigiendo los codos hacia abajo y atrás hasta que la barbilla supere la barra.",
       "Baja con control completo hasta el estiramiento escapular total."
-    ]
+    ],
+    "localGifPath": "/gifs/pull-up.gif"
   },
   {
     "id": "ex_202",
@@ -351,13 +362,14 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-pulldown.gif",
+    "gifUrl": "/gifs/ex_202.gif",
     "instructions": [
       "Ajusta el cojín de muslos y toma la barra con agarre prono amplio.",
       "Inclina el torso ligeramente hacia atrás (~10º) y saca pecho.",
       "Tira de la barra hacia la parte superior del esternón guiando con los codos.",
       "Extiende los brazos lentamente controlando el peso hasta el tope superior."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-pulldown.gif"
   },
   {
     "id": "ex_203",
@@ -380,12 +392,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-one-arm-lat-pulldown.gif",
+    "gifUrl": "/gifs/ex_203.gif",
     "instructions": [
       "Coloca una maneta individual en polea alta y arrodíllate o siéntate de lado.",
       "Tira con un agarre neutro llevando el codo pegado al costado hacia la cadera.",
       "Permite el estiramiento completo del dorsal en la subida con ligera rotación del torso."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-one-arm-lat-pulldown.gif"
   },
   {
     "id": "ex_204",
@@ -411,13 +424,14 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/barbell-bent-over-row.gif",
+    "gifUrl": "/gifs/ex_204.gif",
     "instructions": [
       "Pies a la anchura de hombros, flexiona la cadera manteniendo la columna neutra a 45-70º.",
       "Toma la barra y tracciona hacia la parte baja del abdomen o ombligo.",
       "Junta las escápulas al final del recorrido manteniendo la cabeza alineada.",
       "Desciende la barra sin curvar la zona lumbar."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-bent-over-row.gif"
   },
   {
     "id": "ex_205",
@@ -442,12 +456,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/dumbbell-one-arm-row.gif",
+    "gifUrl": "/gifs/ex_205.gif",
     "instructions": [
       "Apoya una rodilla y mano en el banco plano, con la espalda paralela al suelo.",
       "Con la otra mano, tracciona la mancuerna hacia la cadera describiendo una trayectoria en J.",
       "Mantén el codo pegado al torso y aprieta el dorsal arriba antes de descender."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-one-arm-row.gif"
   },
   {
     "id": "ex_206",
@@ -472,12 +487,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/cable-low-seated-row.gif",
+    "gifUrl": "/gifs/ex_206.gif",
     "instructions": [
       "Siéntate con los pies en los soportes y las rodillas ligeramente flexionadas.",
       "Mantén el pecho erguido y tira del agarre hacia el ombligo retrayendo las escápulas.",
       "Evita balancear excesivamente la columna lumbar durante el tirón."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-low-seated-row.gif"
   },
   {
     "id": "ex_207",
@@ -500,12 +516,13 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/upper-back/lever-t-bar-row.gif",
+    "gifUrl": "/gifs/ex_207.gif",
     "instructions": [
       "Apoya el pecho contra el respaldo inclinado eliminando la tensión lumbar.",
       "Toma los agarres y tracciona abriendo los codos para enfatizar romboides y trapecio medio.",
       "Desciende controlando el peso hasta el estiramiento escapular completo."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-t-bar-row.gif"
   },
   {
     "id": "ex_208",
@@ -529,12 +546,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/lats/cable-straight-arm-pulldown-with-rope.gif",
+    "gifUrl": "/gifs/ex_208.gif",
     "instructions": [
       "De pie frente a la polea alta con cuerda o barra recta, brazos extendidos con ligera flexión de codo.",
       "Flexiona la cadera ligeramente y tracciona hacia los muslos en un arco amplio.",
       "Aprieta los dorsales en la parte baja y regresa sintiendo el estiramiento axilar."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-straight-arm-pulldown-with-rope.gif"
   },
   {
     "id": "ex_301",
@@ -562,13 +580,14 @@
     "difficulty": "avanzado",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-deadlift.gif",
+    "gifUrl": "/gifs/ex_301.gif",
     "instructions": [
       "Barra sobre la mitad de los pies, agarre justo por fuera de las espinillas.",
       "Empuja las caderas hacia atrás, pecho alto y columna completamente neutra.",
       "Empuja contra el suelo extendiendo rodillas y caderas al unísono.",
       "Bloquea arriba con los glúteos sin hiperextender la zona lumbar."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-deadlift.gif"
   },
   {
     "id": "ex_302",
@@ -593,13 +612,14 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-romanian-deadlift.gif",
+    "gifUrl": "/gifs/ex_302.gif",
     "instructions": [
       "De pie con la barra en las manos, rodillas con ligera flexión constante (~15º).",
       "Empuja las caderas hacia la pared trasera mientras la barra desciende pegada a los muslos.",
       "Baja hasta que los isquios alcancen su máximo estiramiento (generalmente bajo las rodillas).",
       "Empuja con las caderas hacia adelante para volver a la posición erguida."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-romanian-deadlift.gif"
   },
   {
     "id": "ex_303",
@@ -624,12 +644,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/dumbbell-romanian-deadlift.gif",
+    "gifUrl": "/gifs/ex_303.gif",
     "instructions": [
       "Sujeta dos mancuernas frente a los muslos con agarre prono o neutro.",
       "Lleva la cadera hacia atrás manteniendo las mancuernas rozando las piernas.",
       "Siente la tensión en los isquiotibiales y glúteos en el punto bajo y regresa contrayendo glúteos."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-romanian-deadlift.gif"
   },
   {
     "id": "ex_304",
@@ -653,12 +674,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/spine/hyperextension-on-45-degree-hyperextension-bench.gif",
+    "gifUrl": "/gifs/ex_304.gif",
     "instructions": [
       "Colócate en el banco de hiperextensiones con el cojín justo por debajo de la cresta ilíaca.",
       "Flexiona el torso hacia adelante y extiende hasta alinear el cuerpo sin arquear en exceso.",
       "Enfoca la contracción en glúteos, isquios y erectores espinales."
-    ]
+    ],
+    "localGifPath": "/gifs/hyperextension-on-45-degree-hyperextension-bench.gif"
   },
   {
     "id": "ex_305",
@@ -682,12 +704,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/lever-lying-leg-curl.gif",
+    "gifUrl": "/gifs/ex_305.gif",
     "instructions": [
       "Túmbate boca abajo con el rodillo apoyado en la parte inferior de los gemelos (encima del talón).",
       "Sujeta los agarres y flexiona las rodillas llevando los talones hacia los glúteos.",
       "Aguanta 1 segundo en contracción máxima y desciende lentamente en 3 segundos."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-lying-leg-curl.gif"
   },
   {
     "id": "ex_306",
@@ -709,12 +732,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/lever-seated-leg-curl.gif",
+    "gifUrl": "/gifs/ex_306.gif",
     "instructions": [
       "Ajusta el respaldo para alinear el eje de la rodilla con el eje de giro de la máquina.",
       "Fija el cojín superior contra los muslos y flexiona las rodillas hacia abajo.",
       "Aprovecha la flexión de cadera sentada para trabajar los isquios en máxima longitud."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-seated-leg-curl.gif"
   },
   {
     "id": "ex_307",
@@ -737,12 +761,13 @@
     "difficulty": "avanzado",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/hamstrings/inverse-leg-curl-bench-support.gif",
+    "gifUrl": "/gifs/ex_307.gif",
     "instructions": [
       "Ancla los tobillos firmemente en el suelo o máquina y mantén el cuerpo recto.",
       "Desciende el torso hacia adelante frenando con la fuerza excéntrica de los isquiotibiales.",
       "Usa las manos para impulsarte ligeramente si es necesario y regresa."
-    ]
+    ],
+    "localGifPath": "/gifs/inverse-leg-curl-bench-support.gif"
   },
   {
     "id": "ex_401",
@@ -769,13 +794,14 @@
     "difficulty": "avanzado",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-full-squat-back-pov.gif",
+    "gifUrl": "/gifs/ex_401.gif",
     "instructions": [
       "Coloca la barra sobre los trapecios (barra alta) o deltoides posterior (barra baja).",
       "Pies a la anchura de hombros con puntas ligeramente abiertas hacia afuera.",
       "Desciende flexionando rodillas y caderas simultáneamente hasta romper el paralelo (90º).",
       "Empuja el suelo con fuerza manteniendo el pecho erguido y las rodillas alineadas."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-full-squat-back-pov.gif"
   },
   {
     "id": "ex_402",
@@ -800,12 +826,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/sled-45-degrees-leg-press.gif",
+    "gifUrl": "/gifs/ex_402.gif",
     "instructions": [
       "Apoya la espalda completa en el respaldo y coloca los pies en la plataforma a media altura.",
       "Desbloquea la prensa y flexiona las rodillas hasta los 90º sin despegar la pelvis del asiento.",
       "Empuja la plataforma sin bloquear bruscamente las rodillas en la extensión final."
-    ]
+    ],
+    "localGifPath": "/gifs/sled-45-degrees-leg-press.gif"
   },
   {
     "id": "ex_403",
@@ -830,12 +857,13 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/sled-hack-squat.gif",
+    "gifUrl": "/gifs/ex_403.gif",
     "instructions": [
       "Apoya la espalda y hombros en las almohadillas con los pies adelantados en la base.",
       "Baja con control buscando la máxima flexión de rodilla para elongar los cuádriceps.",
       "Empuja manteniendo la espalda pegada al soporte durante todo el recorrido."
-    ]
+    ],
+    "localGifPath": "/gifs/sled-hack-squat.gif"
   },
   {
     "id": "ex_404",
@@ -861,12 +889,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/dumbbell-goblet-squat.gif",
+    "gifUrl": "/gifs/ex_404.gif",
     "instructions": [
       "Sostén una mancuerna verticalmente pegada al pecho con ambas manos.",
       "Baja en sentadilla profunda con el torso vertical y los codos pasando por dentro de las rodillas.",
       "Pausa un instante abajo y sube empujando desde los talones."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-goblet-squat.gif"
   },
   {
     "id": "ex_405",
@@ -890,12 +919,13 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/barbell-single-leg-split-squat.gif",
+    "gifUrl": "/gifs/ex_405.gif",
     "instructions": [
       "Coloca un pie apoyado en el empeine sobre un banco trasero a la altura de la rodilla.",
       "Baja con la pierna delantera flexionando la rodilla hasta que el muslo quede paralelo al suelo.",
       "Empuja desde el talón de la pierna delantera manteniendo el equilibrio y torso estable."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-single-leg-split-squat.gif"
   },
   {
     "id": "ex_406",
@@ -919,12 +949,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/dumbbell-walking-lunge.gif",
+    "gifUrl": "/gifs/ex_406.gif",
     "instructions": [
       "Da un paso amplio hacia adelante flexionando ambas rodillas a 90º.",
       "La rodilla trasera roza casi el suelo mientras el torso permanece vertical.",
       "Impúlsate hacia adelante en el siguiente paso de forma fluida."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-walking-lunge.gif"
   },
   {
     "id": "ex_407",
@@ -946,12 +977,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/quads/lever-leg-extension.gif",
+    "gifUrl": "/gifs/ex_407.gif",
     "instructions": [
       "Alinea las rodillas con el eje de rotación y coloca el rodillo sobre los empeines.",
       "Extiende las piernas completamente contrayendo los cuádriceps en el punto alto.",
       "Aguanta 1 segundo arriba y desciende en 2-3 segundos controlados."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-leg-extension.gif"
   },
   {
     "id": "ex_501",
@@ -975,13 +1007,14 @@
     "difficulty": "intermedio",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-glute-bridge-two-legs-on-bench-male.gif",
+    "gifUrl": "/gifs/ex_501.gif",
     "instructions": [
       "Apoya la parte media de la espalda (bajo las escápulas) en el banco plano con la barra acolchada sobre la pelvis.",
       "Pies apoyados en el suelo al ancho de hombros con rodillas a 90º en la cúspide.",
       "Empuja las caderas hacia arriba contrayendo fuertemente los glúteos durante 1-2 segundos.",
       "Baja controlando el descenso sin arquear la zona lumbar."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-glute-bridge-two-legs-on-bench-male.gif"
   },
   {
     "id": "ex_502",
@@ -1004,11 +1037,12 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-glute-bridge-two-legs-on-bench-male.gif",
+    "gifUrl": "/gifs/ex_502.gif",
     "instructions": [
       "Apoya la espalda en el banco con una mancuerna pesada sobre la pelvis.",
       "Eleva la cadera con potencia hasta alinear muslos con el torso y aprieta los glúteos."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-glute-bridge-two-legs-on-bench-male.gif"
   },
   {
     "id": "ex_503",
@@ -1031,12 +1065,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/cable-standing-hip-extension.gif",
+    "gifUrl": "/gifs/ex_503.gif",
     "instructions": [
       "Coloca una tobillera conectada a la polea baja y sujétate a la estructura.",
       "Extiende la pierna hacia atrás en un arco diagonal apretando el glúteo en el final.",
       "Regresa lentamente sin mover la columna lumbar."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-standing-hip-extension.gif"
   },
   {
     "id": "ex_504",
@@ -1060,11 +1095,12 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/glutes/barbell-glute-bridge-two-legs-on-bench-male.gif",
+    "gifUrl": "/gifs/ex_504.gif",
     "instructions": [
       "Túmbate en el suelo boca arriba con las rodillas flexionadas y los pies cerca de los glúteos.",
       "Eleva la pelvis empujando desde los talones hasta alinear tronco y muslos."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-glute-bridge-two-legs-on-bench-male.gif"
   },
   {
     "id": "ex_505",
@@ -1085,12 +1121,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abductors/lever-seated-hip-abduction.gif",
+    "gifUrl": "/gifs/ex_505.gif",
     "instructions": [
       "Siéntate en la máquina de abducción con la espalda recta y las almohadillas por fuera de las rodillas.",
       "Abre las piernas con fuerza contrayendo el glúteo medio y mantén 1 segundo.",
       "Cierra de forma controlada sin dejar caer el peso."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-seated-hip-abduction.gif"
   },
   {
     "id": "ex_601",
@@ -1114,13 +1151,14 @@
     "difficulty": "avanzado",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/barbell-standing-military-press.gif",
+    "gifUrl": "/gifs/ex_601.gif",
     "instructions": [
       "Barra apoyada sobre las clavículas, manos un poco más anchas que los hombros y core apretado.",
       "Empuja la barra verticalmente pasando cerca de la cara.",
       "Mete la cabeza hacia adelante al pasar la frente y bloquea la barra sobre la coronilla.",
       "Desciende con control sin arquear la espalda baja."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-standing-military-press.gif"
   },
   {
     "id": "ex_602",
@@ -1143,12 +1181,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-seated-shoulder-press-parallel-grip.gif",
+    "gifUrl": "/gifs/ex_602.gif",
     "instructions": [
       "Siéntate con respaldo a 75-80º y eleva las mancuernas a la altura de las orejas.",
       "Empuja hacia arriba extendiendo los brazos sin chocar las mancuernas arriba.",
       "Desciende hasta que las mancuernas queden a la altura del cuello."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-seated-shoulder-press-parallel-grip.gif"
   },
   {
     "id": "ex_603",
@@ -1171,12 +1210,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 1,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/lever-shoulder-press-v-2.gif",
+    "gifUrl": "/gifs/ex_603.gif",
     "instructions": [
       "Ajusta la altura del asiento para que los agarres queden a nivel de los hombros.",
       "Empuja con fluidez manteniendo los codos en el plano escapular (30º adelantados).",
       "Desciende con control manteniendo la tensión continua en los deltoides."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-shoulder-press-v-2.gif"
   },
   {
     "id": "ex_604",
@@ -1196,12 +1236,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-lateral-raise.gif",
+    "gifUrl": "/gifs/ex_604.gif",
     "instructions": [
       "De pie con las mancuernas a los costados, torso con inclinación mínima hacia adelante.",
       "Eleva los brazos en el plano escapular (30º adelante) guiando con los codos hasta la altura de los hombros.",
       "Pausa un instante en la horizontal y baja resistiendo la gravedad."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-lateral-raise.gif"
   },
   {
     "id": "ex_605",
@@ -1221,12 +1262,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-lateral-raise.gif",
+    "gifUrl": "/gifs/ex_605.gif",
     "instructions": [
       "Coloca la polea a la altura de la rodilla o muñeca para optimizar el perfil de resistencia.",
       "Eleva el brazo lateralmente manteniendo tensión constante durante todo el recorrido.",
       "Baja despacio sintiendo la carga en el deltoides lateral."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-lateral-raise.gif"
   },
   {
     "id": "ex_606",
@@ -1248,12 +1290,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/cable-standing-rear-delt-row-with-rope.gif",
+    "gifUrl": "/gifs/ex_606.gif",
     "instructions": [
       "Polea a la altura de los ojos con cuerda doble.",
       "Tira hacia la frente separando las manos y rotando externamente los hombros.",
       "Aprieta los deltoides posteriores y romboides al final del movimiento."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-standing-rear-delt-row-with-rope.gif"
   },
   {
     "id": "ex_607",
@@ -1275,11 +1318,12 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/delts/dumbbell-rear-lateral-raise-support-head.gif",
+    "gifUrl": "/gifs/ex_607.gif",
     "instructions": [
       "Inclina el torso a 90º apoyando el pecho o libre con espalda recta.",
       "Eleva las mancuernas hacia los lados con los codos semiflexionados enfocando en deltoides posterior."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-rear-lateral-raise-support-head.gif"
   },
   {
     "id": "ex_701",
@@ -1302,12 +1346,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/ez-bar-biceps-curl-with-arm-blaster.gif",
+    "gifUrl": "/gifs/ex_701.gif",
     "instructions": [
       "Toma la barra Z por las curvaturas interiores para reducir el estrés en muñecas.",
       "Codos pegados a los costados, flexiona los brazos llevando la barra hacia el pecho.",
       "Aprieta los bíceps arriba y desciende en 2-3 segundos sin balancear el cuerpo."
-    ]
+    ],
+    "localGifPath": "/gifs/ez-bar-biceps-curl-with-arm-blaster.gif"
   },
   {
     "id": "ex_702",
@@ -1329,12 +1374,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-incline-biceps-curl.gif",
+    "gifUrl": "/gifs/ex_702.gif",
     "instructions": [
       "Siéntate en banco inclinado a 45-60º dejando los brazos colgar perpendiculares al suelo.",
       "Flexiona los codos manteniendo la posición de hombros retrasada para estirar la cabeza larga.",
       "Sube supinando la muñeca y desciende completamente."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-incline-biceps-curl.gif"
   },
   {
     "id": "ex_703",
@@ -1355,12 +1401,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/dumbbell-hammer-curl.gif",
+    "gifUrl": "/gifs/ex_703.gif",
     "instructions": [
       "Sujeta las mancuernas con agarre neutro (palmas enfrentadas).",
       "Flexiona los brazos manteniendo las palmas mirándose para trabajar el braquial y braquiorradial.",
       "Baja con control hasta la extensión total."
-    ]
+    ],
+    "localGifPath": "/gifs/dumbbell-hammer-curl.gif"
   },
   {
     "id": "ex_704",
@@ -1383,11 +1430,12 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/cable-curl.gif",
+    "gifUrl": "/gifs/ex_704.gif",
     "instructions": [
       "Conecta una barra recta a la polea baja y colócate erguido.",
       "Flexiona los brazos manteniendo tensión constante desde el inicio del movimiento."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-curl.gif"
   },
   {
     "id": "ex_705",
@@ -1408,12 +1456,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/biceps/lever-preacher-curl-v-2.gif",
+    "gifUrl": "/gifs/ex_705.gif",
     "instructions": [
       "Apoya los brazos en el cojín inclinado fijando los codos y axilas.",
       "Sube la carga aislando por completo los bíceps sin impulso corporal.",
       "Baja con cuidado sin hiper-extender bruscamente el codo al final."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-preacher-curl-v-2.gif"
   },
   {
     "id": "ex_801",
@@ -1438,12 +1487,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/barbell-lying-triceps-extension-skull-crusher.gif",
+    "gifUrl": "/gifs/ex_801.gif",
     "instructions": [
       "Túmbate en el banco con la barra Z sostenida sobre los hombros.",
       "Flexiona los codos llevando la barra hacia la coronilla o detrás de la cabeza.",
       "Extiende los brazos con fuerza manteniendo los codos apuntando al techo."
-    ]
+    ],
+    "localGifPath": "/gifs/barbell-lying-triceps-extension-skull-crusher.gif"
   },
   {
     "id": "ex_802",
@@ -1466,12 +1516,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-rope-lying-on-floor-tricep-extension.gif",
+    "gifUrl": "/gifs/ex_802.gif",
     "instructions": [
       "Polea alta con cuerda doble, codos pegados a los costados del torso.",
       "Extiende los brazos hacia abajo separando la cuerda al final para máxima contracción.",
       "Regresa hasta que los antebrazos superen los 90º sin mover los codos de su eje."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-rope-lying-on-floor-tricep-extension.gif"
   },
   {
     "id": "ex_803",
@@ -1492,12 +1543,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/cable-overhead-triceps-extension-rope-attachment.gif",
+    "gifUrl": "/gifs/ex_803.gif",
     "instructions": [
       "Polea a media altura, da un paso adelante e inclina el torso con la cuerda tras la cabeza.",
       "Extiende los brazos hacia adelante trabajando la cabeza larga del tríceps en estiramiento.",
       "Controla el regreso flexionando los codos completamente."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-overhead-triceps-extension-rope-attachment.gif"
   },
   {
     "id": "ex_804",
@@ -1521,12 +1573,13 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/triceps/parallel-bar-dip.gif",
+    "gifUrl": "/gifs/ex_804.gif",
     "instructions": [
       "Súbete a las barras paralelas manteniendo el torso vertical para enfocar en tríceps.",
       "Baja flexionando los codos hacia atrás hasta los 90º.",
       "Empuja con fuerza bloqueando los tríceps arriba."
-    ]
+    ],
+    "localGifPath": "/gifs/parallel-bar-dip.gif"
   },
   {
     "id": "ex_901",
@@ -1548,12 +1601,13 @@
     "difficulty": "avanzado",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/hanging-leg-raise.gif",
+    "gifUrl": "/gifs/ex_901.gif",
     "instructions": [
       "Cuélgate de la barra con agarre firme y cuerpo relajado.",
       "Eleva las piernas rectas o flexionadas enrollando la pelvis hacia el esternón.",
       "Baja despacio sin balancearte para evitar usar el impulso."
-    ]
+    ],
+    "localGifPath": "/gifs/hanging-leg-raise.gif"
   },
   {
     "id": "ex_902",
@@ -1575,12 +1629,13 @@
     "difficulty": "intermedio",
     "mechanics": "isolation",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/cable-kneeling-crunch.gif",
+    "gifUrl": "/gifs/ex_902.gif",
     "instructions": [
       "Arrodíllate frente a la polea alta con la cuerda sostenida junto a las orejas.",
       "Flexiona la columna enrollando el torso hacia los muslos contrayendo el abdomen.",
       "Regresa lentamente resistiendo la carga con el core."
-    ]
+    ],
+    "localGifPath": "/gifs/cable-kneeling-crunch.gif"
   },
   {
     "id": "ex_903",
@@ -1605,12 +1660,13 @@
     "difficulty": "avanzado",
     "mechanics": "compound",
     "tier": 2,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/wheel-rollerout.gif",
+    "gifUrl": "/gifs/ex_903.gif",
     "instructions": [
       "De rodillas con la rueda abdominal en las manos bajo el pecho.",
       "Rueda hacia adelante extendiendo el cuerpo manteniendo el abdomen comprimido.",
       "Tira desde el abdomen para volver a la posición inicial sin arquear la zona lumbar."
-    ]
+    ],
+    "localGifPath": "/gifs/wheel-rollerout.gif"
   },
   {
     "id": "ex_904",
@@ -1635,11 +1691,12 @@
     "difficulty": "novato",
     "mechanics": "compound",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/abs/front-plank-with-twist.gif",
+    "gifUrl": "/gifs/ex_904.gif",
     "instructions": [
       "Apoya los antebrazos y puntas de los pies en el suelo alineando el cuerpo.",
       "Contrae fuertemente glúteos, cuádriceps y abdomen durante todo el tiempo pautado."
-    ]
+    ],
+    "localGifPath": "/gifs/front-plank-with-twist.gif"
   },
   {
     "id": "ex_1001",
@@ -1659,12 +1716,13 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/standing-calf-raise-on-a-staircase.gif",
+    "gifUrl": "/gifs/ex_1001.gif",
     "instructions": [
       "Apoya la punta de los pies en el borde de un escalón o soporte elevado.",
       "Baja los talones por debajo del escalón logrando un estiramiento profundo durante 2 segundos.",
       "Empuja hacia arriba con fuerza sobre el primer y segundo metatarso y aguanta 1 segundo arriba."
-    ]
+    ],
+    "localGifPath": "/gifs/standing-calf-raise-on-a-staircase.gif"
   },
   {
     "id": "ex_1002",
@@ -1684,10 +1742,11 @@
     "difficulty": "novato",
     "mechanics": "isolation",
     "tier": 3,
-    "gifUrl": "https://cdn.jsdelivr.net/gh/JahelCuadrado/ExerciseGymGifsDB@v1.1.0/calves/lever-seated-calf-raise.gif",
+    "gifUrl": "/gifs/ex_1002.gif",
     "instructions": [
       "Siéntate con las rodillas a 90º y la almohadilla sobre la parte baja de los muslos.",
       "Desciende los talones para estirar el sóleo y eleva con potencia en rango completo."
-    ]
+    ],
+    "localGifPath": "/gifs/lever-seated-calf-raise.gif"
   }
 ]

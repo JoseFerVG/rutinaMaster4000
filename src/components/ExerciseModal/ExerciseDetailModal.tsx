@@ -94,7 +94,7 @@ export const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                     </div>
                   )}
                   <div className="absolute bottom-2 right-2 text-[9px] font-mono text-zinc-400 bg-white/90 backdrop-blur-xs px-1.5 py-0.5 rounded border border-zinc-200">
-                    GymGifsDB · CDN
+                    Kinetic · Local HD
                   </div>
                 </div>
 
