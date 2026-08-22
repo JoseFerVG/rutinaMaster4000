@@ -8,6 +8,7 @@ import {
   SessionDuration,
   MuscleFocusPreset,
   Routine,
+  RoutineExercise,
   ToastMessage,
   Exercise
 } from '../types';
@@ -16,7 +17,9 @@ import {
   buildRoutine,
   findQuickSubstitution,
   findPermanentSubstitution,
-  findFreeWeightAlternative
+  findFreeWeightAlternative,
+  createRoutineExerciseInstance,
+  MUSCLE_LABELS_ES
 } from '../utils/routineEngine';
 
 const exercisesDb = rawExercises as Exercise[];
@@ -62,6 +65,7 @@ interface RoutineStore {
   resetAll: () => void;
 
   // Routine Workout Actions
+  addExercisesToDay: (dayNumber: number, muscleGroup: MuscleGroupId, count: number, specificExerciseIds?: string[]) => void;
   replaceTemporary: (dayNumber: number, instanceId: string) => void;
   replacePermanent: (dayNumber: number, instanceId: string) => void;
   replaceWithFreeWeight: (dayNumber: number, instanceId: string) => void;
@@ -177,6 +181,90 @@ export const useRoutineStore = create<RoutineStore>()(
           activeRoutine: null,
           activeDayTab: 1
         });
+      },
+
+      addExercisesToDay: (
+        dayNumber: number,
+        muscleGroup: MuscleGroupId,
+        count: number,
+        specificExerciseIds?: string[]
+      ) => {
+        const { activeRoutine, experience, goal, sessionDuration, equipment } = get();
+        if (!activeRoutine) return;
+
+        const day = activeRoutine.days.find(d => d.dayNumber === dayNumber);
+        if (!day) return;
+
+        const currentExerciseIds = new Set(day.exercises.map(e => e.exerciseId));
+        const newInstances: RoutineExercise[] = [];
+
+        if (specificExerciseIds && specificExerciseIds.length > 0) {
+          specificExerciseIds.forEach(id => {
+            if (!currentExerciseIds.has(id)) {
+              const exMeta = exercisesDb.find(e => e.id === id);
+              if (exMeta) {
+                newInstances.push(
+                  createRoutineExerciseInstance(exMeta, exercisesDb, experience, goal, sessionDuration, equipment)
+                );
+                currentExerciseIds.add(id);
+              }
+            }
+          });
+        } else {
+          // Automatic selection: find non-duplicate exercises for muscleGroup
+          const candidates = exercisesDb.filter(ex =>
+            (ex.muscleGroup === muscleGroup || (ex.secondaryMuscles && ex.secondaryMuscles.includes(muscleGroup))) &&
+            !currentExerciseIds.has(ex.id)
+          );
+
+          // Priority sorting: primary muscle first, then by tier
+          candidates.sort((a, b) => {
+            const aDirect = a.muscleGroup === muscleGroup ? 2 : 1;
+            const bDirect = b.muscleGroup === muscleGroup ? 2 : 1;
+            if (aDirect !== bDirect) return bDirect - aDirect;
+            return a.tier - b.tier;
+          });
+
+          const toAdd = candidates.slice(0, count);
+          toAdd.forEach(ex => {
+            newInstances.push(
+              createRoutineExerciseInstance(ex, exercisesDb, experience, goal, sessionDuration, equipment)
+            );
+            currentExerciseIds.add(ex.id);
+          });
+        }
+
+        if (newInstances.length === 0) {
+          get().showToast('Aviso', 'No se encontraron ejercicios adicionales disponibles sin duplicar para este grupo muscular.', 'warning');
+          return;
+        }
+
+        const updatedFocusMuscles = day.focusMuscles.includes(muscleGroup)
+          ? day.focusMuscles
+          : [...day.focusMuscles, muscleGroup];
+
+        const updatedDays = activeRoutine.days.map(d => {
+          if (d.dayNumber !== dayNumber) return d;
+          return {
+            ...d,
+            focusMuscles: updatedFocusMuscles,
+            exercises: [...d.exercises, ...newInstances]
+          };
+        });
+
+        set({
+          activeRoutine: {
+            ...activeRoutine,
+            days: updatedDays
+          }
+        });
+
+        const muscleName = MUSCLE_LABELS_ES[muscleGroup] || muscleGroup;
+        get().showToast(
+          'Ejercicios Añadidos',
+          `Se han añadido ${newInstances.length} ejercicio(s) de ${muscleName} al Día 0${dayNumber}.`,
+          'success'
+        );
       },
 
       replaceTemporary: (dayNumber: number, instanceId: string) => {

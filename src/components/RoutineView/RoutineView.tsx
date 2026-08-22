@@ -17,7 +17,8 @@ import {
   Layers,
   Sparkles,
   Info,
-  Shield
+  Shield,
+  Plus
 } from 'lucide-react';
 import { useRoutineStore } from '../../store/useRoutineStore';
 import rawExercises from '../../data/exercises.json';
@@ -25,6 +26,7 @@ import { Exercise } from '../../types';
 import { MUSCLE_LABELS_ES } from '../../utils/routineEngine';
 import { ExerciseDetailModal } from '../ExerciseModal/ExerciseDetailModal';
 import { ExerciseSwapModal } from '../ExerciseModal/ExerciseSwapModal';
+import { AddExercisesModal } from '../ExerciseModal/AddExercisesModal';
 import {
   exportRoutineToExcel,
   downloadMarkdownFile,
@@ -63,6 +65,8 @@ export const RoutineView: React.FC = () => {
     mode: 'main'
   });
   const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [addModalDayNumber, setAddModalDayNumber] = useState(1);
 
   if (!activeRoutine) {
     return (
@@ -572,15 +576,30 @@ export const RoutineView: React.FC = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-1.5">
-              {currentDay.focusMuscles.map((muscle) => (
-                <span
-                  key={muscle}
-                  className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-white border border-zinc-200 text-zinc-700"
-                >
-                  {MUSCLE_LABELS_ES[muscle] || muscle}
-                </span>
-              ))}
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                {currentDay.focusMuscles.map((muscle) => (
+                  <span
+                    key={muscle}
+                    className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-white border border-zinc-200 text-zinc-700"
+                  >
+                    {MUSCLE_LABELS_ES[muscle] || muscle}
+                  </span>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setAddModalDayNumber(currentDay.dayNumber);
+                  setIsAddModalOpen(true);
+                }}
+                className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-zinc-950 hover:bg-zinc-800 text-white shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
+                title="Añadir más ejercicios a este día"
+              >
+                <Plus className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Añadir Ejercicios</span>
+              </button>
             </div>
           </div>
 
@@ -589,6 +608,21 @@ export const RoutineView: React.FC = () => {
             {currentDay.exercises.map((exInst, index) =>
               renderExerciseCard(exInst, currentDay.dayNumber, index)
             )}
+          </div>
+
+          {/* Add Exercise Bottom Banner */}
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                setAddModalDayNumber(currentDay.dayNumber);
+                setIsAddModalOpen(true);
+              }}
+              className="w-full py-3.5 px-4 rounded-xl border border-dashed border-zinc-300 hover:border-zinc-900 bg-zinc-50/60 hover:bg-zinc-100/90 transition-all text-xs font-semibold text-zinc-700 hover:text-zinc-950 flex items-center justify-center gap-2 cursor-pointer group"
+            >
+              <Plus className="w-4 h-4 text-zinc-500 group-hover:text-zinc-950 group-hover:scale-110 transition-transform" aria-hidden="true" />
+              <span>¿Día corto? Añadir más ejercicios a esta sesión</span>
+            </button>
           </div>
         </section>
       ) : (
@@ -601,12 +635,26 @@ export const RoutineView: React.FC = () => {
                   <h3 className="text-sm font-bold text-zinc-900">{day.title}</h3>
                   <p className="text-xs text-zinc-500">{day.subtitle}</p>
                 </div>
-                <div className="flex flex-wrap items-center gap-1">
-                  {day.focusMuscles.map((muscle) => (
-                    <span key={muscle} className="text-[10px] px-2 py-0.5 rounded bg-white border border-zinc-200 text-zinc-600 font-medium">
-                      {MUSCLE_LABELS_ES[muscle] || muscle}
-                    </span>
-                  ))}
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div className="flex flex-wrap items-center gap-1">
+                    {day.focusMuscles.map((muscle) => (
+                      <span key={muscle} className="text-[10px] px-2 py-0.5 rounded bg-white border border-zinc-200 text-zinc-600 font-medium">
+                        {MUSCLE_LABELS_ES[muscle] || muscle}
+                      </span>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAddModalDayNumber(day.dayNumber);
+                      setIsAddModalOpen(true);
+                    }}
+                    className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white hover:bg-zinc-100 border border-zinc-200 text-zinc-800 transition-colors flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-3 h-3" aria-hidden="true" />
+                    <span>Añadir</span>
+                  </button>
                 </div>
               </div>
 
@@ -659,6 +707,13 @@ export const RoutineView: React.FC = () => {
             setSpecificExercise(dNum, instId, newExId);
           }
         }}
+      />
+
+      {/* Add More Exercises to Day Modal */}
+      <AddExercisesModal
+        isOpen={isAddModalOpen}
+        dayNumber={addModalDayNumber}
+        onClose={() => setIsAddModalOpen(false)}
       />
     </div>
   );

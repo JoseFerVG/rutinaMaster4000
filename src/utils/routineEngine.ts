@@ -179,25 +179,9 @@ export function buildRoutine(
       return bFocus - aFocus;
     });
 
-    const createRoutineExerciseInstance = (ex: Exercise, tier: 1 | 2 | 3): RoutineExercise => {
-      const { sets, reps, rest, targetRir } = getSetsRepsRest(tier, experience, goal, sessionDuration);
-      const { alternativeId, backupIds } = findDesignatedAlternative(ex, equipment, availableExercises, [ex.id]);
-      
-      return {
-        instanceId: `inst_${ex.id}_${Math.random().toString(36).substring(2, 7)}`,
-        exerciseId: ex.id,
-        originalExerciseId: ex.id,
-        alternativeExerciseId: alternativeId,
-        backupExerciseIds: backupIds,
-        isUsingAlternative: false,
-        sets,
-        reps,
-        rest,
-        targetRir,
-        isTemporarilyReplaced: false,
-        completedSets: new Array(sets).fill(false)
-      };
-    };
+    // Helper to generate a single routine exercise instance
+    const makeInstance = (ex: Exercise) =>
+      createRoutineExerciseInstance(ex, availableExercises, experience, goal, sessionDuration, equipment);
 
     // 1. Tier 1 Main Compounds
     for (const muscle of sortedTargets) {
@@ -207,7 +191,7 @@ export function buildRoutine(
       );
       if (tier1) {
         usedIds.add(tier1.id);
-        picked.push(createRoutineExerciseInstance(tier1, tier1.tier));
+        picked.push(makeInstance(tier1));
       }
     }
 
@@ -219,7 +203,7 @@ export function buildRoutine(
       );
       if (tier2) {
         usedIds.add(tier2.id);
-        picked.push(createRoutineExerciseInstance(tier2, tier2.tier));
+        picked.push(makeInstance(tier2));
       }
     }
 
@@ -232,7 +216,7 @@ export function buildRoutine(
         );
         if (tier3) {
           usedIds.add(tier3.id);
-          picked.push(createRoutineExerciseInstance(tier3, tier3.tier));
+          picked.push(makeInstance(tier3));
         }
       }
     }
@@ -245,7 +229,7 @@ export function buildRoutine(
       );
       if (filler) {
         usedIds.add(filler.id);
-        picked.push(createRoutineExerciseInstance(filler, filler.tier));
+        picked.push(makeInstance(filler));
       }
     }
 
@@ -572,3 +556,31 @@ export function findDesignatedAlternative(
   const alternativeId = backupIds.length > 0 ? backupIds[0] : undefined;
   return { alternativeId, backupIds };
 }
+
+export function createRoutineExerciseInstance(
+  ex: Exercise,
+  allExercises: Exercise[],
+  experience: ExperienceLevel = 'intermedio',
+  goal: TrainingGoal = 'hipertrofia',
+  sessionDuration: SessionDuration = 60,
+  equipment: EquipmentPreference = 'commercial'
+): RoutineExercise {
+  const { sets, reps, rest, targetRir } = getSetsRepsRest(ex.tier, experience, goal, sessionDuration);
+  const { alternativeId, backupIds } = findDesignatedAlternative(ex, equipment, allExercises, [ex.id]);
+
+  return {
+    instanceId: `inst_${ex.id}_${Math.random().toString(36).substring(2, 7)}`,
+    exerciseId: ex.id,
+    originalExerciseId: ex.id,
+    alternativeExerciseId: alternativeId,
+    backupExerciseIds: backupIds,
+    isUsingAlternative: false,
+    sets,
+    reps,
+    rest,
+    targetRir,
+    isTemporarilyReplaced: false,
+    completedSets: new Array(sets).fill(false)
+  };
+}
+
